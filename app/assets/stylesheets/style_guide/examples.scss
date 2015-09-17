@@ -1,0 +1,13 @@
+.style-guide__example {
+  details {
+    margin: 0 1rem 1rem 1rem;
+    cursor: pointer;
+  }
+  .style-guide__example_name {
+    background-color: #EEEEEE;
+    padding: 0.5rem;
+  }
+  .style-guide__example_render {
+    &> * { margin-left: 0.5rem; margin-right: 0.5rem; }
+  }
+}

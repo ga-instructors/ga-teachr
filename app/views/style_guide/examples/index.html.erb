@@ -1,0 +1,10 @@
+<% @examples.each do |name, path| %>
+ <div class="style-guide__example">
+		<div class="style-guide__example_name"><%= name.titleize %></div>
+		<div class="style-guide__example_render"><%= render file: path %></div>
+		<details>
+			<summary>Source</summary>
+			<pre class="erb"><%= path.read %></pre>
+		</details>
+	</div>
+<% end %>

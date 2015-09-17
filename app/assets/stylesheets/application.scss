@@ -1,0 +1,170 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600italic,600);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:300,400);
+@font-face{
+  font-family:'PF DIN Compressed Pro';
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot');
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-add88b9951f5b54bf2c999d9050b9f62.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-1a87934a2795c688efb2da5ee4ff5215.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-ada0743a150262c54a25e7937e653e47.svg#pf_din_text_comp_promedium') format('svg');
+  font-weight:600;
+  font-style:normal
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+  line-height: 1.5em;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+}
+
+/* ------------------
+        HEADERS
+   ------------------ */
+
+h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3 {
+  font-family: 'PF DIN Compressed Pro';
+  text-transform: uppercase;
+  line-height: 3rem;
+}
+h4, h5, h6 {
+  font-size: 1rem;
+  line-height: 2rem;
+}
+h1 { font-size: 5rem; line-height: 6rem; }
+h2 { font-size: 3rem; }
+h3 { font-size: 2rem; }
+h4 { text-decoration: underline; }
+h5 { }
+h6 { color: #999999; }
+
+/* ------------------
+       TYPOGRAPHY
+   ------------------ */
+
+p { margin-top: 0; }
+
+pre {
+  background-color: #FAFAFA;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  padding: 0 0.5rem;
+  border: solid #EEEEEE 1px;
+}
+
+blockquote {
+  border-left: solid #EEEEEE 0.5em;
+  padding-left: 1em;
+}
+
+/* ------------------
+         FORMS
+   ------------------ */
+
+.field {
+  line-height: 2rem;
+  label {
+    display: inline-block;
+    min-width: 150pt;
+  }
+  label ~ input {
+    width: calc(100% - 155pt);
+  }
+  input[type=radio], input[type=checkbox] {
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    top: 1pt;
+  }
+  input ~ label {
+    width: auto;
+    padding: 0pt 4pt;
+  }
+}
+
+input[type=text], input[type=password], input[type=email], textarea {
+  font-size: 1rem;
+  padding: 0.25rem;
+  border: solid #EEEEEE 1px;
+  width: 100%;
+  width: calc(100% - 3pt);
+}
+textarea { min-height: 100pt; }
+
+a:link.button, a:visited.button, .button, button, input[type=submit], input[type=reset], input[type=button] {
+  background-color: #FFFFFF;
+  border: solid #EEEEEE 1px;
+  border-bottom: solid black 2px;
+  border-radius: 2pt;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2rem;
+  margin: 0.5rem;
+  min-height: 2rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-decoration: none;
+  &:hover {
+    &:before {
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: rgba(128, 128, 128, 0.15);
+    }
+  }
+  &.primary {
+    background-color: #FA4542;
+    color: #FFFFFF; font-weight: 600;
+    border-color: #BE0201;
+  }
+  &.secondary {
+    background-color: #EEEEEE;
+  }
+}
+
+/* ------------------
+       CONTAINERS
+   ------------------ */
+
+.container {
+  margin: 0 auto;
+  &.small { max-width: 400pt; }
+  &.large { max-width: 1000pt; }
+  > * { margin-left: 0.5rem; margin-right: 0.5rem; }
+}
+
+/* ------------------
+       NAVIGATION
+   ------------------ */
+
+nav {
+  display: table;
+  width: 100%;
+  margin: 1rem;
+  ul { margin: 0; padding: 0; display: table-row; }
+  ul li { width: 10%; display: table-cell; text-align: center; }
+}

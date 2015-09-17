@@ -1,0 +1,2 @@
+module StyleGuide::ExamplesHelper
+end
