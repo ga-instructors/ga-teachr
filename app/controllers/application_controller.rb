@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  include AuthenticationsHelper
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,5 +14,6 @@ class ApplicationController < ActionController::Base
   def set_timezone(&block)
     Time.use_zone(session[:tz], &block)
   end
+
 
 end

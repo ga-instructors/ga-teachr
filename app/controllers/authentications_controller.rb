@@ -4,7 +4,8 @@ class AuthenticationsController < ApplicationController
   # GET /authentications
   # GET /authentications.json
   def index
-    @authentications = Authentication.all
+    authorize Authentication, :index?
+    @authentications = policy_scope(Authentication)
   end
 
   # GET /authentications/1
@@ -15,6 +16,7 @@ class AuthenticationsController < ApplicationController
   # GET /authentications/new
   def new
     @authentication = Authentication.new
+    authorize @authentication
   end
 
   # GET /authentications/1/edit
@@ -26,6 +28,7 @@ class AuthenticationsController < ApplicationController
   def create
     @authentication = Authentication.new(authentication_params)
     @authentication.request = request
+    authorize @authentication, :create?
 
     respond_to do |format|
       if @authentication.save
@@ -57,9 +60,9 @@ class AuthenticationsController < ApplicationController
   # DELETE /authentications/1
   # DELETE /authentications/1.json
   def destroy
-    @authentication.destroy
+    reset_session
     respond_to do |format|
-      format.html { redirect_to authentications_url, notice: 'Authentication was successfully destroyed.' }
+      format.html { redirect_to new_authentication_url, notice: 'You have logged out' }
       format.json { head :no_content }
     end
   end
@@ -68,6 +71,7 @@ class AuthenticationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_authentication
       @authentication = Authentication.find(params[:id])
+      authorize @authentication
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

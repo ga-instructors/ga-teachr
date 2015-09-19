@@ -1,0 +1,5 @@
+<%= content_tag_for :div, employee, draggable: true do %>
+	<div class="employee__gravatar"><%= image_tag gravatar_url(employee.email, 48), draggable: false %></div>
+	<div class="employee__name"><%= employee.name %></div>
+	<div class="employee__title"><%= employee.title %></div>
+<% end %>

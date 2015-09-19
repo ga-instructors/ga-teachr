@@ -43,6 +43,7 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'ffaker'
+  gem 'better_errors'
 end
 
 group :development do

@@ -1,31 +1,32 @@
 <p id="notice"><%= notice %></p>
+<div class="large container">
+	<h1>Listing Authentications</h1>
 
-<h1>Listing Authentications</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>User</th>
+				<th>Password</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>User</th>
-      <th>Password</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+		<tbody>
+			<% @authentications.each do |authentication| %>
+				<tr>
+					<td><%= authentication.type %></td>
+					<td><%= authentication.user %></td>
+					<td><%= authentication.password %></td>
+					<td><%= link_to 'Show', authentication %></td>
+					<td><%= link_to 'Edit', edit_authentication_path(authentication) %></td>
+					<td><%= link_to 'Destroy', authentication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 
-  <tbody>
-    <% @authentications.each do |authentication| %>
-      <tr>
-        <td><%= authentication.type %></td>
-        <td><%= authentication.user %></td>
-        <td><%= authentication.password %></td>
-        <td><%= link_to 'Show', authentication %></td>
-        <td><%= link_to 'Edit', edit_authentication_path(authentication) %></td>
-        <td><%= link_to 'Destroy', authentication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<br>
 
-<br>
-
-<%= link_to 'New Authentication', new_authentication_path %>
+	<%= link_to 'New Authentication', new_authentication_path %>
+</div>

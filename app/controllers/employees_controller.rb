@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees = policy_scope(Employee.all)
   end
 
   # GET /employees/1
@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    authorize @employee
   end
 
   # GET /employees/1/edit
@@ -65,6 +66,7 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = Employee.find(params[:id])
+      authorize @employee
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
