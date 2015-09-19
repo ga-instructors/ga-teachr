@@ -24,6 +24,13 @@ en:
   locales:
     en: English
     es: Spanish
+  activerecord:
+    errors:
+      models:
+        authentication:
+          attributes:
+            user:
+              blank: invalid or incorrect password
   helpers:
     label:
       authentication:

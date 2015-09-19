@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
     (employee || student).name
   end
 
+  def campus
+    (employee || student).campus
+  end
+
 end

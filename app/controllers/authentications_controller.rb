@@ -25,9 +25,12 @@ class AuthenticationsController < ApplicationController
   # POST /authentications.json
   def create
     @authentication = Authentication.new(authentication_params)
+    @authentication.request = request
 
     respond_to do |format|
       if @authentication.save
+        session[:tk] = @authentication.token
+        session[:tz] = @authentication.timezone.name
         format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
         format.json { render :show, status: :created, location: @authentication }
       else

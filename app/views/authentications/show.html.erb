@@ -8,11 +8,22 @@
 <p>
   <strong>User:</strong>
   <%= @authentication.user %>
+	<%= @authentication.timezone %>
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @authentication.password %>
+  <strong>IP Address:</strong>
+  <%= @authentication.ip_address %>
+</p>
+
+<p>
+  <strong>User Agent:</strong>
+  <%= @authentication.user_agent %>
+</p>
+
+<p>
+  <strong>Acceptable Languages:</strong>
+  <%= @authentication.accept_language %>
 </p>
 
 <%= link_to 'Edit', edit_authentication_path(@authentication) %> |

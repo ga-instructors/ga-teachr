@@ -10,7 +10,8 @@ RSpec.describe 'Login Feature', type: :feature do
   let(:user) do
     student = Student.create!(first_name: 'Jaden', email: 'student@gmail.com', user_attributes: { password: valid_password })
     user = student.user
-    employee = Employee.create!(user: user, first_name: 'Jaden', title: 'Instructor', email: 'employee@generalassemb.ly')
+    campus = Campus.create(name: 'New York', timezone: 'Eastern Time (US & Canada)')
+    employee = Employee.create!(user: user, campus: campus, first_name: 'Jaden', title: 'Instructor', email: 'employee@generalassemb.ly')
     user
   end
 
@@ -25,7 +26,7 @@ RSpec.describe 'Login Feature', type: :feature do
     it 'rejects when invalid' do
       visit '/login'
       fill_in 'Email Address', with: user.employee.email
-      fill_in 'Password', with: valid_password
+      fill_in 'Password', with: invalid_password
       click_button 'Login'
       expect(current_path).to eq '/auth'
     end
@@ -42,15 +43,10 @@ RSpec.describe 'Login Feature', type: :feature do
     it 'denies when invalid' do
       visit '/login'
       fill_in 'Email Address', with: user.student.email
-      fill_in 'Password', with: valid_password
+      fill_in 'Password', with: invalid_password
       click_button 'Login'
       expect(current_path).to eq '/auth'
     end
-  end
-
-  private
-
-  def create_user
   end
 
 end

@@ -19,7 +19,8 @@ jaden = Employee.create({
   email: 'jaden.carver@gmail.com',
   campus: campus,
   debug: true,
-  admin: true
+  admin: true,
+  user: User.new(password: 'tmoat')
 })
 
 wdi = Course.create({
