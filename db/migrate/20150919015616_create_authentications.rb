@@ -3,7 +3,7 @@ class CreateAuthentications < ActiveRecord::Migration
     create_table :authentications do |t|
       t.string :type
       t.references :user, index: true, foreign_key: true
-      t.string :token, index: true
+      t.string :token, index: true, unique: true
       t.string :ip_address
       t.string :user_agent
       t.string :accept_language

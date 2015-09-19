@@ -3,7 +3,7 @@ class CreateStudents < ActiveRecord::Migration
     create_table :students do |t|
       t.string :first_name
       t.string :last_name
-      t.string :email
+      t.string :email, index: true, unique: true
       t.references :cohort, index: true, foreign_key: true
 
       t.timestamps null: false

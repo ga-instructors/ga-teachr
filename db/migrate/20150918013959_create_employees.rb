@@ -4,7 +4,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :title
-      t.string :email
+      t.string :email, unique: true, index: true
       t.references :campus, index: true, foreign_key: true
       t.boolean :debug
       t.boolean :admin

@@ -3,18 +3,29 @@
 
 	<h1><%= @cohort.name %></h1>
 
+	<div style="overflow: hidden; text-align: center;">
+		<div style="float: left; margin-right: 1rem;">
+			<%= render @cohort.instructors %>
+		</div>
+		<div style="float: left; margin-right: 1rem;">
+			<%= render @cohort.associates %>
+		</div>
+		<div style="float: left; margin-right: 1rem;">
+			<%= render @cohort.assistants %>
+		</div>
+		<div style="float: left; margin-right: 1rem;">
+			<%= render @cohort.producers %>
+		</div>
+	</div>
+
 	<p>
 		<strong>Campus:</strong>
-		<%= @cohort.campus %>
+		<%= @cohort.campus.name %>
 	</p>
 
 	<p>
 		<strong>Course:</strong>
-		<%= @cohort.course %>
-	</p>
-
-	<p>
-		<strong>Name:</strong>
+		<%= @cohort.course.name %>
 	</p>
 
 	<p>

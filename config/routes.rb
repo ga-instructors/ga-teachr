@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :authentications, path: 'auth'
-  get '/login' => 'authentications#new', as: 'login'
+  root to: 'authentications#new'
 
   resources :students
   resources :cohorts
@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   resources :employees
   resources :campuses
   resources :campus
-  root to: 'style_guide/examples#index'
+  get '/style-guide' => 'style_guide/examples#index'
 
 end

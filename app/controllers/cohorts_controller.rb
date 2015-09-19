@@ -4,7 +4,7 @@ class CohortsController < ApplicationController
   # GET /cohorts
   # GET /cohorts.json
   def index
-    @cohorts = Cohort.all
+    @cohorts = policy_scope(Cohort)
   end
 
   # GET /cohorts/1
@@ -15,6 +15,7 @@ class CohortsController < ApplicationController
   # GET /cohorts/new
   def new
     @cohort = Cohort.new
+    authorize @cohort
   end
 
   # GET /cohorts/1/edit
@@ -65,6 +66,7 @@ class CohortsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cohort
       @cohort = Cohort.find(params[:id])
+      authorize @cohort
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

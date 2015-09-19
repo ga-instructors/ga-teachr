@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919015616) do
+ActiveRecord::Schema.define(version: 20150919200927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150919015616) do
     t.datetime "updated_at",       null: false
   end
 
+  add_index "authentications", ["token"], name: "index_authentications_on_token", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "campuses", force: :cascade do |t|
@@ -54,6 +55,17 @@ ActiveRecord::Schema.define(version: 20150919015616) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "cohort_functions", force: :cascade do |t|
+    t.string   "type"
+    t.integer  "cohort_id"
+    t.integer  "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "cohort_functions", ["cohort_id"], name: "index_cohort_functions_on_cohort_id", using: :btree
+  add_index "cohort_functions", ["employee_id"], name: "index_cohort_functions_on_employee_id", using: :btree
 
   create_table "cohorts", force: :cascade do |t|
     t.integer  "campus_id"
@@ -87,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150919015616) do
   end
 
   add_index "employees", ["campus_id"], name: "index_employees_on_campus_id", using: :btree
+  add_index "employees", ["email"], name: "index_employees_on_email", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
@@ -98,6 +111,7 @@ ActiveRecord::Schema.define(version: 20150919015616) do
   end
 
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
+  add_index "students", ["email"], name: "index_students_on_email", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "password_digest"
@@ -111,6 +125,8 @@ ActiveRecord::Schema.define(version: 20150919015616) do
   add_index "users", ["student_id"], name: "index_users_on_student_id", using: :btree
 
   add_foreign_key "authentications", "users"
+  add_foreign_key "cohort_functions", "cohorts"
+  add_foreign_key "cohort_functions", "employees"
   add_foreign_key "cohorts", "campuses"
   add_foreign_key "cohorts", "courses"
   add_foreign_key "employees", "campuses"
