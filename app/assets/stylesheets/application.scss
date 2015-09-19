@@ -78,14 +78,26 @@ blockquote {
          FORMS
    ------------------ */
 
+input[type=text], input[type=password], input[type=email], textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border: solid #EEEEEE 1px;
+  width: 100%;
+  width: calc(100% - 3pt);
+}
+
+textarea { min-height: 100pt; }
+select { font-family: inherit; font-size: 1rem; }
+
 .field {
   line-height: 2rem;
   label {
     display: inline-block;
-    min-width: 150pt;
+    min-width: 120pt;
   }
   label ~ input {
-    width: calc(100% - 155pt);
+    width: calc(100% - 130pt);
   }
   input[type=radio], input[type=checkbox] {
     width: 1rem;
@@ -97,16 +109,18 @@ blockquote {
     width: auto;
     padding: 0pt 4pt;
   }
+  .field_with_errors {
+    background-color: yellow;
+    display: inline-block;
+  }
+  .field_with_errors:first-child {
+    margin-left: -4pt;
+    padding-left: 4pt;
+  }
+  .field_with_errors ~ .field_with_errors {
+    width: calc(100% - 160pt);
+  }
 }
-
-input[type=text], input[type=password], input[type=email], textarea {
-  font-size: 1rem;
-  padding: 0.25rem;
-  border: solid #EEEEEE 1px;
-  width: 100%;
-  width: calc(100% - 3pt);
-}
-textarea { min-height: 100pt; }
 
 a:link.button, a:visited.button, .button, button, input[type=submit], input[type=reset], input[type=button] {
   background-color: #FFFFFF;
@@ -120,7 +134,9 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
   font-size: 1rem;
   font-weight: 400;
   line-height: 2rem;
-  margin: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
   min-height: 2rem;
   padding: 0.5rem 1rem;
   position: relative;
@@ -144,6 +160,10 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
   &.secondary {
     background-color: #EEEEEE;
   }
+  &.big {
+    font-size: 1.5rem;
+    padding: 0.5rem 3rem;
+  }
 }
 
 /* ------------------
@@ -155,6 +175,24 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
   &.small { max-width: 400pt; }
   &.large { max-width: 1000pt; }
   > * { margin-left: 0.5rem; margin-right: 0.5rem; }
+}
+
+#notice {
+  background-color: #EEEEEE;
+  line-height: 2rem;
+  padding: 0 0.5rem;
+}
+
+table {
+  width: 100%;
+  thead {
+    background-color: #EAEAEA;
+  }
+  tbody {
+    tr:nth-child(2n) {
+      background-color: #F5F5F5;
+    }
+  }
 }
 
 /* ------------------

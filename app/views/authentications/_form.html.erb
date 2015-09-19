@@ -1,0 +1,21 @@
+<% if @authentication.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@authentication.errors.count, "error") %> prohibited this authentication from being saved:</h2>
+
+		<ul>
+			<% @authentication.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= form.hidden_field :type %>
+<div class="field">
+	<%= form.label :user_email %>
+	<%= form.text_field :user_email %>
+</div>
+<div class="field">
+	<%= form.label :password %>
+	<%= form.password_field :password %>
+</div>

@@ -1,0 +1,32 @@
+<% if @cohort.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@cohort.errors.count, "error") %> prohibited this cohort from being saved:</h2>
+
+		<ul>
+			<% @cohort.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<div class="field">
+	<%= form.label :campus_id %>
+	<%= form.select :campus_id, Campus.pluck(:name, :id) %>
+</div>
+<div class="field">
+	<%= form.label :course_id %>
+	<%= form.select :course_id, Course.pluck(:name, :id) %>
+</div>
+<div class="field">
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+</div>
+<div class="field">
+	<%= form.label :begins_at %>
+	<%= form.datetime_select :begins_at %>
+</div>
+<div class="field">
+	<%= form.label :ends_at %>
+	<%= form.datetime_select :ends_at %>
+</div>

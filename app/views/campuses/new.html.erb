@@ -1,0 +1,11 @@
+<div class="large container">
+	<h1>New Campus</h1>
+
+	<%= form_for(@campus) do |form| %>
+		<%= render form %>
+		<div class="actions">
+			<%= form.submit %>
+			<%= link_to 'Cancel', campuses_path %>
+		</div>
+	<% end %>
+</div>

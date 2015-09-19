@@ -20,4 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  title: General Assembly - Teachr
+  locales:
+    en: English
+    es: Spanish
+  helpers:
+    label:
+      authentication:
+        user_email: Email Address
+      campus:
+        locale: Language
+        address_street: Address
+        address_city: City
+        address_state: State
+        address_country: Country
+        address_code: ZIP

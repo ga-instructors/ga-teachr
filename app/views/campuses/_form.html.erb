@@ -1,0 +1,54 @@
+<% if form.object.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@campus.errors.count, "error") %> prohibited this campus from being saved:</h2>
+
+		<ul>
+			<% @campus.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<div class="field">
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+</div>
+<div class="field">
+	<%= form.label :timezone %>
+	<%= form.select :timezone, ActiveSupport::TimeZone.all.map{|t|["#{t.tzinfo.name.titleize} - #{t.name}",t.name]} %>
+</div>
+<div class="field">
+	<%= form.label :locale %>
+	<%= form.select :locale, I18n.available_locales.map{|l|[t(l, scope: 'locales'),l]} %>
+</div>
+<div class="field">
+	<%= form.label :address_street %>
+	<%= form.text_field :address_street %>
+</div>
+<div class="field">
+	<%= form.label :address_city %>
+	<%= form.text_field :address_city %>
+</div>
+<div class="field">
+	<%= form.label :address_state %>
+	<%= form.text_field :address_state %>
+</div>
+<div class="field">
+	<%= form.label :address_country %>
+	<%= form.text_field :address_country %>
+</div>
+<div class="field">
+	<%= form.label :address_code %>
+	<%= form.text_field :address_code %>
+</div>
+<%= form.hidden_field :address_latitude %>
+<%= form.hidden_field :address_longitude %>
+<div class="field">
+	<%= form.label :phone_number %>
+	<%= form.text_field :phone_number %>
+</div>
+<div class="field">
+	<%= form.label :description %>
+	<%= form.text_area :description %>
+</div>

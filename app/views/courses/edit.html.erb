@@ -1,0 +1,9 @@
+<h1>Editing Course</h1>
+
+<%= form_for(@course) do |form| %>
+	<%= render form %>
+  <div class="actions">
+    <%= f.submit %>
+		<%= link_to 'Cancel', @course %>
+	</div>
+<% end %>

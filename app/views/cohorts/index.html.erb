@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+	<h1>Listing Cohorts</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Campus</th>
+				<th>Course</th>
+				<th>Name</th>
+				<th>Begins at</th>
+				<th>Ends at</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @cohorts.each do |cohort| %>
+				<tr>
+					<td><%= link_to cohort.campus.name, cohort.campus %></td>
+					<td><%= link_to cohort.course, cohort.course %></td>
+					<td><%= cohort.name %></td>
+					<td><%= cohort.begins_at %></td>
+					<td><%= cohort.ends_at %></td>
+					<td><%= link_to 'Show', cohort %></td>
+					<td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
+					<td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br>
+
+	<%= link_to 'New Cohort', new_cohort_path %>
+</div>

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+	<h1>Employees</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Title</th>
+				<th>Campus</th>
+				<th>Debug</th>
+				<th>Admin</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @employees.each do |employee| %>
+				<tr>
+					<td><%= link_to employee.name, employee %></td>
+					<td><%= employee.title %></td>
+					<td><%= link_to employee.campus.name, employee.campus %></td>
+					<td><%= employee.debug %></td>
+					<td><%= employee.admin %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br>
+
+	<%= link_to 'New Employee', new_employee_path, class: 'button' %>
+</div>

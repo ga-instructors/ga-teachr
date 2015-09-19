@@ -1,0 +1,12 @@
+<div class="large container">
+	<h1>Editing Employee</h1>
+
+	<%= form_for(@employee) do |form| %>
+		<%= render form %>
+		<div class="actions">
+			<%= form.submit %>
+			<%= link_to 'Cancel', @employee %>
+		</div>
+	<% end %>
+
+</div>

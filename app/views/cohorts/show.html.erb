@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+
+	<h1><%= @cohort.name %></h1>
+
+	<p>
+		<strong>Campus:</strong>
+		<%= @cohort.campus %>
+	</p>
+
+	<p>
+		<strong>Course:</strong>
+		<%= @cohort.course %>
+	</p>
+
+	<p>
+		<strong>Name:</strong>
+	</p>
+
+	<p>
+		<strong>Begins at:</strong>
+		<%= @cohort.begins_at %>
+	</p>
+
+	<p>
+		<strong>Ends at:</strong>
+		<%= @cohort.ends_at %>
+	</p>
+
+	<%= link_to 'Edit', edit_cohort_path(@cohort) %> |
+	<%= link_to 'Back', cohorts_path %>
+</div>

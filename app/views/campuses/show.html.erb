@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+<p>
+  <strong>Name:</strong>
+  <%= @campus.name %>
+</p>
+
+<p>
+  <strong>Timezone:</strong>
+  <%= @campus.timezone %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @campus.locale %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @campus.address_latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @campus.address_longitude %>
+</p>
+
+<p>
+  <strong>Address street:</strong>
+  <%= @campus.address_street %>
+</p>
+
+<p>
+  <strong>Address city:</strong>
+  <%= @campus.address_city %>
+</p>
+
+<p>
+  <strong>Address state:</strong>
+  <%= @campus.address_state %>
+</p>
+
+<p>
+  <strong>Address zip:</strong>
+  <%= @campus.address_code %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @campus.phone_number %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @campus.description %>
+</p>
+
+<%= link_to 'Edit', edit_campus_path(@campus) %> |
+<%= link_to 'Back', campuses_path %>
+</div>

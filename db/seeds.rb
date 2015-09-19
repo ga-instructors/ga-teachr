@@ -5,3 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+campus = Campus.create({
+  name: 'New York Campus',
+  timezone: 'Eastern Time (US & Canada)',
+  locale: 'en'
+})
+
+jaden = Employee.create({
+  first_name: 'Jaden',
+  last_name: 'Carver',
+  title: 'WDI Instructor',
+  email: 'jaden.carver@gmail.com',
+  campus: campus,
+  debug: true,
+  admin: true
+})
+
+wdi = Course.create({
+  name: 'Web Development Immersive (WDI)'
+})
+

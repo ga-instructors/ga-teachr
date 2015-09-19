@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+
+	<h1>LOCATIONS</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th><%=t 'helpers.label.campus.name' %></th>
+				<th><%=t 'helpers.label.campus.timezone' %></th>
+				<th><%=t 'helpers.label.campus.locale' %></th>
+				<th><%=t 'helpers.label.campus.address_city' %></th>
+				<th><%=t 'helpers.label.campus.address_state' %></th>
+				<th><%=t 'helpers.label.campus.address_code' %></th>
+				<th><%=t 'helpers.label.campus.phone_number' %></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @campuses.each do |campus| %>
+				<tr>
+					<td><%= link_to campus.name, campus %></td>
+					<td><%= campus.timezone %></td>
+					<td><%=t campus.locale, scope: 'locales' %></td>
+					<td><%= campus.address_city %></td>
+					<td><%= campus.address_state %></td>
+					<td><%= campus.address_code %></td>
+					<td><%= campus.phone_number %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= link_to 'New Campus', new_campus_path, class: 'button' %>
+</div>
