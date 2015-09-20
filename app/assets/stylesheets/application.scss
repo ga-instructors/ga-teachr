@@ -60,6 +60,7 @@ h6 { color: #999999; }
    ------------------ */
 
 p { margin-top: 0; }
+a { color: #4078c0; }
 
 pre {
   background-color: #FAFAFA;
@@ -72,6 +73,11 @@ pre {
 blockquote {
   border-left: solid #EEEEEE 0.5em;
   padding-left: 1em;
+}
+
+hr {
+  border-style: solid;
+  border-color: #EEEEEE;
 }
 
 /* ------------------
@@ -89,6 +95,7 @@ input[type=text], input[type=password], input[type=email], textarea {
 
 textarea { min-height: 100pt; }
 select { font-family: inherit; font-size: 1rem; }
+progress { width: 100%; }
 
 .field {
   line-height: 2rem;
@@ -189,8 +196,11 @@ table {
     background-color: #EAEAEA;
   }
   tbody {
-    tr:nth-child(2n) {
+    tr {
       background-color: #F5F5F5;
+    }
+    tr:nth-child(2n) {
+      background-color: #FFFFFF;
     }
   }
 }

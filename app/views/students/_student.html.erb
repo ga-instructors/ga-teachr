@@ -1,0 +1,4 @@
+<%= content_tag_for :div, student, style: 'line-height: 32px', draggable: true do %>
+	<%= image_tag gravatar_url(student.email, 24), style: 'vertical-align: -6px;', draggable: false %>
+	<%= student.name %>
+<% end %>

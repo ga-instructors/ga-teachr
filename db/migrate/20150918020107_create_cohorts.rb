@@ -4,6 +4,7 @@ class CreateCohorts < ActiveRecord::Migration
       t.references :campus, index: true, foreign_key: true
       t.references :course, index: true, foreign_key: true
       t.string :name
+      t.string :github_repo
       t.timestamp :begins_at
       t.timestamp :ends_at
 

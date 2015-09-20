@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<div class="large container">
+
 <p>
   <strong>First name:</strong>
   <%= @student.first_name %>
@@ -11,14 +13,21 @@
 </p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @student.title %>
-</p>
-
-<p>
   <strong>Cohort:</strong>
   <%= @student.cohort %>
 </p>
 
+<p>
+  <strong>Github:</strong>
+	<%= @student.github_username %>
+	<ul>
+		<% @student.github[:rels][:repos].get.data.each do |repo| %>
+			<li><%= repo[:name] %></li>
+		<% end %>
+	</ul>
+</p>
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>
+
+</div>

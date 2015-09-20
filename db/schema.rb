@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919200927) do
+ActiveRecord::Schema.define(version: 20150920014708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,10 +71,11 @@ ActiveRecord::Schema.define(version: 20150919200927) do
     t.integer  "campus_id"
     t.integer  "course_id"
     t.string   "name"
+    t.string   "github_repo"
     t.datetime "begins_at"
     t.datetime "ends_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "cohorts", ["campus_id"], name: "index_cohorts_on_campus_id", using: :btree
@@ -101,13 +102,25 @@ ActiveRecord::Schema.define(version: 20150919200927) do
   add_index "employees", ["campus_id"], name: "index_employees_on_campus_id", using: :btree
   add_index "employees", ["email"], name: "index_employees_on_email", using: :btree
 
+  create_table "student_registrations", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "cohort_id"
+    t.text     "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "student_registrations", ["cohort_id"], name: "index_student_registrations_on_cohort_id", using: :btree
+  add_index "student_registrations", ["student_id"], name: "index_student_registrations_on_student_id", using: :btree
+
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.string   "github_username"
     t.integer  "cohort_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
@@ -130,6 +143,8 @@ ActiveRecord::Schema.define(version: 20150919200927) do
   add_foreign_key "cohorts", "campuses"
   add_foreign_key "cohorts", "courses"
   add_foreign_key "employees", "campuses"
+  add_foreign_key "student_registrations", "cohorts"
+  add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"
   add_foreign_key "users", "employees"
   add_foreign_key "users", "students"

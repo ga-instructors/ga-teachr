@@ -22,6 +22,10 @@
 	<%= form.label :email %>
 	<%= form.text_field :email %>
 </div>
+<div class="field">
+	<%= form.label :github_username %>
+	<%= form.text_field :github_username %>
+</div>
 <%= form.fields_for :user do |user_form| %>
 	<div class="field">
 		<%= user_form.label :password %>

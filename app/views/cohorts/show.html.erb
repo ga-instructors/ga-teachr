@@ -1,7 +1,25 @@
 <p id="notice"><%= notice %></p>
 <div class="large container">
 
+	<h3 style="float: right; text-align: right; color: #CCCCCC;">
+		<%= @cohort.course.name %><br />
+		<%= @cohort.campus.name %>
+	</h3>
 	<h1><%= @cohort.name %></h1>
+
+	<div style="overflow: auto;">
+		<progress min="0" max="<%= @cohort.ends_at - @cohort.begins_at %>" value="<%= Time.now - @cohort.begins_at %>"></progress>
+		<div style="float: left;">
+			<%= @cohort.begins_at.to_date.to_s(:long) %>
+		</div>
+		<div style="float: right;">
+			<%= @cohort.ends_at.to_date.to_s(:long) %>
+		</div>
+		<div style="text-align: center;"><%= Time.current.to_date.to_s(:long) %></div>
+	</div>
+	<hr />
+
+	<h3>INSTRUCTIONAL TEAM</h3>
 
 	<div style="overflow: hidden; text-align: center;">
 		<div style="float: left; margin-right: 1rem;">
@@ -18,26 +36,59 @@
 		</div>
 	</div>
 
-	<p>
-		<strong>Campus:</strong>
-		<%= @cohort.campus.name %>
-	</p>
+	<div style="float: left; width: 200px;">
+		<h3>STUDENTS</h3>
+		<%= render @cohort.students %>
+		<% if policy(@cohort).edit? %>
+			<%= link_to 'Update Cohort', edit_cohort_path(@cohort), class: 'button' %>
+		<% end %>
+	</div>
 
-	<p>
-		<strong>Course:</strong>
-		<%= @cohort.course.name %>
-	</p>
-
-	<p>
-		<strong>Begins at:</strong>
-		<%= @cohort.begins_at %>
-	</p>
-
-	<p>
-		<strong>Ends at:</strong>
-		<%= @cohort.ends_at %>
-	</p>
-
-	<%= link_to 'Edit', edit_cohort_path(@cohort) %> |
-	<%= link_to 'Back', cohorts_path %>
+	<div style="float: left; width: calc(100% - 250px);">
+		<h3>FILES</h3>
+		<table>
+			<% @cohort.github.rels[:contents].get.data.each do |file| %>
+				<tr>
+					<% case file[:type] %>
+					<% when "dir" %>
+						<td style="width: 1.5rem; text-align: center;">
+							<svg style="height: 1rem;" viewBox="0 0 8 8">
+								<path d="M0 0v2h8v-1h-5v-1h-3zm0 3v4.5c0 .28.22.5.5.5h7c.28 0 .5-.22.5-.5v-4.5h-8z" />
+							</svg>
+						</td>
+						<td>
+							<%= file[:name].gsub(/^u([0-9])/, 'unit \1:').titleize %>
+						</td>
+						<td>
+							<a href="<%= file[:html_url] %>" target="github.com">/<%= file[:name] %></a>
+						</td>
+					<% else %>
+						<td>
+							<svg style="height: 1rem;" viewBox="0 0 8 8">
+								<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3z" />
+							</svg>
+						</td>
+						<td>
+							<%= file[:name] %>
+						</td>
+						<td style="color: #999999;">
+							<%= Mime::Type.lookup_by_extension(file[:name].split('.')[1..-1].join('.')).to_s %>
+						</td>
+					<% end %>
+				</tr>
+			<% end %>
+		</table>
+		<br />
+		<h3>COURSE LOG</h3>
+		<table width="100%">
+			<% @cohort.github[:rels][:commits].get.data.each do |commit| %>
+				<tr>
+					<td><%= commit[:commit][:committer][:date] %></td>
+					<td><%= commit[:commit][:committer][:name] %></td>
+					<td><%= commit[:commit][:message] %></td>
+				</tr>
+			<% end %>
+		</table>
+		<br />
+	</div>
 </div>
