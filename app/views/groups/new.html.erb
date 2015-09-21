@@ -1,0 +1,11 @@
+<div class="large container">
+	<h1>New <%= @cohort.name %> Group</h1>
+
+	<%= form_for(@groups_grouping, url: cohort_groups_path) do |form| %>
+		<%= render form %>
+		<div class="actions">
+			<%= form.submit %>
+			<%= link_to 'Cancel', cohort_groups_path %>
+		</div>
+	<% end %>
+</div>

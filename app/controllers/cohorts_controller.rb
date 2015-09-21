@@ -10,6 +10,8 @@ class CohortsController < ApplicationController
   # GET /cohorts/1
   # GET /cohorts/1.json
   def show
+    params[:browse] = '/' if params[:browse].blank?
+    @files = @cohort.browse(params[:browse])
   end
 
   # GET /cohorts/new

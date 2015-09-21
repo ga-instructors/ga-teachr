@@ -1,0 +1,20 @@
+<% if @groups_grouping.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@groups_grouping.errors.count, "error") %> prohibited this groups_grouping from being saved:</h2>
+
+		<ul>
+			<% @groups_grouping.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<div class="field">
+	<%= form.label :name %><br>
+	<%= form.text_field :name %>
+</div>
+<%= form.fields_for :groups do |group_form| %>
+	<%= group_form.text_field :name %>
+<% end %>
+

@@ -171,6 +171,11 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
     font-size: 1.5rem;
     padding: 0.5rem 3rem;
   }
+  &.small {
+    font-size: 0.75rem;
+    padding: 0.125rem 1rem;
+    margin: 0.25rem 0.5rem;;
+  }
 }
 
 /* ------------------

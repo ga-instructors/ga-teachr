@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<div class="small container">
+	<h1><%= @cohort.name %> GROUPS</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th width="90%">Name</th>
+				<th colspan="2"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @groups_groupings.each do |groups_grouping| %>
+				<tr>
+					<td><%= link_to groups_grouping.name, cohort_group_path(@cohort, groups_grouping) %></td>
+					<td><%= link_to 'Modify', edit_cohort_group_path(@cohort, groups_grouping) %></td>
+					<td><%= link_to 'Delete', cohort_group_path(@cohort, groups_grouping), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br>
+
+	<%= link_to 'New Grouping', new_cohort_group_path(@cohort) %>
+</div>

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root to: 'authentications#new'
 
   resources :students
-  resources :cohorts
+  resources :cohorts do
+    resources :groups
+  end
   resources :courses
   resources :employees
   resources :campuses

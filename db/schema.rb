@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920014708) do
+ActiveRecord::Schema.define(version: 20150920084628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,34 @@ ActiveRecord::Schema.define(version: 20150920014708) do
   add_index "employees", ["campus_id"], name: "index_employees_on_campus_id", using: :btree
   add_index "employees", ["email"], name: "index_employees_on_email", using: :btree
 
+  create_table "groups_assignments", force: :cascade do |t|
+    t.integer  "groups_group_id"
+    t.integer  "student_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "groups_assignments", ["groups_group_id"], name: "index_groups_assignments_on_groups_group_id", using: :btree
+  add_index "groups_assignments", ["student_id"], name: "index_groups_assignments_on_student_id", using: :btree
+
+  create_table "groups_groupings", force: :cascade do |t|
+    t.integer  "cohort_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groups_groupings", ["cohort_id"], name: "index_groups_groupings_on_cohort_id", using: :btree
+
+  create_table "groups_groups", force: :cascade do |t|
+    t.integer  "groups_grouping_id"
+    t.string   "name"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "groups_groups", ["groups_grouping_id"], name: "index_groups_groups_on_groups_grouping_id", using: :btree
+
   create_table "student_registrations", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "cohort_id"
@@ -143,6 +171,10 @@ ActiveRecord::Schema.define(version: 20150920014708) do
   add_foreign_key "cohorts", "campuses"
   add_foreign_key "cohorts", "courses"
   add_foreign_key "employees", "campuses"
+  add_foreign_key "groups_assignments", "groups_groups"
+  add_foreign_key "groups_assignments", "students"
+  add_foreign_key "groups_groupings", "cohorts"
+  add_foreign_key "groups_groups", "groups_groupings"
   add_foreign_key "student_registrations", "cohorts"
   add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"

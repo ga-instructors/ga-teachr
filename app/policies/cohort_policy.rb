@@ -1,4 +1,9 @@
 class CohortPolicy < ApplicationPolicy
+
+  def update?
+    user && user.employee && @record.functions.where(employee_id: user.employee_id)
+  end
+
   class Scope < Scope
     def resolve
       if user && user.employee

@@ -1,23 +1,37 @@
-<p id="notice"><%= notice %></p>
-<div class="large container">
+<div style="background-image: url('http://www.wired.com/wp-content/uploads/2015/07/nh-pluto-moonlight.jpg'); background-size: cover; background-position: 0 60%; text-shadow: 1px 2px 1px rgba(0,0,0,0.5); overflow: auto; color: white; padding: 1rem; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); font-weight: 600;font-size: 1.1em;">
+	<p id="notice"><%= notice %></p>
+	<div class="large container">
+		<h3 style="float: right; text-align: right;">
+			<%= @cohort.course.name %><br />
+			<%= @cohort.campus.name %>
+		</h3>
+		<h1><%= @cohort.name %></h1>
 
-	<h3 style="float: right; text-align: right; color: #CCCCCC;">
-		<%= @cohort.course.name %><br />
-		<%= @cohort.campus.name %>
-	</h3>
-	<h1><%= @cohort.name %></h1>
-
-	<div style="overflow: auto;">
-		<progress min="0" max="<%= @cohort.ends_at - @cohort.begins_at %>" value="<%= Time.now - @cohort.begins_at %>"></progress>
-		<div style="float: left;">
-			<%= @cohort.begins_at.to_date.to_s(:long) %>
+		<div style="overflow: auto;">
+			<progress min="0" max="<%= @cohort.ends_at - @cohort.begins_at %>" value="<%= Time.now - @cohort.begins_at %>"></progress>
+			<div style="float: left;">
+				<%= @cohort.begins_at.to_date.to_s(:long) %>
+			</div>
+			<div style="float: right;">
+				<%= @cohort.ends_at.to_date.to_s(:long) %>
+			</div>
+			<div style="text-align: center;"><%= Time.current.to_date.to_s(:long) %></div>
 		</div>
-		<div style="float: right;">
-			<%= @cohort.ends_at.to_date.to_s(:long) %>
-		</div>
-		<div style="text-align: center;"><%= Time.current.to_date.to_s(:long) %></div>
 	</div>
-	<hr />
+</div>
+
+<div class="large container">
+	<% if policy(@cohort).edit? %>
+		<div style="float:right;">
+			<%= link_to 'Group', new_cohort_group_path(@cohort), class: 'small button' %>
+			<%= link_to edit_cohort_path(@cohort), class: 'small button' do %>
+				<svg width="16" height="16" viewBox="0 0 8 8" style="vertical-align: -4px;">
+					<path d="M5.5 0c-1.38 0-2.5 1.12-2.5 2.5 0 .32.08.62.19.91l-2.91 2.88c-.39.39-.39 1.05 0 1.44.2.2.46.28.72.28.26 0 .52-.09.72-.28l2.88-2.91c.28.11.58.19.91.19 1.38 0 2.5-1.12 2.5-2.5 0-.16 0-.32-.03-.47l-.97.97h-2v-2l.97-.97c-.15-.03-.31-.03-.47-.03zm-4.5 6.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z" />
+				</svg>
+				&nbsp;&nbsp;Settings
+			<% end %>
+		</div>
+	<% end %>
 
 	<h3>INSTRUCTIONAL TEAM</h3>
 
@@ -39,15 +53,17 @@
 	<div style="float: left; width: 200px;">
 		<h3>STUDENTS</h3>
 		<%= render @cohort.students %>
-		<% if policy(@cohort).edit? %>
-			<%= link_to 'Update Cohort', edit_cohort_path(@cohort), class: 'button' %>
-		<% end %>
 	</div>
 
 	<div style="float: left; width: calc(100% - 250px);">
-		<h3>FILES</h3>
+		<h3 style="float:left">FILES</h3>
+		<% if (parent = params[:browse].split('/')[0..-2]).length > 0 %>
+			<div style="float: left; line-height: 3rem; margin-left: 1em; font-size: 0.9rem;">
+				<%= link_to "Back to Parent", browse: parent.join('/') %>
+			</div>
+		<% end %>
 		<table>
-			<% @cohort.github.rels[:contents].get.data.each do |file| %>
+			<% @files.each do |file| %>
 				<tr>
 					<% case file[:type] %>
 					<% when "dir" %>
@@ -57,13 +73,13 @@
 							</svg>
 						</td>
 						<td>
-							<%= file[:name].gsub(/^u([0-9])/, 'unit \1:').titleize %>
+							<%= link_to file[:name].gsub(/^u([0-9])/, 'unit \1:').gsub(/^d0*([0-9]+)/, 'day \1:').titleize, browse: [params[:browse], file[:name]].join('/') %>
 						</td>
 						<td>
 							<a href="<%= file[:html_url] %>" target="github.com">/<%= file[:name] %></a>
 						</td>
 					<% else %>
-						<td>
+						<td style="width: 1.5rem; text-align: center;">
 							<svg style="height: 1rem;" viewBox="0 0 8 8">
 								<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3z" />
 							</svg>
@@ -81,7 +97,7 @@
 		<br />
 		<h3>COURSE LOG</h3>
 		<table width="100%">
-			<% @cohort.github[:rels][:commits].get.data.each do |commit| %>
+			<% @cohort.log.each do |commit| %>
 				<tr>
 					<td><%= commit[:commit][:committer][:date] %></td>
 					<td><%= commit[:commit][:committer][:name] %></td>

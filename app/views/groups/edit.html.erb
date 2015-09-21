@@ -1,0 +1,11 @@
+<h1>Editing Groups Grouping</h1>
+
+<%= form_for(@groups_grouping, url: cohort_group_path(@cohort, @groups_grouping)) do |form| %>
+	<%= render form %>
+	<div class="actions">
+		<%= form.submit %>
+	</div>
+<% end %>
+
+<%= link_to 'Show', cohort_group_path(@cohort, @groups_grouping) %> |
+<%= link_to 'Back', cohort_groups_path %>

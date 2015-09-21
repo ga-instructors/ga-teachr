@@ -124,6 +124,7 @@ Student.create!({
   first_name: "Meiji",
   last_name: "Chen",
   email: "meiji.chen@gmail.com",
+  github_username: "meijichen",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -131,6 +132,7 @@ Student.create!({
   first_name: "Nick",
   last_name: "Marshall",
   email: "nialbima@gmail.com",
+  github_username: "nialbima",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -176,6 +178,7 @@ Student.create!({
   first_name: "Victoria",
   last_name: "Donnelly",
   email: "vic.n.d1@gmail.com",
+  github_username: "nealado",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -213,6 +216,7 @@ Student.create!({
   first_name: "Joy",
   last_name: "Morgan",
   email: "tesoro1021@gmail.com",
+  github_username: "morga147",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -220,6 +224,7 @@ Student.create!({
   first_name: "Pamela",
   last_name: "Nevins",
   email: "pamela.nevins@gmail.com",
+  github_username: "pnev",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -242,6 +247,7 @@ Student.create!({
   first_name: "Salvatore",
   last_name: "Fanara",
   email: "sfanara@gmail.com",
+  github_username: "tfbkny",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })
@@ -249,6 +255,7 @@ Student.create!({
   first_name: "Mohamed",
   last_name: "Elgendy",
   email: "elgendi.mohamed@gmail.com",
+  github_username: "moelgendy",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
   user: User.new(password: 'test')
 })

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+
+	<h1><%= @groups_grouping.cohort.name %>: <%= @groups_grouping.name %></h1>
+
+	<% @groups_grouping.groups.each do |group| %>
+		<%= @group.name %>
+	<% end %>
+
+
+	<%= link_to 'Edit', edit_cohort_group_path(@cohort, @groups_grouping) %> |
+	<%= link_to 'Back', cohort_groups_path %>
+</div>
