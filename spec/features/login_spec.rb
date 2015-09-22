@@ -17,14 +17,14 @@ RSpec.describe 'Login Feature', type: :feature do
 
   context 'as an employee' do
     it 'accepts when valid' do
-      visit '/login'
+      visit '/auth/new'
       fill_in 'Email Address', with: user.employee.email
       fill_in 'Password', with: valid_password
       click_button 'Login'
       expect(current_path).to match %r{/auth/[0-9]+}
     end
     it 'rejects when invalid' do
-      visit '/login'
+      visit '/auth/new'
       fill_in 'Email Address', with: user.employee.email
       fill_in 'Password', with: invalid_password
       click_button 'Login'
@@ -34,14 +34,14 @@ RSpec.describe 'Login Feature', type: :feature do
 
   context 'as a student' do
     it 'accepts when valid' do
-      visit '/login'
+      visit '/auth/new'
       fill_in 'Email Address', with: user.student.email
       fill_in 'Password', with: valid_password
       click_button 'Login'
       expect(current_path).to match %r{/auth/[0-9]+}
     end
     it 'denies when invalid' do
-      visit '/login'
+      visit '/auth/new'
       fill_in 'Email Address', with: user.student.email
       fill_in 'Password', with: invalid_password
       click_button 'Login'
