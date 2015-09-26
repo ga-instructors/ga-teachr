@@ -103,14 +103,16 @@ Student.create!({
   email: "jacob.shemkovitz@gmail.com",
   github_username: "jforjacob",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Andres",
   last_name: "Carter",
   email: "carter.marino@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Steph",
@@ -118,7 +120,8 @@ Student.create!({
   email: "steffi.nathai@gmail.com",
   github_username: "StephNathai",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Meiji",
@@ -126,7 +129,8 @@ Student.create!({
   email: "meiji.chen@gmail.com",
   github_username: "meijichen",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Nick",
@@ -134,7 +138,8 @@ Student.create!({
   email: "nialbima@gmail.com",
   github_username: "nialbima",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Jennifer",
@@ -142,21 +147,24 @@ Student.create!({
   email: "jenniferllwu@gmail.com",
   github_username: "jenniferyien",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Brian",
   last_name: "Deutsch",
   email: "bgdeutsch@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Edward",
   last_name: "Petner",
   email: "edward.petner@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Esther",
@@ -164,7 +172,8 @@ Student.create!({
   last_name: "Zinn",
   email: "bionicfemme@me.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Harrison",
@@ -172,7 +181,8 @@ Student.create!({
   email: "harrison.e.riddell@gmail.com",
   github_username: "HarrisonRiddell",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Victoria",
@@ -180,7 +190,8 @@ Student.create!({
   email: "vic.n.d1@gmail.com",
   github_username: "nealado",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Yuka",
@@ -188,21 +199,24 @@ Student.create!({
   email: "yukanagai@gmail.com",
   github_username: "yukanagai",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Christopher",
   last_name: "Smith",
   email: "smithopher87@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Jaskaranjit",
   last_name: "Singh",
   email: "singhjaskar1@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Pierre",
@@ -210,7 +224,8 @@ Student.create!({
   email: "pcajuste@gmail.com",
   github_username: "pcajuste",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Joy",
@@ -218,7 +233,8 @@ Student.create!({
   email: "tesoro1021@gmail.com",
   github_username: "morga147",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Pamela",
@@ -226,7 +242,8 @@ Student.create!({
   email: "pamela.nevins@gmail.com",
   github_username: "pnev",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Zoe",
@@ -234,14 +251,16 @@ Student.create!({
   email: "zoesachs1@gmail.com",
   github_username: "zoesachs",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Eric",
   last_name: "Kim",
   email: "erickim91@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Salvatore",
@@ -249,7 +268,8 @@ Student.create!({
   email: "sfanara@gmail.com",
   github_username: "tfbkny",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Mohamed",
@@ -257,7 +277,8 @@ Student.create!({
   email: "elgendi.mohamed@gmail.com",
   github_username: "moelgendy",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Raquel",
@@ -265,7 +286,8 @@ Student.create!({
   email: "raquelhosein12@gmail.com",
   github_username: "raquelhosein",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Matt",
@@ -273,19 +295,22 @@ Student.create!({
   email: "mattydevicce@gmail.com",
   github_username: "mattydevicce",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Calvin",
   last_name: "Yeung",
   email: "calyeung92@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })
 Student.create!({
   first_name: "Josh",
   last_name: "Bubis",
   email: "joshbubis@gmail.com",
   registrations: [Student::Registration.new(cohort: pluto, status: "enrolled")],
-  user: User.new(password: 'test')
+  user: User.new(password: 'test'),
+  cohort: pluto
 })

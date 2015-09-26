@@ -2,6 +2,8 @@
 <div class="small container">
 	<h1>LOGIN</h1>
 
+	<div style="text-align:center; margin: 2rem;"><%= link_to 'Login with Github', '/auth/github', class: 'big primary button' %></div>
+
 	<%= form_for(@authentication) do |form| %>
 		<%= render form %>
 		<div class="actions" style="text-align:center">

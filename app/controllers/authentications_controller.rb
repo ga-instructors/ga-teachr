@@ -34,7 +34,7 @@ class AuthenticationsController < ApplicationController
       if @authentication.save
         session[:tk] = @authentication.token
         session[:tz] = @authentication.timezone.name
-        format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
+        format.html { redirect_to authentication_url(@authentication), notice: 'Authentication was successfully created.' }
         format.json { render :show, status: :created, location: @authentication }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class AuthenticationsController < ApplicationController
   def update
     respond_to do |format|
       if @authentication.update(authentication_params)
-        format.html { redirect_to @authentication, notice: 'Authentication was successfully updated.' }
+        format.html { redirect_to authentication_url(@authentication), notice: 'Authentication was successfully updated.' }
         format.json { render :show, status: :ok, location: @authentication }
       else
         format.html { render :edit }
@@ -76,6 +76,10 @@ class AuthenticationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def authentication_params
-      params.require(:authentication).permit(:type, :user_email, :password)
+      if params[:provider]
+        params.permit(:provider, :error, :error_description, :state)
+      else
+        params.require(:authentication).permit(:type, :user_email, :password)
+      end
     end
 end

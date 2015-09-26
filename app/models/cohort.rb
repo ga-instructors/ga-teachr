@@ -14,20 +14,4 @@ class Cohort < ActiveRecord::Base
 
   validates :campus, :course, :name, :begins_at, :ends_at, presence: true
 
-  def browse(path='/')
-    github.contents(github_repo, path: path)
-  end
-
-  def log
-    github.commits(github_repo)
-  end
-
-  private
-
-  def github
-    @github ||= Octokit::Client.new(
-                                    # TODO: CONFIG LOGIN
-    )
-  end
-
 end

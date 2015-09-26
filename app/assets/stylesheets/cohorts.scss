@@ -1,3 +1,57 @@
 // Place all the styles related to the Cohorts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#cohort_students {
+  padding-bottom: 2rem;
+  float: left;
+  width: 200px;
+  a[href] { text-decoration: none; }
+  .student {
+    text-decoration: none !important;
+    padding-left: 3pt;
+  }
+  .student.selected {
+    background-color: #EEEEEE;
+    color: #AAAAAA;
+  }
+}
+#students_content, #groups_ui {
+  float: left;
+  width: calc(100% - 250px);
+}
+#groups_ui ul { list-style-type: none; }
+#groups_ui li {
+  float: left;
+  width: 209px;
+  height: 209px;
+  border: solid #CCCCCC 1px;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  &.hover {
+    background-color: #EEEEEE;
+    label { color: #EEEEEE; }
+  }
+  &.active {
+    background-color: #CCCCCC;
+    label { color: #000000; }
+  }
+  label {
+    color: #FFFFFF;
+    display: block;
+    line-height: 200px;
+    font-size: 100px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  #cohort_students {
+    position: relative;
+    left: -205px;
+    margin-right: -210px;
+  }
+  #students_content, #groups_ui {
+    width: 100%;
+  }
+}

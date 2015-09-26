@@ -16,8 +16,4 @@ class Student < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
-  def github
-    @github ||= Octokit.user(github_username)
-  end
-
 end

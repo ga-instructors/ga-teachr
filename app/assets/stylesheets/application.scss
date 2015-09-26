@@ -194,6 +194,7 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
   line-height: 2rem;
   padding: 0 0.5rem;
 }
+#notice:empty { display: none; }
 
 table {
   width: 100%;
@@ -221,3 +222,5 @@ nav {
   ul { margin: 0; padding: 0; display: table-row; }
   ul li { width: 10%; display: table-cell; text-align: center; }
 }
+
+img { max-width: 100%; }

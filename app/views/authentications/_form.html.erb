@@ -1,7 +1,5 @@
 <% if @authentication.errors.any? %>
 	<div id="error_explanation">
-		<h5><%= pluralize(@authentication.errors.count, "error") %> prohibited this authentication from being saved:</h2>
-
 		<ul>
 			<% @authentication.errors.full_messages.each do |message| %>
 				<li><%= message %></li>

@@ -34,28 +34,41 @@
 	<% end %>
 
 	<h3>INSTRUCTIONAL TEAM</h3>
+	<nav>
+		<ul>
+			<% @cohort.functions.each do |function| %>
+				<li><%= render function %></li>
+			<% end %>
+		</ul>
+	</nav>
 
-	<div style="overflow: hidden; text-align: center;">
-		<div style="float: left; margin-right: 1rem;">
-			<%= render @cohort.instructors %>
-		</div>
-		<div style="float: left; margin-right: 1rem;">
-			<%= render @cohort.associates %>
-		</div>
-		<div style="float: left; margin-right: 1rem;">
-			<%= render @cohort.assistants %>
-		</div>
-		<div style="float: left; margin-right: 1rem;">
-			<%= render @cohort.producers %>
-		</div>
-	</div>
+	<hr />
 
-	<div style="float: left; width: 200px;">
+	<div id="cohort_students" draggable="true">
 		<h3>STUDENTS</h3>
-		<%= render @cohort.students %>
+		<ul style="list-style-type: none;margin:0;padding:0;">
+			<% @cohort.students.each do |student| %>
+				<li>
+					<%= link_to student, remote: true do %>
+						<%= render student %>
+						<% end %>
+				</li>
+			<% end %>
+		</ul>
 	</div>
 
-	<div style="float: left; width: calc(100% - 250px);">
+	<div id="groups_ui" style="display: none">
+		<ul>
+			<% @cohort.students.count.times do |i| %>
+				<li><label><%= i + 1 %></label></li>
+			<% end %>
+		</ul>
+	</div>
+
+	<div id="students_content">
+		<% @forks.each do |fork| %>
+			<li><%= fork[:full_name] %></li>
+		<% end %>
 		<h3 style="float:left">FILES</h3>
 		<% if (parent = params[:browse].split('/')[0..-2]).length > 0 %>
 			<div style="float: left; line-height: 3rem; margin-left: 1em; font-size: 0.9rem;">
@@ -97,7 +110,7 @@
 		<br />
 		<h3>COURSE LOG</h3>
 		<table width="100%">
-			<% @cohort.log.each do |commit| %>
+			<% @log.each do |commit| %>
 				<tr>
 					<td><%= commit[:commit][:committer][:date] %></td>
 					<td><%= commit[:commit][:committer][:name] %></td>

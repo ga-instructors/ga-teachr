@@ -1,0 +1,10 @@
+<%= image_tag gravatar_url(@student.email, 384), style: 'border: solid #EEEEEE 1px; float: right;', draggable: false %>
+<h1><%= @student.name %></h1>
+
+<p>
+  <strong>Github:</strong>
+  <% if @student.github_username? %>
+    <%= link_to @student.github_username, "https://www.github.com/#{@student.github_username}", target: 'github.com' %>
+  <% else %><em>None</em>
+  <% end %>
+</p>

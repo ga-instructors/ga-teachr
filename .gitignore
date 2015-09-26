@@ -13,3 +13,6 @@
 /tmp
 *.swp
 *.swo
+
+# Ignore application configuration
+/config/application.yml

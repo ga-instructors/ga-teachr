@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :authentications, path: 'auth'
   root to: 'authentications#new'
+  resources :authentications, path: 'auth'
+  get '/auth/:provider/callback', to: 'authentications#create'
 
   resources :students
   resources :cohorts do
