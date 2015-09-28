@@ -59,16 +59,18 @@
 
 	<div id="groups_ui" style="display: none">
 		<ul>
-			<% @cohort.students.count.times do |i| %>
+			<% (@cohort.students.count.to_f/2).ceil.times do |i| %>
 				<li><label><%= i + 1 %></label></li>
 			<% end %>
 		</ul>
 	</div>
 
 	<div id="students_content">
-		<% @forks.each do |fork| %>
-			<li><%= fork[:full_name] %></li>
-		<% end %>
+		<select>
+			<% @forks.each do |fork| %>
+				<option><%= fork[:full_name] %></option>
+			<% end %>
+		</select>
 		<h3 style="float:left">FILES</h3>
 		<% if (parent = params[:browse].split('/')[0..-2]).length > 0 %>
 			<div style="float: left; line-height: 3rem; margin-left: 1em; font-size: 0.9rem;">

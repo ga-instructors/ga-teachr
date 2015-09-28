@@ -4,13 +4,19 @@ class Authentication < ActiveRecord::Base
   validates :user, presence: true
 
   before_validation :populate_from_request, on: :create, if: -> { request }
-  before_validation :validate_password, on: :create, if: -> { type == 'Authentication' }
+  before_validation :validate_password, on: :create, if: -> { type.blank? || type == 'Authentication' }
+
+  scope :github, -> { where(type: 'Authentication::Github') }
 
   def self.new(attributes={})
     if self ==  Authentication && attributes[:provider] == 'github'
       Authentication::Github.new(attributes)
     else super(attributes)
     end
+  end
+
+  def client
+    user.authentications.github.last.try(:client)
   end
 
   def timezone
