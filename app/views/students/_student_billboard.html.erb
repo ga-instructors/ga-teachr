@@ -1,5 +1,21 @@
 <%= image_tag gravatar_url(@student.email, 384), style: 'border: solid #EEEEEE 1px; float: right;', draggable: false %>
-<h1><%= @student.name %></h1>
+<h1 style="white-space: nowrap; text-shadow: -1px 0 8px rgba(255,255,255,0.5), 1px 0 8px rgba(255,255,255,0.5);"><%= @student.name %></h1>
+
+<div  style="width: calc(100% - 420px); overflow: auto;">
+  <svg id="students_progress-graph" viewBox="0 0 240 105" preserveAspectRatio="xMinYMin" style="height: 290px;">
+    <rect x=1 y=1 width=238 height=103 stroke="#EEEEEE" fill="none" />
+    <% points = [0.1, 0.1, 0.15, 0.2, 0.4, 0.32, 0.4, 0.1, 0.05, 0.3, 0.4, 0.9, 0.4] %>
+    <path d="
+      <% points.each_with_index do |point, i| %>
+        <% if i == 0 %>M<% else %>L<% end %>
+        <%= i * (233/(points.count-1)) + 5 %> <%= (1-point) * 100 %>
+      <% end %>
+    " stroke-width="1" stroke="#CCCCCC" fill="none" />
+    <% points.each_with_index do |point, i| %>
+      <circle cx=<%= i * (233/(points.count-1)) + 5 %> cy=<%= (1-point) * 100 %> r=2 fill="red" />
+    <% end %>
+  </svg>
+</div>
 
 <p>
   <strong>Github:</strong>
