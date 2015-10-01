@@ -7,7 +7,8 @@
     <% points = [0.1, 0.1, 0.15, 0.2, 0.4, 0.32, 0.4, 0.1, 0.05, 0.3, 0.4, 0.9, 0.4] %>
     <path d="
       <% points.each_with_index do |point, i| %>
-        <% if i == 0 %>M<% else %>L<% end %>
+        <% if i == 0 %>M<% else %>S<% end %>
+        <%= i * (233/(points.count-1)) + 5 %> <%= (1-points[i-1]) * 100 %>
         <%= i * (233/(points.count-1)) + 5 %> <%= (1-point) * 100 %>
       <% end %>
     " stroke-width="1" stroke="#CCCCCC" fill="none" />
