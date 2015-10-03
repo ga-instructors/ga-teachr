@@ -1,5 +1,5 @@
 class Cohort::Assistant < Cohort::Function
   def title
-    "Teaching Assistant"
+    "TA"
   end
 end

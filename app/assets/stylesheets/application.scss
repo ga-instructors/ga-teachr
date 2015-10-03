@@ -217,10 +217,7 @@ table {
 
 nav {
   display: table;
-  width: 100%;
   margin: 1rem;
   ul { margin: 0; padding: 0; display: table-row; }
   ul li { width: 10%; display: table-cell; text-align: center; }
 }
-
-img { max-width: 100%; }

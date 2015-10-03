@@ -1,6 +1,6 @@
 example_id                           | status | run_time        |
 ------------------------------------ | ------ | --------------- |
-./spec/features/login_spec.rb[1:1:1] | passed | 0.09007 seconds |
-./spec/features/login_spec.rb[1:1:2] | passed | 0.29036 seconds |
-./spec/features/login_spec.rb[1:2:1] | passed | 0.05631 seconds |
-./spec/features/login_spec.rb[1:2:2] | passed | 0.03804 seconds |
+./spec/features/login_spec.rb[1:1:1] | passed | 0.05672 seconds |
+./spec/features/login_spec.rb[1:1:2] | passed | 0.04575 seconds |
+./spec/features/login_spec.rb[1:2:1] | passed | 0.54264 seconds |
+./spec/features/login_spec.rb[1:2:2] | passed | 0.04818 seconds |

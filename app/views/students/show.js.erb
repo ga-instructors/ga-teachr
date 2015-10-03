@@ -2,4 +2,5 @@ $(function() {
   $('#students_content').html('<%=j render 'student_billboard', formats: [:html] %>');
   $('.student').removeClass('selected');
   $('#<%= dom_id(@student) %>').addClass('selected');
+  $('#instructional-team').hide();
 })

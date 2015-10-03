@@ -55,3 +55,12 @@
     width: 100%;
   }
 }
+
+@media (max-width: 1000px) {
+  .employee__title {
+    display: none;
+  }
+  .employee__name .last {
+    display: none;
+  }
+}

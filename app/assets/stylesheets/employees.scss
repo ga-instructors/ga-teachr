@@ -3,14 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .employee {
-  min-width: 100pt;
+  overflow: hidden;
   display: inline-block;
   margin: 0.5rem;
   font-size: 0.8rem;
   line-height: 1rem;
-  background-color: #EEEEEE;
   text-align: center;
   padding: 0.5rem;
   .employee__gravatar img { border-radius: 2pt; }
-  .employee__name { font-weight: 600; }
+  .employee__name { font-weight: 600; white-space: nowrap; overflow: hidden; }
 }

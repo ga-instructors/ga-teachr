@@ -50,6 +50,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'puffing-billy'
 end
 
 group :development do

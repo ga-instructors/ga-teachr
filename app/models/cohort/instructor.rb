@@ -1,5 +1,5 @@
 class Cohort::Instructor < Cohort::Function
   def title
-    "Instructional Lead"
+    "Instructor"
   end
 end

@@ -1,5 +1,5 @@
 class Cohort::Associate < Cohort::Function
   def title
-    "Instructional Associate"
+    "Associate"
   end
 end
