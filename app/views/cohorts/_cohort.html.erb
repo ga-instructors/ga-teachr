@@ -1,0 +1,20 @@
+<div style="background-image: url('http://www.wired.com/wp-content/uploads/2015/07/nh-pluto-moonlight.jpg'); background-size: cover; background-position: 0 60%; text-shadow: 1px 2px 1px rgba(0,0,0,0.5); overflow: auto; color: white; padding: 1rem; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); font-weight: 600;font-size: 1.1em; margin-bottom: 0.5rem;">
+	<div class="large container">
+		<h3 style="float: right; text-align: right;">
+			<%= cohort.course.name %><br />
+			<%= cohort.campus.name %>
+		</h3>
+		<h1><%= link_to cohort.name, @cohort, style: 'color: white; text-decoration: none;' %></h1>
+
+		<div style="overflow: auto;">
+			<progress min="0" max="<%= cohort.ends_at - cohort.begins_at %>" value="<%= Time.now - cohort.begins_at %>"></progress>
+			<div style="float: left;">
+				<%= cohort.begins_at.to_date.to_s(:long) %>
+			</div>
+			<div style="float: right;">
+				<%= cohort.ends_at.to_date.to_s(:long) %>
+			</div>
+			<div style="text-align: center;"><%= Time.current.to_date.to_s(:long) %></div>
+		</div>
+	</div>
+</div>

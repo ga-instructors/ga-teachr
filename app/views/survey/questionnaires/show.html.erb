@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'cohorts/cohort', cohort: @survey_questionnaire.cohort %>
+
+<div class="large container">
+  <div style="float: right;"><%= link_to 'Edit', edit_survey_questionnaire_path(@survey_questionnaire), class: 'button' %></div>
+  <h2><%= @survey_questionnaire.ordinal %>. <%= @survey_questionnaire.title %></h2>
+
+  <hr />
+  <div style="padding: 2% 4%;">
+    <%= @survey_questionnaire.introduction_html %>
+  </div>
+  <hr />
+
+  <div style="text-align: center;">
+    <%= form_for Survey::Questionnaire.new do |f| %>
+      <%= f.submit 'Start', class: 'big primary button' %>
+    <% end %>
+  </div>
+</div>

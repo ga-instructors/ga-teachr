@@ -1,5 +1,5 @@
 class StyleGuidePolicy < ApplicationPolicy
   def index?
-    user && user.admin?
+    user && user.employee?
   end
 end

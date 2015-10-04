@@ -1,24 +1,6 @@
-<div style="background-image: url('http://www.wired.com/wp-content/uploads/2015/07/nh-pluto-moonlight.jpg'); background-size: cover; background-position: 0 60%; text-shadow: 1px 2px 1px rgba(0,0,0,0.5); overflow: auto; color: white; padding: 1rem; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); font-weight: 600;font-size: 1.1em; margin-bottom: 0.5rem;">
-	<p id="notice"><%= notice %></p>
-	<div class="large container">
-		<h3 style="float: right; text-align: right;">
-			<%= @cohort.course.name %><br />
-			<%= @cohort.campus.name %>
-		</h3>
-		<h1><%= link_to @cohort.name, @cohort, style: 'color: white; text-decoration: none;' %></h1>
+<p id="notice"><%= notice %></p>
 
-		<div style="overflow: auto;">
-			<progress min="0" max="<%= @cohort.ends_at - @cohort.begins_at %>" value="<%= Time.now - @cohort.begins_at %>"></progress>
-			<div style="float: left;">
-				<%= @cohort.begins_at.to_date.to_s(:long) %>
-			</div>
-			<div style="float: right;">
-				<%= @cohort.ends_at.to_date.to_s(:long) %>
-			</div>
-			<div style="text-align: center;"><%= Time.current.to_date.to_s(:long) %></div>
-		</div>
-	</div>
-</div>
+<%= render @cohort %>
 
 <div class="large container">
 
@@ -28,20 +10,44 @@
 			<ul style="list-style-type: none;margin:0;padding:0;">
 				<% @cohort.students.order(:first_name).each do |student| %>
 					<li>
-						<%= link_to student, remote: true do %>
+						<%= link_to cohort_student_path(@cohort, student), remote: true do %>
 							<%= render student %>
 							<% end %>
 					</li>
 				<% end %>
 			</ul>
+			<% if @cohort.drops.any? %>
+				<hr />
+				<details>
+					<summary><%= pluralize @cohort.drops.count, 'Drop' %></summary>
+					<ul style="list-style-type: none;margin:0;padding:0;">
+						<% @cohort.drops.order(:first_name).each do |student| %>
+							<li>
+								<%= link_to cohort_student_path(@cohort, student), remote: true do %>
+									<%= render student %>
+									<% end %>
+							</li>
+						<% end %>
+					</ul>
+				</details>
+			<% end %>
 		</div>
 	<% end %>
 
 	<% cache [@cohort, 'groups_ui'] do %>
 		<div id="groups_ui" style="display: none">
 			<ul>
-				<% (@cohort.students.count.to_f/2).ceil.times do |i| %>
-					<li><label><%= i + 1 %></label></li>
+				<% max_groups = (@cohort.students.count.to_f/2).ceil %>
+				<% (1..max_groups).each do |i| %>
+					<li><label><%= i %>
+						<% if i == max_groups %>
+							<div>Pairs</div>
+						<% elsif i == @cohort.instructors.count + @cohort.associates.count %>
+							<div>Instructional Team</div>
+						<% elsif i == @cohort.instructors.count %>
+							<div>Instructors</div>
+						<% end %>
+					</label></li>
 				<% end %>
 			</ul>
 		</div>
@@ -50,19 +56,59 @@
 	<% cache [@cohort, params[:browse]] do %>
 
 		<div id="students_content">
-			<div id="instructional-team">
-				<% if policy(@cohort).edit? %>
-					<div style="float:right;">
-						<%= link_to 'Group', new_cohort_group_path(@cohort), class: 'small button' %>
-						<%= link_to edit_cohort_path(@cohort), class: 'small button' do %>
-							<svg width="16" height="16" viewBox="0 0 8 8" style="vertical-align: -4px;">
-								<path d="M5.5 0c-1.38 0-2.5 1.12-2.5 2.5 0 .32.08.62.19.91l-2.91 2.88c-.39.39-.39 1.05 0 1.44.2.2.46.28.72.28.26 0 .52-.09.72-.28l2.88-2.91c.28.11.58.19.91.19 1.38 0 2.5-1.12 2.5-2.5 0-.16 0-.32-.03-.47l-.97.97h-2v-2l.97-.97c-.15-.03-.31-.03-.47-.03zm-4.5 6.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z" />
+			<div>
+				<nav style="width: 100%">
+					<ul>
+						<li>
+							<%= link_to survey_questionnaires_path do %>
+								<svg width="72" height="72" viewbox="-4 -4 16 16">
+									<circle cx=4 cy=4 r=8 fill=black />
+									<path d="M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 1c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm2 1l-3 1-1 3 3-1 1-3zm-2 1.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z" fill=white />
+								</svg>
+								<div>Surveys</div>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to cohort_groups_path(@cohort) do %>
+								<svg width="72" height="72" viewbox="-4 -5 16 16">
+									<circle cx=4 cy=3 r=8 fill=black />
+									<path d="M0 0v7h8v-1h-7v-6h-1zm5 0v5h2v-5h-2zm-3 2v3h2v-3h-2z" fill="white" />
+								</svg>
+								<div>Groups</div>
+							<% end %>
+						</li>
+						<li>
+							<svg width="72" height="72" viewbox="-4 -4 16 16">
+								<circle cx=4 cy=4 r=8 fill=black />
+								<path d="M0 0v1h8v-1h-8zm0 2v5.91c0 .05.04.09.09.09h7.81c.05 0 .09-.04.09-.09v-5.91h-2.97v1.03h-2.03v-1.03h-3z" fill=white />
 							</svg>
-							&nbsp;&nbsp;Settings
+							<div>Installs</div>
+						</li>
+						<li>
+							<svg width="72" height="72" viewbox="-4 -4 16 16">
+								<circle cx=4 cy=4 r=8 fill=black />
+								<path d="M4.5 0c-1.21 0-2.27.86-2.5 2-1.1 0-2 .9-2 2s.9 2 2 2h4.5c.83 0 1.5-.67 1.5-1.5 0-.65-.42-1.29-1-1.5v-.5c0-1.38-1.12-2.5-2.5-2.5z" transform="translate(0 1)" fill="white" />
+							</svg>
+							<div>Github</div>
+						</li>
+						<% if policy(@cohort).edit? %>
+							<li>
+								<%= link_to edit_cohort_path(@cohort) do %>
+									<svg width="72" height="72" viewbox="-4 -4 16 16">
+										<circle cx=4 cy=4 r=8 fill=black />
+										<path d="M0 0v7h7v-3.59l-1 1v1.59h-5v-5h3.59l1-1h-5.59zm7 0l-3 3-1-1-1 1 2 2 4-4-1-1z" transform="translate(0.5,0.5)" fill=white />
+									</svg>
+									<div>Settings</div>
+								<% end %>
+							</li>
 						<% end %>
-					</div>
-				<% end %>
-				<h2>INSTRUCTIONAL TEAM</h2>
+					</ul>
+				</nav>
+			</div>
+
+			<hr />
+
+			<div id="instructional-team">
 				<nav>
 					<ul>
 						<% @cohort.functions.eager_load(:employee => :user).each do |function| %>
@@ -72,61 +118,68 @@
 				</nav>
 			</div>
 
-			<select>
-				<% @forks.call.each do |fork| %>
-					<option><%= fork[:full_name] %></option>
+			<% if @forks %>
+				<select>
+					<% @forks.call.each do |fork| %>
+						<option><%= fork[:full_name] %></option>
+					<% end %>
+				</select>
 				<% end %>
-			</select>
-			<h3 style="float:left">FILES</h3>
-			<% if (parent = params[:browse].split('/')[0..-2]).length > 0 %>
-				<div style="float: left; line-height: 3rem; margin-left: 1em; font-size: 0.9rem;">
-					<%= link_to "Back to Parent", browse: parent.join('/') %>
-				</div>
+
+			<% if @files %>
+				<h3 style="float:left">FILES</h3>
+				<% if (parent = params[:browse].split('/')[0..-2]).length > 0 %>
+					<div style="float: left; line-height: 3rem; margin-left: 1em; font-size: 0.9rem;">
+						<%= link_to "Back to Parent", browse: parent.join('/') %>
+					</div>
+				<% end %>
+				<table>
+					<% @files.call.each do |file| %>
+						<tr>
+							<% case file[:type] %>
+							<% when "dir" %>
+								<td style="width: 1.5rem; text-align: center;">
+									<svg style="height: 1rem;" viewBox="0 0 8 8">
+										<path d="M0 0v2h8v-1h-5v-1h-3zm0 3v4.5c0 .28.22.5.5.5h7c.28 0 .5-.22.5-.5v-4.5h-8z" />
+									</svg>
+								</td>
+								<td>
+									<%= link_to file[:name].gsub(/^u([0-9])/, 'unit \1:').gsub(/^d0*([0-9]+)/, 'day \1:').titleize, browse: [params[:browse], file[:name]].join('/') %>
+								</td>
+								<td>
+									<a href="<%= file[:html_url] %>" target="github.com">/<%= file[:name] %></a>
+								</td>
+							<% else %>
+								<td style="width: 1.5rem; text-align: center;">
+									<svg style="height: 1rem;" viewBox="0 0 8 8">
+										<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3z" />
+									</svg>
+								</td>
+								<td>
+									<%= file[:name] %>
+								</td>
+								<td style="color: #999999;">
+									<%= Mime::Type.lookup_by_extension(file[:name].split('.')[1..-1].join('.')).to_s %>
+								</td>
+							<% end %>
+						</tr>
+					<% end %>
+				</table>
 			<% end %>
-			<table>
-				<% @files.call.each do |file| %>
-					<tr>
-						<% case file[:type] %>
-						<% when "dir" %>
-							<td style="width: 1.5rem; text-align: center;">
-								<svg style="height: 1rem;" viewBox="0 0 8 8">
-									<path d="M0 0v2h8v-1h-5v-1h-3zm0 3v4.5c0 .28.22.5.5.5h7c.28 0 .5-.22.5-.5v-4.5h-8z" />
-								</svg>
-							</td>
-							<td>
-								<%= link_to file[:name].gsub(/^u([0-9])/, 'unit \1:').gsub(/^d0*([0-9]+)/, 'day \1:').titleize, browse: [params[:browse], file[:name]].join('/') %>
-							</td>
-							<td>
-								<a href="<%= file[:html_url] %>" target="github.com">/<%= file[:name] %></a>
-							</td>
-						<% else %>
-							<td style="width: 1.5rem; text-align: center;">
-								<svg style="height: 1rem;" viewBox="0 0 8 8">
-									<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3z" />
-								</svg>
-							</td>
-							<td>
-								<%= file[:name] %>
-							</td>
-							<td style="color: #999999;">
-								<%= Mime::Type.lookup_by_extension(file[:name].split('.')[1..-1].join('.')).to_s %>
-							</td>
-						<% end %>
-					</tr>
-				<% end %>
-			</table>
-			<br />
-			<h3>COURSE LOG</h3>
-			<table width="100%">
-				<% @log.call.each do |commit| %>
-					<tr>
-						<td><%= commit[:commit][:committer][:date] %></td>
-						<td><%= commit[:commit][:committer][:name] %></td>
-						<td><%= commit[:commit][:message] %></td>
-					</tr>
-				<% end %>
-			</table>
-			<br />
+
+			<% if @log %>
+				<table width="100%">
+					<% @log.call.each do |commit| %>
+						<tr>
+							<td><%= commit[:commit][:committer][:name] %></td>
+							<td><%= commit[:commit][:message] %></td>
+							<td width="200"><%= commit[:commit][:committer][:date] %></td>
+						</tr>
+					<% end %>
+				</table>
+				<br />
+			<% end %>
+
 		<% end %>
 	</div>
 </div>

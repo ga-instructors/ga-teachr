@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<div class="large container">
+  <h1>Surveys</h1>
+
+  <% @survey_questionnaires.group_by(&:cohort).each do |cohort, questionnaires| %>
+    <h3><%= link_to cohort.name, cohort %></h3>
+    <ol style="list-style-type: upper-roman;">
+      <% questionnaires.each do |questionnaire| %>
+        <li><%= link_to questionnaire.title, questionnaire %></li>
+      <% end %>
+    </ol>
+  <% end %>
+
+  <%= link_to 'New Questionnaire', new_survey_questionnaire_path, class: 'button' %>
+</div>

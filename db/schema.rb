@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920084628) do
+ActiveRecord::Schema.define(version: 20151003010845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,17 @@ ActiveRecord::Schema.define(version: 20150920084628) do
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
   add_index "students", ["email"], name: "index_students_on_email", using: :btree
 
+  create_table "survey_questionnaires", force: :cascade do |t|
+    t.integer  "cohort_id"
+    t.integer  "ordinal"
+    t.string   "title"
+    t.text     "introduction"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "survey_questionnaires", ["cohort_id"], name: "index_survey_questionnaires_on_cohort_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "password_digest"
     t.integer  "employee_id"
@@ -178,6 +189,7 @@ ActiveRecord::Schema.define(version: 20150920084628) do
   add_foreign_key "student_registrations", "cohorts"
   add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"
+  add_foreign_key "survey_questionnaires", "cohorts"
   add_foreign_key "users", "employees"
   add_foreign_key "users", "students"
 end

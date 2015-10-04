@@ -14,24 +14,12 @@
  *= require_self
 */
 
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600italic,600);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:300,400);
-@font-face{
-  font-family:'PF DIN Compressed Pro';
-  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot');
-  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-add88b9951f5b54bf2c999d9050b9f62.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-1a87934a2795c688efb2da5ee4ff5215.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-ada0743a150262c54a25e7937e653e47.svg#pf_din_text_comp_promedium') format('svg');
-  font-weight:600;
-  font-style:normal
-}
-
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body { height: 100%; margin: 0; padding: 0; }
 body {
   line-height: 1.5em;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+  font-family: 'Circular', 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
 }
 
 /* ------------------
@@ -49,6 +37,7 @@ h4, h5, h6 {
   line-height: 2rem;
 }
 h1 { font-size: 5rem; line-height: 6rem; }
+article h1 { font-size: 4rem; line-height: 4rem; }
 h2 { font-size: 3rem; }
 h3 { font-size: 2rem; }
 h4 { text-decoration: underline; }
@@ -84,7 +73,7 @@ hr {
          FORMS
    ------------------ */
 
-input[type=text], input[type=password], input[type=email], textarea {
+input[type=text], input[type=password], input[type=email], input[type=number], textarea {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.25rem;
@@ -98,6 +87,7 @@ select { font-family: inherit; font-size: 1rem; }
 progress { width: 100%; }
 
 .field {
+  overflow: hidden;
   line-height: 2rem;
   label {
     display: inline-block;
@@ -185,6 +175,7 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
 .container {
   margin: 0 auto;
   &.small { max-width: 400pt; }
+  &.medium { max-width: 600pt; }
   &.large { max-width: 1000pt; }
   > * { margin-left: 0.5rem; margin-right: 0.5rem; }
 }
@@ -193,6 +184,7 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
   background-color: #EEEEEE;
   line-height: 2rem;
   padding: 0 0.5rem;
+  margin: 0;
 }
 #notice:empty { display: none; }
 
@@ -217,7 +209,13 @@ table {
 
 nav {
   display: table;
-  margin: 1rem;
+  margin: 2rem 0;
+  a { line-height: 0.9rem; text-decoration: none; color: #000000; }
+  a:hover {
+    color: red;
+    text-decoration: underline;
+    svg *[fill="black"] { fill: #FA4542; }
+  }
   ul { margin: 0; padding: 0; display: table-row; }
   ul li { width: 10%; display: table-cell; text-align: center; }
 }

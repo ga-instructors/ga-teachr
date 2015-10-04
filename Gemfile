@@ -28,6 +28,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -35,7 +36,12 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
 gem 'omniauth-github'
 gem "octokit", "~> 4.0"
-gem "figaro"
+gem 'redcarpet'
+gem 'pygments.rb'
+gem 'deep_cloneable'
+gem 'database_cleaner'
+gem 'figaro'
+gem 'ansi' # for installfest-scripting
 source 'https://rails-assets.org' do
   gem 'rails-assets-velocity'
 end

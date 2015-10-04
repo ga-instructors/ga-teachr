@@ -11,9 +11,11 @@ class CohortsController < ApplicationController
   # GET /cohorts/1.json
   def show
     params[:browse] = '/' if params[:browse].blank?
-    @files = -> { current_auth.client.contents(@cohort.github_repo, path: params[:browse]) }
-    @forks = -> { current_auth.client.forks(@cohort.github_repo) }
-    @log = -> { current_auth.client.commits(@cohort.github_repo) }
+    if current_auth.client
+      @files = -> { current_auth.client.contents(@cohort.github_repo, path: params[:browse]) }
+      @forks = -> { current_auth.client.forks(@cohort.github_repo) }
+      @log = -> { current_auth.client.commits(@cohort.github_repo) }
+    end
   end
 
   # GET /cohorts/new

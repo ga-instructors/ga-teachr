@@ -1,0 +1,26 @@
+<% if @survey_questionnaire.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@survey_questionnaire.errors.count, "error") %> prohibited this survey_questionnaire from being saved:</h2>
+
+    <ul>
+    <% @survey_questionnaire.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= form.label :cohort_id %>
+  <%= form.select :cohort_id, Cohort.joins(:course).pluck("CONCAT(courses.name, CONCAT(' - ', cohorts.name))", :id) %>
+</div>
+<div class="field">
+  <%= form.label :title %>
+  <%= form.number_field :ordinal, style: 'width: 3rem;' %>
+  <%= form.text_field :title, style: 'width: calc(100% - 130pt - 3rem);'%>
+</div>
+<div class="field">
+  <%= form.label :introduction %><br>
+  <%= form.text_area :introduction, class: 'markdown' %>
+  <iframe class="markdown-preview" src="http://about:blank" height="1"></iframe>
+</div>

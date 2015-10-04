@@ -1,0 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600italic,600);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:300,400);
+
+@font-face{
+  font-family:'PF DIN Compressed Pro';
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot');
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-4c9a2cb902d8bd0697189d66fb332da5.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-add88b9951f5b54bf2c999d9050b9f62.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-1a87934a2795c688efb2da5ee4ff5215.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-ada0743a150262c54a25e7937e653e47.svg#pf_din_text_comp_promedium') format('svg');
+  font-weight:600;
+  font-style:normal
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: normal;
+    font-style: normal;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-7245d759332ebbd8d4bd4eed9c175af2.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-7245d759332ebbd8d4bd4eed9c175af2.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-e906d7562b29841250ad325e022161b8.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-ad5ba731d463e86024fdaa68863c16c6.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-9abeca2359fc48102217f32077bf37cd.svg#CircularBook') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: normal;
+    font-style: italic;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-f0e7f889e88296b10eece2114926e42c.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-f0e7f889e88296b10eece2114926e42c.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-10890eae98fa0509e6f888426903ea53.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-0902687a305ff11f164a7028379a6842.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-c6b90866a57a6df6381490b611d79a88.svg#CircularBookItalic') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: 800;
+    font-style: normal;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-047d1c51ab95817af599acb2429d1903.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-047d1c51ab95817af599acb2429d1903.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-c6270b2ca8ddca14b02913f270813803.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-086d3c0247d25a51e5766de72b9ae4fd.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-922989543af3f18749471af129eb430d.svg#CircularBlack') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: 800;
+    font-style: italic;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-5c0f8d3aa44bda366d473bc2c435d13b.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-5c0f8d3aa44bda366d473bc2c435d13b.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-807050b5d2e56fff85dbe0f40ec17df8.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-a7af1fdbb232ab4e103345bd19ea43eb.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-700c5450599b89ae9d43620fe8a9713c.svg#CircularBlackItalic') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: bold;
+    font-style: normal;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-9fe062f810369974a69eab31622f928a.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-9fe062f810369974a69eab31622f928a.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-50b58fb6b726b8db936a0958f6a6194b.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-6f3bb568aa2c70aeab9e4766022cdbd9.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-890a362cf2598bf6133e97db6f218207.svg#CircularBold') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: bold;
+    font-style: italic;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-d6a6b83982661865dac88848cfa556a5.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-d6a6b83982661865dac88848cfa556a5.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-13d1f510592feb1095cd1b100412946e.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-16a58ae36db7c9310f12af07278a6e23.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-16d1a63554d7681c9997122974bdff03.svg#CircularBookItalic') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: 500;
+    font-style: normal;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-95f3435414be149c9eddc986e78351aa.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-95f3435414be149c9eddc986e78351aa.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-f676fa6e1543f89953e41e16cefe366a.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-90dfa7c2f467f83a3c1c2a759e260942.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-91d2cd0aee68e7adec0bf5aeed747771.svg#CircularMedium') format('svg')
+}
+
+@font-face {
+    font-family: 'Circular';
+    font-weight: 500;
+    font-style: italic;
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-37802e08f149bc460b15b32c7bad497e.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-37802e08f149bc460b15b32c7bad497e.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-62dc68cc2d14e20dc253084abca7114f.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-3450c0ff8befdedd53629ffc57e1f122.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-09ccb5b8d13399d85be8569388d65859.svg#CircularMediumItalic') format('svg')
+}

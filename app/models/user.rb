@@ -12,4 +12,12 @@ class User < ActiveRecord::Base
     (employee || student).campus
   end
 
+  def employee?
+    employee.present?
+  end
+
+  def student?
+    student.present?
+  end
+
 end

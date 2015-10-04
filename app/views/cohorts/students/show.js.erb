@@ -1,0 +1,6 @@
+$(function() {
+  $('#students_content').html('<%=j render template: 'cohorts/students/show', formats: [:html] %>');
+  $('.student').removeClass('selected');
+  $('#<%= dom_id(@student) %>').addClass('selected');
+  $('#notice').slideUp();
+})

@@ -39,9 +39,14 @@
   label {
     color: #FFFFFF;
     display: block;
-    line-height: 200px;
-    font-size: 100px;
+    line-height: 180px;
+    font-size: 80px;
     text-align: center;
+    > div {
+      line-height: 25px;
+      font-size: 20px;
+      background-color: rgba(255,255,255,0.33);
+    }
   }
 }
 
@@ -51,9 +56,8 @@
     left: -205px;
     margin-right: -210px;
   }
-  #students_content, #groups_ui {
-    width: 100%;
-  }
+  #students_content, #groups_ui { width: 100%; }
+  #students_content nav { margin-left: -0.5rem; margin-right: -0.5rem; }
 }
 
 @media (max-width: 1000px) {

@@ -1,0 +1,26 @@
+// Place all the styles related to the api/markdown_preview controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body#markdown_preview_preview {
+  overflow: hidden;
+}
+
+textarea.markdown {
+  max-width: 48%;
+  margin-right: 2%;
+  float: left;
+  min-height: 200px;
+}
+iframe.markdown-preview {
+  width: 48%;
+  border: none;
+  height: 200px;
+}
+@media (max-width: 797px) {
+  textarea.markdown {
+    max-width: 100%;
+  }
+  iframe.markdown-preview {
+    display: none;
+  }
+}
