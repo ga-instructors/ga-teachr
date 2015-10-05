@@ -5,7 +5,7 @@ class Employee < ActiveRecord::Base
   has_many :cohort_functions, class_name: Cohort::Function
   has_many :cohorts, through: :cohort_functions
 
-  validates :first_name, :title, :email, presence: true
+  validates :first_name, :title, :email, :campus, presence: true
   accepts_nested_attributes_for :user
 
   after_initialize do
@@ -14,6 +14,10 @@ class Employee < ActiveRecord::Base
 
   def name
     [first_name, last_name].join(' ')
+  end
+
+  def cohort
+    cohorts.last
   end
 
 end

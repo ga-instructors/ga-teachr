@@ -4,13 +4,11 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_secure_password
 
-  def name
-    (employee || student).name
+  def either
+    (employee || student)
   end
 
-  def campus
-    (employee || student).campus
-  end
+  delegate :name, :email, :campus, :cohort, :cohorts, to: :either
 
   def employee?
     employee.present?

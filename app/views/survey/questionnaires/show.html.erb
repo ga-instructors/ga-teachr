@@ -3,18 +3,24 @@
 <%= render 'cohorts/cohort', cohort: @survey_questionnaire.cohort %>
 
 <div class="large container">
-  <div style="float: right;"><%= link_to 'Edit', edit_survey_questionnaire_path(@survey_questionnaire), class: 'button' %></div>
+  <div style="float: right;"><%= link_to 'Edit Survey', edit_survey_questionnaire_path(@survey_questionnaire), class: 'button' %></div>
   <h2><%= @survey_questionnaire.ordinal %>. <%= @survey_questionnaire.title %></h2>
 
   <hr />
-  <div style="padding: 2% 4%;">
+  <div style="padding: 2%;" class="markdown">
     <%= @survey_questionnaire.introduction_html %>
   </div>
   <hr />
 
   <div style="text-align: center;">
-    <%= form_for Survey::Questionnaire.new do |f| %>
-      <%= f.submit 'Start', class: 'big primary button' %>
+    <% if policy(@survey_response).create? %>
+      <%= form_for @survey_response do |f| %>
+        <%= f.hidden_field :survey_questionnaire_id %>
+        <%= f.submit 'Start', class: 'big primary button' %>
+      <% end %>
+    <% else %>
+      <%= link_to "Start", survey_questionnaire_questions_path(@survey_questionnaire), class: 'big primary button' %>
     <% end %>
+    <br /><br />
   </div>
 </div>

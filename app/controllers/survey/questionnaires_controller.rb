@@ -10,11 +10,12 @@ class Survey::QuestionnairesController < ApplicationController
   # GET /survey/questionnaires/1
   # GET /survey/questionnaires/1.json
   def show
+    @survey_response = @survey_questionnaire.responses.new(student: current_user.student)
   end
 
   # GET /survey/questionnaires/new
   def new
-    @cohort = current_user.employee.cohorts.last
+    @cohort = current_user.cohort
     @survey_questionnaire = Survey::Questionnaire.new(cohort: @cohort)
     authorize @survey_questionnaire
   end
@@ -45,7 +46,7 @@ class Survey::QuestionnairesController < ApplicationController
   def update
     respond_to do |format|
       if @survey_questionnaire.update(survey_questionnaire_params)
-        format.html { redirect_to @survey_questionnaire, notice: 'Questionnaire was successfully updated.' }
+        format.html { redirect_to survey_questions_path(@survey_questionnaire), notice: 'Questionnaire was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_questionnaire }
       else
         format.html { render :edit }

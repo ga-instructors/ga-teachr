@@ -7,6 +7,9 @@ class Student < ActiveRecord::Base
 
   has_many :registrations
   has_many :cohorts, through: :registrations
+  belongs_to :cohort
+
+  delegate :campus, to: :cohort
 
   after_initialize do
     build_user if user.blank? && new_record?

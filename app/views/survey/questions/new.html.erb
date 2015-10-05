@@ -1,0 +1,13 @@
+<div class="large container">
+  <h1>New Survey Question</h1>
+
+  <%= form_for(@survey_question) do |form| %>
+    <%= render form %>
+    <div class="actions" style="text-align: center;">
+      <%= form.submit class: 'large primary' %>
+      <%= link_to 'Cancel', survey_questions_path %>
+    </div>
+    <br />
+  <% end %>
+
+</div>

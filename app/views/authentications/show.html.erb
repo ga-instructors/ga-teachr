@@ -1,18 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<%= render current_user.cohort %>
+
 <div class="large container">
-	<% if current_user.employee %>
-		<% if current_user.employee.cohorts %>
-			<h3>COHORTS</h3>
-			<ul>
-				<% current_user.employee.cohorts.each do |cohort| %>
-					<li><%= link_to cohort.name, cohort %></li>
-				<% end %>
-			</ul>
+	<%= image_tag gravatar_url(current_user.email, 384), style: 'border: solid #EEEEEE 1px; float: right;' %>
+
+	<h3>COHORTS</h3>
+	<ul>
+		<% current_user.cohorts.each do |cohort| %>
+			<li><%= link_to cohort.name, cohort %></li>
 		<% end %>
-	<% end %>
-	<% if current_user.student %>
-		<h2>AGENDA</h2>
-		<h3>STUDENT TOOLS</h3>
-	<% end %>
+	</ul>
+
 </div>

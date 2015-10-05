@@ -1,11 +1,12 @@
-<h1>Editing Groups Grouping</h1>
+<div class="large container">
+	<h1>Editing Groups Grouping</h1>
 
-<%= form_for(@groups_grouping, url: cohort_group_path(@cohort, @groups_grouping)) do |form| %>
-	<%= render form %>
-	<div class="actions">
-		<%= form.submit %>
-	</div>
-<% end %>
+	<%= form_for(@groups_grouping, url: cohort_group_path(@cohort, @groups_grouping)) do |form| %>
+		<%= render form %>
+		<div class="actions">
+			<%= form.submit %>
+			<%= link_to 'Cancel', cohort_groups_path %>
+		</div>
+	<% end %>
 
-<%= link_to 'Show', cohort_group_path(@cohort, @groups_grouping) %> |
-<%= link_to 'Back', cohort_groups_path %>
+</div>

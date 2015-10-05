@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'authentications#new'
 
   resources :authentications, path: 'auth'
@@ -14,7 +13,12 @@ Rails.application.routes.draw do
     resources :students, controller: 'cohorts/students'
   end
   namespace :survey do
-    resources :questionnaires
+    resources :questionnaires do
+      resources :questions
+      resources :responses
+    end
+    resources :questions
+    resources :responses
   end
 
   get '/api/v1/markdown-preview' => 'api/markdown_preview#preview', as: 'api_markdown_preview'

@@ -41,6 +41,7 @@ gem 'pygments.rb'
 gem 'deep_cloneable'
 gem 'database_cleaner'
 gem 'figaro'
+gem 'react-rails'
 gem 'ansi' # for installfest-scripting
 source 'https://rails-assets.org' do
   gem 'rails-assets-velocity'

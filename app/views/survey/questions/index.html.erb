@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<div class="large container">
+  <h1>Survey Questions</h1>
+
+  <% @survey_questions.each do |survey_question| %>
+    <div style="float: right;">
+      <%= link_to 'Details', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
+      <%= link_to 'Update', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
+      <%= link_to 'Remove', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small button' %>
+    </div>
+      <h5>Q<%= survey_question.ordinal %>.</h5>
+      <%= survey_question.prompt_html %>
+      <% if survey_question.options.any? %>
+        <ul style="list-style-type: circle">
+          <% survey_question.options.each do |option| %>
+            <li><%= option.label %></li>
+          <% end %>
+          <% if survey_question.open_ended? %>
+            <li>Other (Specify)</li>
+          <% end %>
+        </ul>
+      <% else %>
+      <% end %>
+      <hr />
+  <% end %>
+
+  <%= link_to 'New Question', new_survey_questionnaire_question_path, class: 'button' %>
+  <%= link_to 'Cancel', survey_questionnaires_path %>
+</div>

@@ -9,17 +9,17 @@ jQuery ->
     updateMarkdown = ->
       markdown = $editor.val()
       currentPosition = $editor[0].selectionStart
-      count = 0
-      tableDetected = false
 
       # Find starting position
+      count = 0
+      tableDetected = false
       for a in [currentPosition..1] by -1
         tableDetected = a if markdown[a] == "\n" && markdown[a-1] == "|"
         count++ if markdown[a] == "\n"
-        break if count > $preview.height()/60
+        break if count > $preview.height()/40
 
       # Find ending position
-      count = 0
+      count = count - 9
       for z in [currentPosition..markdown.length] by 1
         count++ if markdown[z] == "\n"
         break if count > $preview.height()/60

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003010845) do
+ActiveRecord::Schema.define(version: 20151004213743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20151003010845) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
+    t.string   "abbrev"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -154,6 +155,16 @@ ActiveRecord::Schema.define(version: 20151003010845) do
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
   add_index "students", ["email"], name: "index_students_on_email", using: :btree
 
+  create_table "survey_question_options", force: :cascade do |t|
+    t.integer  "survey_question_id"
+    t.string   "label"
+    t.float    "value"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "survey_question_options", ["survey_question_id"], name: "index_survey_question_options_on_survey_question_id", using: :btree
+
   create_table "survey_questionnaires", force: :cascade do |t|
     t.integer  "cohort_id"
     t.integer  "ordinal"
@@ -164,6 +175,38 @@ ActiveRecord::Schema.define(version: 20151003010845) do
   end
 
   add_index "survey_questionnaires", ["cohort_id"], name: "index_survey_questionnaires_on_cohort_id", using: :btree
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.integer  "survey_questionnaire_id"
+    t.integer  "ordinal"
+    t.text     "prompt"
+    t.boolean  "open_ended"
+    t.string   "format"
+    t.text     "valuation"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "survey_questions", ["survey_questionnaire_id"], name: "index_survey_questions_on_survey_questionnaire_id", using: :btree
+
+  create_table "survey_responses", force: :cascade do |t|
+    t.integer  "survey_questionnaire_id"
+    t.integer  "student_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "survey_responses", ["student_id"], name: "index_survey_responses_on_student_id", using: :btree
+  add_index "survey_responses", ["survey_questionnaire_id"], name: "index_survey_responses_on_survey_questionnaire_id", using: :btree
+
+  create_table "survey_topics", force: :cascade do |t|
+    t.integer  "survey_question_id"
+    t.string   "name"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "survey_topics", ["survey_question_id"], name: "index_survey_topics_on_survey_question_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "password_digest"
@@ -189,7 +232,12 @@ ActiveRecord::Schema.define(version: 20151003010845) do
   add_foreign_key "student_registrations", "cohorts"
   add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"
+  add_foreign_key "survey_question_options", "survey_questions"
   add_foreign_key "survey_questionnaires", "cohorts"
+  add_foreign_key "survey_questions", "survey_questionnaires"
+  add_foreign_key "survey_responses", "students"
+  add_foreign_key "survey_responses", "survey_questionnaires"
+  add_foreign_key "survey_topics", "survey_questions"
   add_foreign_key "users", "employees"
   add_foreign_key "users", "students"
 end

@@ -1,60 +1,28 @@
 <p id="notice"><%= notice %></p>
 <div class="large container">
-<p>
-  <strong>Name:</strong>
-  <%= @campus.name %>
-</p>
 
-<p>
-  <strong>Timezone:</strong>
-  <%= @campus.timezone %>
-</p>
+  <br>
+  <div style="width: 60%; float: left;">
+    <h2><%= @campus.name %></h2>
+    <h3><%= @campus.timezone.now.to_s(:long) %></h3>
+  </div>
 
-<p>
-  <strong>Language:</strong>
-  <%= @campus.locale %>
-</p>
+  <div style="width: 35%; float: left;">
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @campus.address_latitude %>
-</p>
+    <p>
+      <strong>Address:</strong><br />
+      <%= @campus.address_street %><br />
+      <%= @campus.address_city %>, <%= @campus.address_state %> <%= @campus.address_code %><br />
+      <strong>Phone:</strong>
+      <%= @campus.phone_number %>
+    </p>
+  </div>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @campus.address_longitude %>
-</p>
+  <br style="clear: both;" />
+  
+  <% @campus.cohorts.each do |cohort| %>
+    <%= render cohort %>
+  <% end %>
 
-<p>
-  <strong>Address street:</strong>
-  <%= @campus.address_street %>
-</p>
-
-<p>
-  <strong>Address city:</strong>
-  <%= @campus.address_city %>
-</p>
-
-<p>
-  <strong>Address state:</strong>
-  <%= @campus.address_state %>
-</p>
-
-<p>
-  <strong>Address zip:</strong>
-  <%= @campus.address_code %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @campus.phone_number %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @campus.description %>
-</p>
-
-<%= link_to 'Edit', edit_campus_path(@campus) %> |
-<%= link_to 'Back', campuses_path %>
+  <%= link_to 'Update Campus', edit_campus_path(@campus), class: 'button' %>
 </div>

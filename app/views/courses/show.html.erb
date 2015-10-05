@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
+<div class="large container">
+  <h1><%= @course.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
+  <table>
+    <% @course.cohorts.each do |cohort| %>
+      <%= render cohort %>
+    <% end %>
+  </table>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+  <%= link_to 'Update Course', edit_course_path(@course), class: 'button' %>
+</div>

@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
-<div class="small container">
+<div class="medium container">
+	<svg width="72" height="72" viewbox="-4 -5 16 16" style="float: right; margin: 0.5rem;">
+		<circle cx=4 cy=3 r=8 fill=black />
+		<path d="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h6.5c.41 0 .75-.34.75-.75v-5.5c0-.41-.34-.75-.75-.75h-6.5zm.25 1h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1z" fill="white" />
+	</svg>
 	<h1><%= @cohort.name %> GROUPS</h1>
 
 	<table>
@@ -23,5 +27,6 @@
 
 	<br>
 
-	<%= link_to 'New Grouping', new_cohort_group_path(@cohort) %>
+	<%= link_to 'New Grouping', new_cohort_group_path(@cohort), class: 'button' %>
+	<%= link_to 'Finished', current_user.cohort %>
 </div>

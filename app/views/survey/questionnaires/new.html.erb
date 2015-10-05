@@ -1,5 +1,5 @@
 <div class="large container">
-  <h1>New Questionnaire</h1>
+  <h1>Survey <%= @survey_questionnaire.cohort.name %></h1>
 
   <%= form_for(@survey_questionnaire) do |form| %>
     <%= render form %>

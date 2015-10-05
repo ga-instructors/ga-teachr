@@ -1,6 +1,6 @@
 class Survey::QuestionnairePolicy < ApplicationPolicy
   def create?
-    true
+    user && user.employee
   end
 
   def update?

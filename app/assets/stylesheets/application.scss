@@ -31,6 +31,8 @@ h1, h2, h3 {
   font-family: 'PF DIN Compressed Pro';
   text-transform: uppercase;
   line-height: 3rem;
+  a { text-decoration: none; }
+  a.white { color: white; }
 }
 h4, h5, h6 {
   font-size: 1rem;
@@ -53,7 +55,7 @@ a { color: #4078c0; }
 
 pre {
   background-color: #FAFAFA;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Inconsolata', monospace;
   font-weight: 300;
   padding: 0 0.5rem;
   border: solid #EEEEEE 1px;
@@ -76,20 +78,31 @@ hr {
 input[type=text], input[type=password], input[type=email], input[type=number], textarea {
   font-family: inherit;
   font-size: 1rem;
-  padding: 0.25rem;
-  border: solid #EEEEEE 1px;
+  padding: 0.5rem;
+  border: solid #666666 1px;
   width: 100%;
   width: calc(100% - 3pt);
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+  &[disabled] {
+    color: rgb(150, 150, 150);
+    border-color: rgb(240, 240, 240);
+  }
 }
 
-textarea { min-height: 100pt; }
+textarea { min-height: 100pt; font-weight: 300; font-family: 'Roboto Mono', monospace; }
 select { font-family: inherit; font-size: 1rem; }
 progress { width: 100%; }
 
+.field:first-child {
+    margin-top: 1rem;
+}
+
 .field {
+  margin-top: 1rem;
   overflow: hidden;
   line-height: 2rem;
-  label {
+  label:first-child {
     display: inline-block;
     min-width: 120pt;
   }
@@ -190,6 +203,7 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
 
 table {
   width: 100%;
+  margin-bottom: 1rem;
   thead {
     background-color: #EAEAEA;
   }
@@ -218,4 +232,17 @@ nav {
   }
   ul { margin: 0; padding: 0; display: table-row; }
   ul li { width: 10%; display: table-cell; text-align: center; }
+}
+
+/* ------------------
+       MARKDOWN
+ -------------------- */
+
+ table.highlighttable {
+   pre { margin: 0; }
+   .linenos { width: 3em; text-align: right; }
+}
+
+.tab-content {
+  border: solid #EEEEEE 1px; padding: 1rem; margin-top: -0.5rem;
 }

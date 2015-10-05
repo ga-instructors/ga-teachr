@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Survey questionnaire:</strong>
+  <%= @survey_question.survey_questionnaire %>
+</p>
+
+<p>
+  <strong>Ordinal:</strong>
+  <%= @survey_question.ordinal %>
+</p>
+
+<p>
+  <strong>Topics:</strong>
+  <%= @survey_question.topics %>
+</p>
+
+<p>
+  <strong>Prompt:</strong>
+  <%= @survey_question.prompt %>
+</p>
+
+<p>
+  <strong>Open ended:</strong>
+  <%= @survey_question.open_ended %>
+</p>
+
+<p>
+  <strong>Format:</strong>
+  <%= @survey_question.format %>
+</p>
+
+<p>
+  <strong>Valuation:</strong>
+  <%= @survey_question.valuation %>
+</p>
+
+<%= link_to 'Edit', edit_survey_question_path(@survey_question) %> |
+<%= link_to 'Back', survey_questions_path %>

@@ -65,6 +65,7 @@ class CampusesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_campus
       @campus = Campus.find(params[:id])
+      authorize @campus
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

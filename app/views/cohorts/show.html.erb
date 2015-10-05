@@ -7,7 +7,7 @@
 	<% cache [@cohort, 'cohort_students'] do %>
 		<div id="cohort_students" draggable="true">
 			<h3>STUDENTS</h3>
-			<ul style="list-style-type: none;margin:0;padding:0;">
+			<ul style="list-style-type: none; margin:0; padding:0;">
 				<% @cohort.students.order(:first_name).each do |student| %>
 					<li>
 						<%= link_to cohort_student_path(@cohort, student), remote: true do %>
@@ -20,7 +20,7 @@
 				<hr />
 				<details>
 					<summary><%= pluralize @cohort.drops.count, 'Drop' %></summary>
-					<ul style="list-style-type: none;margin:0;padding:0;">
+					<ul style="list-style-type: none; margin: 0; padding: 0;">
 						<% @cohort.drops.order(:first_name).each do |student| %>
 							<li>
 								<%= link_to cohort_student_path(@cohort, student), remote: true do %>
@@ -72,7 +72,7 @@
 							<%= link_to cohort_groups_path(@cohort) do %>
 								<svg width="72" height="72" viewbox="-4 -5 16 16">
 									<circle cx=4 cy=3 r=8 fill=black />
-									<path d="M0 0v7h8v-1h-7v-6h-1zm5 0v5h2v-5h-2zm-3 2v3h2v-3h-2z" fill="white" />
+								  <path d="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h6.5c.41 0 .75-.34.75-.75v-5.5c0-.41-.34-.75-.75-.75h-6.5zm.25 1h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1z" fill="white" />
 								</svg>
 								<div>Groups</div>
 							<% end %>
