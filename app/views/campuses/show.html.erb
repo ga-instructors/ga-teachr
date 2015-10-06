@@ -19,10 +19,12 @@
   </div>
 
   <br style="clear: both;" />
-  
+
   <% @campus.cohorts.each do |cohort| %>
     <%= render cohort %>
   <% end %>
+  
+  <br style="clear: both;" />
 
   <%= link_to 'Update Campus', edit_campus_path(@campus), class: 'button' %>
 </div>

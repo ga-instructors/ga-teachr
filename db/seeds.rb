@@ -45,8 +45,8 @@ Cohort.all.each do |cohort|
 
     if member["role"] == "student" && student = Student.find_by(email: member["email"])
       cohort.registrations.create!(student: student)
-    elsif member["role"] == "instructor" && employee = Employee.find_by(email: member["email"])
-      cohort.instructors.create!(employee: employee)
+    elsif ["instructor", "member"].include?(member["role"]) && employee = Employee.find_by(email: member["email"])
+      cohort.associates.create!(employee: employee)
     else
       first_name, *last_name = member["name"].split(' ')
       props = {
@@ -63,6 +63,11 @@ Cohort.all.each do |cohort|
         props[:campus] = nycampus
         legacy_map[employee = Employee.create!(props)] = member["user_id"]
         legacy_map[cohort.instructors.create!(employee: employee)] = member["id"]
+      when "member"
+        props["title"] = "Instructional Associate"
+        props[:campus] = nycampus
+        legacy_map[employee = Employee.create!(props)] = member["user_id"]
+        legacy_map[cohort.associates.create!(employee: employee)] = member["id"]
       end
     end
 

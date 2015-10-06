@@ -1,4 +1,19 @@
 jQuery ->
+  fileUploadPreview = (input, $preview) ->
+    if input.files && input.files[0]
+      reader = new FileReader()
+      reader.onload = (event) ->
+        console.log(event.target.result)
+        $preview.css({
+          'background-image': "url(#{event.target.result})",
+          'background-position': "50% 50%"
+        })
+      reader.readAsDataURL(input.files[0])
+
+  $(document).on 'change', 'input#cohort_banner', (event) ->
+    banner = $('.cohort__banner')
+    fileUploadPreview(event.target, banner)
+
   $(document).on 'dragstart', '#cohort_students', (event) ->
     $('#students_content').hide();
     $('#groups_ui li').removeClass('hover active');

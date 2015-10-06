@@ -1,3 +1,17 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#courses_show, #campuses_show {
+  .cohort__banner {
+    h1 { font-size: 3rem; line-height: 3rem; }
+    h3 { display: none; }
+    box-shadow: none;
+    @media (min-width: 1150px) {
+      float: left;
+      width: 45%;
+    }
+    @media (max-width: 500px) {
+      .cohort_current { display: none; }
+    }
+  }
+}

@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20151004213743) do
     t.string   "github_repo"
     t.datetime "begins_at"
     t.datetime "ends_at"
+    t.float    "banner_x"
+    t.float    "banner_y"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

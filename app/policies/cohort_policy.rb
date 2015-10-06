@@ -8,6 +8,14 @@ class CohortPolicy < ApplicationPolicy
     update?
   end
 
+  def create?
+    user && user.employee
+  end
+
+  def show?
+    user && user.employee
+  end
+
   class Scope < Scope
     def resolve
       if user && user.employee

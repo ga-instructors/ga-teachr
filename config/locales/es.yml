@@ -1,8 +1,8 @@
 en:
   title: General Assembly - Teachr
   locales:
-    en: English
-    es: Spanish
+    en: Ingles
+    es: Espanol
   activerecord:
     errors:
       models:

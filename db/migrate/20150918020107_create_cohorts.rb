@@ -8,6 +8,9 @@ class CreateCohorts < ActiveRecord::Migration
       t.timestamp :begins_at
       t.timestamp :ends_at
 
+      t.float :banner_x
+      t.float :banner_y
+
       t.timestamps null: false
     end
   end

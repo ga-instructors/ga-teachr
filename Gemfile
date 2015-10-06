@@ -43,6 +43,8 @@ gem 'database_cleaner'
 gem 'figaro'
 gem 'react-rails'
 gem 'ansi' # for installfest-scripting
+gem 'mini_magick'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-velocity'
 end

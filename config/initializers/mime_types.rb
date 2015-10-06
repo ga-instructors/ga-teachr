@@ -4,3 +4,4 @@
 # Mime::Type.register "text/richtext", :rtf
 
 Mime::Type.register "text/markdown", :md
+Mime::Type.register "image/jpg", :jpg

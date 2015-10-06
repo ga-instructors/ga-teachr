@@ -1,4 +1,5 @@
 class CohortsController < ApplicationController
+
   before_action :set_cohort, only: [:show, :edit, :update, :destroy]
 
   # GET /cohorts
@@ -16,11 +17,16 @@ class CohortsController < ApplicationController
       @forks = -> { current_auth.client.forks(@cohort.github_repo) }
       @log = -> { current_auth.client.commits(@cohort.github_repo) }
     end
+    respond_to do |format|
+      format.html
+      format.jpg { redirect_to ActionController::Base.helpers.image_path('cohorts/default-background.jpg') }
+      format.json
+    end
   end
 
   # GET /cohorts/new
   def new
-    @cohort = Cohort.new
+    @cohort = Cohort.new(name: FFaker::Food.ingredient.titleize, course: current_user.cohort.course, campus: current_user.campus, begins_at: Time.now, ends_at: 12.weeks.from_now)
     authorize @cohort
   end
 
@@ -32,6 +38,7 @@ class CohortsController < ApplicationController
   # POST /cohorts.json
   def create
     @cohort = Cohort.new(cohort_params)
+    authorize @cohort
 
     respond_to do |format|
       if @cohort.save
@@ -77,6 +84,6 @@ class CohortsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cohort_params
-      params.require(:cohort).permit(:campus_id, :course_id, :name, :begins_at, :ends_at, :github_repo)
+      params.require(:cohort).permit(:campus_id, :course_id, :banner_x, :banner_y, :banner, :name, :begins_at, :ends_at, :github_repo)
     end
 end

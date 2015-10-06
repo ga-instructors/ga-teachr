@@ -68,3 +68,23 @@
     display: none;
   }
 }
+
+.cohort__banner {
+  background-image: image-url('cohorts/default-background.jpg');
+  background-size: cover;
+  background-position: 0 60%;
+  background-repeat: no-repeat;
+  text-shadow: 1px 2px 1px rgba(0,0,0,0.5);
+  overflow: auto;
+  color: white;
+  padding: 1rem;
+  box-shadow: inset 0 -10px 100px rgba(0,0,0,0.5);
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-bottom: 0.5rem;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
