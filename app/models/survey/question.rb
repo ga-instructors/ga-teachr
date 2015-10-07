@@ -14,10 +14,12 @@ class Survey::Question < ActiveRecord::Base
 
   default_scope -> { order(:ordinal) }
 
-  belongs_to :questionnaire
+  belongs_to :questionnaire, foreign_key: :survey_questionnaire_id
   has_many :options, foreign_key: :survey_question_id
   has_many :topics, foreign_key: :survey_question_id
   accepts_nested_attributes_for :topics, :options
+
+  has_many :answers, foreign_key: :survey_question_id
 
   after_initialize :initialize_ordinal
   # before_save :update_ordinals

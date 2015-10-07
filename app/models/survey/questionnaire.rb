@@ -2,7 +2,8 @@ class Survey::Questionnaire < ActiveRecord::Base
   after_initialize :initialize_ordinal
   before_save :update_ordinals
 
-  default_scope { order(:ordinal) }
+  default_scope { order :ordinal }
+  scope :ready, -> { where 'begins_at > ? AND ends_at < ?', Time.now.utc, Time.now.utc }
 
   belongs_to :cohort
   has_many :questions, foreign_key: 'survey_questionnaire_id'

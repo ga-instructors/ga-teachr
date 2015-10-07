@@ -5,11 +5,23 @@
 <div class="large container">
 	<%= image_tag gravatar_url(current_user.email, 384), style: 'border: solid #EEEEEE 1px; float: right;' %>
 
-	<h3>COHORTS</h3>
-	<ul>
-		<% current_user.cohorts.each do |cohort| %>
-			<li><%= link_to cohort.name, cohort %></li>
+	<div style="text-align:center;">
+		<br />
+		<% if current_user.cohort.surveys.ready.any? %>
+			<h3>HERE YOU GO!</h3>
+			<% current_user.cohort.surveys.ready.each do |survey| %>
+				<%= link_to survey.title, survey, class: 'button' %>
+			<% end %>
+		<% else %>
+			<h2>Great Job!</h2>
+			<p>It appears that you are caught up.</p>
 		<% end %>
-	</ul>
+		<br />
+		<svg viewbox="0 0 100 100" style="width: calc(100% - 500px); height: 300px; margin: 0 auto;">
+			<% percent = 0.5 %>
+			<circle cx=50 cy=50 r=40 fill="none" stroke-width=10 stroke="#CC0000" stroke-dasharray="<%= percent * 251 %>,999"></circle>
+			<text x=55 y=55 text-anchor="middle"><%= (percent * 100).ceil %>%</text>
+		</svg>
+	</div>
 
 </div>

@@ -1,4 +1,4 @@
-<div class="cohort__banner" style="background-image: url('<%= cohort_path(cohort, format: 'jpg') %>')">
+<div class="cohort__banner" style="background-image: url('<%= cohort.id ? cohort_path(cohort, format: 'jpg') : image_path('cohorts/default-background.jpg') %>')">
 	<div class="large container">
 		<h3 style="float: right; text-align: right;">
 			<%= link_to cohort.course.name, cohort.course, class: 'white' %><br />

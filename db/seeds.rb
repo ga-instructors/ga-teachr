@@ -57,6 +57,7 @@ Cohort.all.each do |cohort|
         }
       case member["role"]
       when "student"
+        props[:cohort] = cohort
         legacy_map[cohort.students.create!(props)] = member["user_id"]
       when "instructor"
         props["title"] = "#{cohort.course.abbrev} Instructor"
@@ -99,9 +100,16 @@ Cohort.all.each do |cohort|
           value: option["grade"]
         })
       end
-
+      assessments = db.exec_params("SELECT * FROM quizzes_assessments WHERE quiz_id = $1", [question["id"]])
+      binding.pry if assessments.count > 0
     end
   end
 end
 
 Employee.find_by(email: 'jaden@generalassemb.ly').user.update(password: 'tmoat')
+Student.create!({
+  first_name: 'Steven', last_name: 'Jones',
+  email: 'greatprogger@hotmail.com',
+  cohort: Cohort.find_by(name: 'Pluto 2015'),
+  user: User.create!(password: 'testtest')
+})

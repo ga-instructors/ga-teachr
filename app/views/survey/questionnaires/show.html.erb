@@ -16,7 +16,7 @@
     <% if policy(@survey_response).create? %>
       <%= form_for @survey_response do |f| %>
         <%= f.hidden_field :survey_questionnaire_id %>
-        <%= f.submit 'Start', class: 'big primary button' %>
+        <%= f.submit 'Start', class: 'big primary button', onclick: 'this.requestFullscreen()' %>
       <% end %>
     <% else %>
       <%= link_to "Start", survey_questionnaire_questions_path(@survey_questionnaire), class: 'big primary button' %>

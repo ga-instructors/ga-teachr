@@ -18,7 +18,7 @@
 			<% @cohorts.each do |cohort| %>
 				<tr>
 					<td><%= link_to cohort.campus.name, cohort.campus %></td>
-					<td><%= link_to cohort.course, cohort.course %></td>
+					<td><%= link_to cohort.course.name, cohort.course %></td>
 					<td><%= cohort.name %></td>
 					<td><%= cohort.begins_at %></td>
 					<td><%= cohort.ends_at %></td>

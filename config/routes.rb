@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :campuses
   resources :cohorts do
     resources :groups
-    resources :students, controller: 'cohorts/students'
+    resources :students, module: 'cohorts'
+    resources :questionnaires, module: 'survey'
   end
   namespace :survey do
     resources :questionnaires do

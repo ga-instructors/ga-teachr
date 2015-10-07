@@ -1,19 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<div class="large container">
+<div class="medium container">
 
-  <h2>Question #<%= @survey_question.ordinal %></h2>
+  <h4>Q<%= @survey_question.ordinal %>.</h4>
 
   <%= @survey_question.prompt_html %>
 
   <p>
-    <strong>Open ended:</strong>
-    <%= @survey_question.open_ended %>
-  </p>
-
-  <p>
     <strong>Topics:</strong>
     <%= @survey_question.topics %>
+  </p>
+
+  <% @survey_question.answers.each do |answer| %>
+    <%= answer %>
+  <% end %>
+
+  <p>
+    <strong>Open ended:</strong>
+    <%= @survey_question.open_ended %>
   </p>
 
   <p>
@@ -26,7 +30,6 @@
     <%= @survey_question.valuation %>
   </p>
 
-  <%= link_to 'Edit', edit_survey_question_path(@survey_question) %> |
-  <%= link_to 'Back', survey_questions_path %>
+  <%= link_to 'Back to Questions', survey_questionnaire_questions_path(@survey_question.questionnaire) %>
 
 </div>

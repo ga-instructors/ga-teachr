@@ -1,10 +1,11 @@
 class Survey::QuestionnairesController < ApplicationController
+  before_action :set_cohort
   before_action :set_survey_questionnaire, only: [:show, :edit, :update, :destroy]
 
   # GET /survey/questionnaires
   # GET /survey/questionnaires.json
   def index
-    @survey_questionnaires = policy_scope(Survey::Questionnaire.all)
+    @survey_questionnaires = policy_scope(@cohort ? @cohort.surveys : Survey::Questionnaire.all)
   end
 
   # GET /survey/questionnaires/1
@@ -67,6 +68,10 @@ class Survey::QuestionnairesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_cohort
+      @cohort = Cohort.find(params[:cohort_id]) if params[:cohort_id]
+    end
+
     def set_survey_questionnaire
       @survey_questionnaire = Survey::Questionnaire.find(params[:id])
       authorize @survey_questionnaire
@@ -74,6 +79,6 @@ class Survey::QuestionnairesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_questionnaire_params
-      params.require(:survey_questionnaire).permit(:cohort_id, :ordinal, :title, :introduction)
+      params.require(:survey_questionnaire).permit(:cohort_id, :ordinal, :title, :begins_at, :ends_at, :introduction)
     end
 end

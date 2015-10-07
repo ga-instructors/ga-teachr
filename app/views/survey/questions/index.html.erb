@@ -3,12 +3,7 @@
   <h1>Survey Questions</h1>
 
   <% @survey_questions.each do |survey_question| %>
-    <div style="float: right;">
-      <%= link_to 'Details', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
-      <%= link_to 'Update', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
-      <%= link_to 'Remove', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'small button' %>
-    </div>
-      <h5>Q<%= survey_question.ordinal %>.</h5>
+      <h4>Q<%= survey_question.ordinal %>.</h4>
       <%= survey_question.prompt_html %>
       <% if survey_question.options.any? %>
         <ul style="list-style-type: circle">
@@ -20,7 +15,13 @@
           <% end %>
         </ul>
       <% else %>
+        <textarea disabled></textarea>
       <% end %>
+      <div style="text-align: right;">
+        <%= link_to 'Remove', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: #CCCCCC; text-decoration: none;' %>
+        <%= link_to 'Update Prompt', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
+        <%= link_to 'Responses', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
+      </div>
       <hr />
   <% end %>
 

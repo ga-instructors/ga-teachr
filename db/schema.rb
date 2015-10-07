@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004213743) do
+ActiveRecord::Schema.define(version: 20151006181110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,19 @@ ActiveRecord::Schema.define(version: 20151004213743) do
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
   add_index "students", ["email"], name: "index_students_on_email", using: :btree
 
+  create_table "survey_answers", force: :cascade do |t|
+    t.integer  "survey_question_id"
+    t.integer  "student_id"
+    t.text     "answer"
+    t.integer  "survey_question_option_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "survey_answers", ["student_id"], name: "index_survey_answers_on_student_id", using: :btree
+  add_index "survey_answers", ["survey_question_id"], name: "index_survey_answers_on_survey_question_id", using: :btree
+  add_index "survey_answers", ["survey_question_option_id"], name: "index_survey_answers_on_survey_question_option_id", using: :btree
+
   create_table "survey_question_options", force: :cascade do |t|
     t.integer  "survey_question_id"
     t.string   "label"
@@ -171,7 +184,10 @@ ActiveRecord::Schema.define(version: 20151004213743) do
     t.integer  "cohort_id"
     t.integer  "ordinal"
     t.string   "title"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
     t.text     "introduction"
+    t.boolean  "open_book"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -234,6 +250,9 @@ ActiveRecord::Schema.define(version: 20151004213743) do
   add_foreign_key "student_registrations", "cohorts"
   add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"
+  add_foreign_key "survey_answers", "students"
+  add_foreign_key "survey_answers", "survey_question_options"
+  add_foreign_key "survey_answers", "survey_questions"
   add_foreign_key "survey_question_options", "survey_questions"
   add_foreign_key "survey_questionnaires", "cohorts"
   add_foreign_key "survey_questions", "survey_questionnaires"
