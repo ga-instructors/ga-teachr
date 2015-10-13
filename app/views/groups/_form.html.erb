@@ -11,10 +11,23 @@
 <% end %>
 
 <div class="field">
-	<%= form.label :name %><br>
+	<%= form.label :name %>
 	<%= form.text_field :name %>
 </div>
-<%= form.fields_for :groups do |group_form| %>
-	<%= group_form.text_field :name %>
-<% end %>
 
+<div class="groups" style="overflow: auto;">
+	<%= form.fields_for :groups do |group_form| %>
+		<div class="group" style="width: 20%; float: left;">
+			<%= group_form.text_field :name %>
+			<ul style="list-style-type: none; padding: 0;">
+			<%= group_form.fields_for :assignments do |assign_form| %>
+				<li>
+					<%= render assign_form.object.student %>
+					<%= assign_form.hidden_field :_destroy %>
+					<%= assign_form.hidden_field :groups_group_id %>
+					<%= assign_form.hidden_field :student_id %>
+				</li>
+			<% end %>
+		</div>
+	<% end %>
+</div>

@@ -15,11 +15,8 @@ class GroupsController < ApplicationController
 
   # GET /groups/groupings/new
   def new
-    @groups_grouping = @cohort.groupings.new
-    5.times do |i|
-      group = @groups_grouping.groups.new(name: "Group #{i+1}")
-      group.students = Student.all
-    end
+    @groups_grouping = @cohort.groupings.new(params[:group])
+    @groups_grouping.populate!
     authorize @groups_grouping
   end
 
@@ -49,7 +46,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @groups_grouping.update(groups_grouping_params)
-        format.html { redirect_to @groups_grouping, notice: 'Grouping was successfully updated.' }
+        format.html { redirect_to cohort_groups_path(@cohort, @groups_grouping), notice: 'Grouping was successfully updated.' }
         format.json { render :show, status: :ok, location: @groups_grouping }
       else
         format.html { render :edit }
@@ -81,6 +78,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def groups_grouping_params
-      params.require(:groups_grouping).permit(:name)
+      params.require(:groups_grouping).permit(:name, :groups_attributes => {:id => "", :name => "", assignments_attributes: [:id, :groups_group_id, :student_id, :_destroy]})
     end
 end

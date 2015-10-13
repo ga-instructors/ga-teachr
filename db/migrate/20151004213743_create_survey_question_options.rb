@@ -3,7 +3,7 @@ class CreateSurveyQuestionOptions < ActiveRecord::Migration
     create_table :survey_question_options do |t|
       t.references :survey_question, index: true, foreign_key: true
       t.string :label
-      t.float :value
+      t.float :value, default: 0
 
       t.timestamps null: false
     end

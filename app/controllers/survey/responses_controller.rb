@@ -4,7 +4,7 @@ class Survey::ResponsesController < ApplicationController
   # GET /survey/responses
   # GET /survey/responses.json
   def index
-    @survey_responses = Survey::Response.all
+    @survey_responses = policy_scope(Survey::Response.all)
   end
 
   # GET /survey/responses/1
@@ -26,11 +26,12 @@ class Survey::ResponsesController < ApplicationController
   # POST /survey/responses.json
   def create
     @survey_response = Survey::Response.new(survey_response_params)
+    @survey_response.student = current_user.student
     authorize @survey_response
 
     respond_to do |format|
       if @survey_response.save
-        format.html { redirect_to @survey_response, notice: 'Response was successfully created.' }
+        format.html { redirect_to edit_survey_response_path(@survey_response), notice: 'Good Luck!' }
         format.json { render :show, status: :created, location: @survey_response }
       else
         format.html { render :new }
@@ -72,6 +73,6 @@ class Survey::ResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_response_params
-      params.require(:survey_response).permit(:survey_questionnaire_id, :student_id)
+      params.require(:survey_response).permit(:survey_questionnaire_id, :answers_attributes => [:id, :survey_question_id, :survey_question_option_id, :answer])
     end
 end

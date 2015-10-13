@@ -6,7 +6,7 @@ class CreateSurveyQuestions < ActiveRecord::Migration
       t.text :prompt
       t.boolean :open_ended
       t.string :format
-      t.text :valuation
+      t.text :evaluation
 
       t.timestamps null: false
     end

@@ -1,13 +1,30 @@
 <p id="notice"><%= notice %></p>
+<%= render @cohort %>
 <div class="large container">
 
-	<h1><%= @groups_grouping.cohort.name %>: <%= @groups_grouping.name %></h1>
+	<h1><%= @groups_grouping.name %></h1>
 
 	<% @groups_grouping.groups.each do |group| %>
-		<%= @group.name %>
+
 	<% end %>
 
+	<div class="groups" style="overflow: auto;">
+		<% @groups_grouping.groups.each_with_index do |group, i| %>
+			<div class="group" style="width: 20%; float: left;">
+				<h3><%= group.name || "Group #{i+1}" %></h3>
+				<ul style="list-style-type: none; padding: 0;">
+					<% group.students do |assign| %>
+						<li>
+							<%= student %>
+							<%= render student %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	</div>
 
-	<%= link_to 'Edit', edit_cohort_group_path(@cohort, @groups_grouping) %> |
-	<%= link_to 'Back', cohort_groups_path %>
+
+	<%= link_to 'Edit', edit_cohort_group_path(@cohort, @groups_grouping) %>
+	<%= link_to 'Finished', cohort_groups_path %>
 </div>

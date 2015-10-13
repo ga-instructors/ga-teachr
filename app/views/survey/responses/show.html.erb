@@ -1,14 +1,33 @@
 <p id="notice"><%= notice %></p>
+<%= render @survey_response.cohort %>
+<div class="large container">
+  <div style="float: right; margin: 0.5rem 2rem;">
+    <%= render 'students/student', student: @survey_response.student %>
+  </div>
+  <h2>
+    <%= @survey_response.questionnaire.ordinal %>.
+    <%= @survey_response.questionnaire.title %>
+  </h2>
+  <hr />
 
-<p>
-  <strong>Survey questionnaire:</strong>
-  <%= @survey_response.survey_questionnaire %>
-</p>
+  <% @survey_response.questions.each do |question, answer| %>
+    <div style="overflow: hidden;">
+      <div style="width: 20%; float: left;"><%= react_component 'RadialProgress' %></div>
+      <div style="width: 65%; margin-left: 25%;">
+        <h4>Q<%= question.ordinal %>.</h4>
+        <div class="markdown"><%= question.prompt_html %></div>
+        <hr />
+        <h6><%= @survey_response.student.first_name %> answered:</h6>
+        <% if answer.question_option %>
+        <ul style="list-style-type: circle; margin-top: 0;">
+          <li><strong><%= answer.question_option.label %></strong></li>
+        </ul>
+        <% end %>
+        <div class="markdown" style="border-left: solid #EEEEEE 0.25rem; padding-left: 0.75rem;"><%= answer.answer_html %></div>
+      </div>
+    </div>
+  <% end %>
 
-<p>
-  <strong>Student:</strong>
-  <%= @survey_response.student %>
-</p>
-
-<%= link_to 'Edit', edit_survey_response_path(@survey_response) %> |
-<%= link_to 'Back', survey_responses_path %>
+  <%#= link_to 'Retake', edit_survey_response_path(@survey_response) %>
+  <%#= link_to 'Responses', survey_responses_path %>
+</div>

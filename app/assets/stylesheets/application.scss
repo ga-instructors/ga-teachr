@@ -20,13 +20,14 @@ html, body { height: 100%; margin: 0; padding: 0; }
 body {
   line-height: 1.5em;
   font-family: 'Circular', 'Helvetica Neue', 'Helvetica', 'Verdana', sans-serif;
+  color: #555555;
 }
 
 /* ------------------
         HEADERS
    ------------------ */
 
-h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3, h4, h5, h6 { margin: 0; color: #000000; }
 h1, h2, h3 {
   font-family: 'PF DIN Compressed Pro';
   text-transform: uppercase;
@@ -53,7 +54,7 @@ h6 { color: #999999; }
 p { margin-top: 0; }
 a { color: #4078c0; }
 
-pre {
+pre, code {
   background-color: #FAFAFA;
   font-family: 'Inconsolata', monospace;
   font-weight: 300;
@@ -79,7 +80,7 @@ input[type=text], input[type=password], input[type=email], input[type=number], t
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem;
-  border: solid #666666 1px;
+  border: solid #999999 1px;
   width: 100%;
   width: calc(100% - 3pt);
   margin-top: 0.15rem;
@@ -248,3 +249,15 @@ nav {
 }
 
 img { max-width: 100%; }
+svg {
+  text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+  }
+  * { transition: all 0.25s; }
+}

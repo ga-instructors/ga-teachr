@@ -95,21 +95,38 @@ Cohort.all.each do |cohort|
       legacy_map[survey_question] = question["id"]
       options = db.exec_params("SELECT * FROM quizzes_question_options WHERE question_id = $1", [legacy_map[survey_question]])
       options.each do |option|
-        survey_question.options.create!({
+        legacy_map[survey_question.options.create!({
           label: option["label"],
           value: option["grade"]
-        })
+        })] = option["id"]
       end
-      assessments = db.exec_params("SELECT * FROM quizzes_assessments WHERE quiz_id = $1", [question["id"]])
-      binding.pry if assessments.count > 0
+      cohort.students.each do |student|
+        assessment = db.exec_params("SELECT * FROM quizzes_assessments WHERE quiz_id = $1 AND user_id = $2", [quiz["id"], legacy_map[student]]).first
+        if assessment
+          response = survey.responses.find_or_create_by!(student: student)
+          answer = db.exec_params("SELECT * FROM quizzes_answers WHERE assessment_id = $1 AND question_id = $2", [assessment["id"], question["id"]]).first
+          survey_answer = response.answers.create!({
+            question: survey_question,
+            answer: answer["answer"],
+            question_option: survey_question.options.detect { |option| legacy_map[option] == answer["question_option_id"] }
+          })
+          survey_answer.evaluations.create!({
+            value: answer["grade"]
+          })
+        else
+          warn "Unable to import assessment, assessment not found for #{student.name}"
+        end
+      end
     end
   end
 end
 
+pluto = Cohort.find_by(name: 'Pluto 2015')
 Employee.find_by(email: 'jaden@generalassemb.ly').user.update(password: 'tmoat')
-Student.create!({
+student = Student.create!({
   first_name: 'Steven', last_name: 'Jones',
   email: 'greatprogger@hotmail.com',
-  cohort: Cohort.find_by(name: 'Pluto 2015'),
+  cohort: pluto,
   user: User.create!(password: 'testtest')
 })
+student.registrations.create!(cohort: pluto)

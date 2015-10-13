@@ -1,8 +1,51 @@
-<div class="large container">
-  <h1>Editing Survey Response</h1>
+<p id="notice"><%= notice %></p>
+<div class="medium container">
 
-  <%= render 'form' %>
+  <%= form_for(@survey_response) do |f| %>
+    <% if @survey_response.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@survey_response.errors.count, "error") %> prohibited this survey_response from being saved:</h2>
 
-  <%= link_to 'Show', @survey_response %> |
-  <%= link_to 'Back', survey_responses_path %>
+        <ul>
+        <% @survey_response.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <br />
+    <h2><%= @survey_response.questionnaire.ordinal %>. <%= @survey_response.questionnaire.title %></h2>
+    <hr />
+
+    <% @survey_response.questions.each do |question, answer| %>
+      <%= f.fields_for :answers, answer do |ff| %>
+        <%= ff.hidden_field :survey_question_id %>
+        <h4>Q<%= question.ordinal %>.</h4>
+        <%= question.prompt_html %>
+        <% if question.options.any? %>
+          <ul style="list-style-type: none">
+            <% question.options.each do |option| %>
+              <li>
+                <%= ff.radio_button :survey_question_option_id, option.id %>
+                <%= ff.label :survey_question_option_id, option.label, value: option.id %>
+              </li>
+            <% end %>
+            <% if question.open_ended? %>
+              <li>Other (Specify)</li>
+            <% end %>
+          </ul>
+        <% else %>
+          <%= ff.text_area :answer %>
+        <% end %>
+        <hr />
+      <% end %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
+  <% end %>
+
 </div>

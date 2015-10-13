@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :questionnaires do
       resources :questions
       resources :responses
+      resources :evaluations
     end
     resources :questions
     resources :responses

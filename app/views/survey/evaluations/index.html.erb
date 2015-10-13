@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Survey Evaluations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Survey response</th>
+      <th>Survey question</th>
+      <th>Student</th>
+      <th>Employee</th>
+      <th>Value</th>
+      <th>Manifest</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @survey_evaluations.each do |survey_evaluation| %>
+      <tr>
+        <td><%= survey_evaluation.survey_response %></td>
+        <td><%= survey_evaluation.survey_question %></td>
+        <td><%= survey_evaluation.student %></td>
+        <td><%= survey_evaluation.employee %></td>
+        <td><%= survey_evaluation.value %></td>
+        <td><%= survey_evaluation.manifest %></td>
+        <td><%= link_to 'Show', survey_evaluation %></td>
+        <td><%= link_to 'Edit', edit_survey_evaluation_path(survey_evaluation) %></td>
+        <td><%= link_to 'Destroy', survey_evaluation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Evaluation', new_survey_questionnaire_evaluation_path %>

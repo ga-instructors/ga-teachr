@@ -11,6 +11,8 @@ class Survey::QuestionsController < ApplicationController
   # GET /survey/questions/1
   # GET /survey/questions/1.json
   def show
+    @next_question = @questionnaire.questions.where('ordinal > ?', @survey_question.ordinal).first
+    @previous_question = @questionnaire.questions.where('ordinal < ?', @survey_question.ordinal).last
   end
 
   # GET /survey/questions/new
@@ -24,6 +26,7 @@ class Survey::QuestionsController < ApplicationController
 
   # GET /survey/questions/1/edit
   def edit
+    @survey_question.options.build
   end
 
   # POST /survey/questions
@@ -80,6 +83,6 @@ class Survey::QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_question_params
-      params.require(:survey_question).permit(:survey_questionnaire_id, :ordinal, :topics, :prompt, :open_ended, :format, :valuation)
+      params.require(:survey_question).permit(:survey_questionnaire_id, :ordinal, :topics, :prompt, :open_ended, :format, :evaluation)
     end
 end

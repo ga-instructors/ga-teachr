@@ -1,10 +1,13 @@
-<h1>Editing Survey Question</h1>
+<div class="large container">
+  <br />
+  <h2><%= @questionnaire.ordinal %>. <%= @questionnaire.title %></h2>
 
-<%= form_for(@survey_question) do |form| %>
-  <%= render form %>
-  <div class="actions">
-    <%= form.submit %>
-    <%= link_to 'Cancel', survey_questions_path %>
-  </div>
+  <%= form_for(@survey_question) do |form| %>
+    <%= render form %>
+    <div class="actions">
+      <%= form.submit %>
+      <%= link_to 'Cancel', survey_questionnaire_questions_path %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>

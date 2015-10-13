@@ -4,7 +4,7 @@
   <%= form_for(@survey_questionnaire) do |form| %>
     <%= render form %>
     <div class="actions">
-      <%= form.submit %>
+      <%= form.submit 'Continue' %>
       <%= link_to 'Cancel', survey_questionnaires_path %>
     </div>
   <% end %>

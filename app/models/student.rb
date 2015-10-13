@@ -9,6 +9,8 @@ class Student < ActiveRecord::Base
   has_many :cohorts, through: :registrations
   belongs_to :cohort
 
+  has_many :survey_responses, class_name: 'Survey::Response'
+
   validates :cohort, presence: true
 
   delegate :campus, to: :cohort

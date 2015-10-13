@@ -3,11 +3,11 @@
   <h1><%= @course.name %></h1>
 
   <table>
-    <% @course.cohorts.each do |cohort| %>
+    <% @course.cohorts.order('ends_at DESC').each do |cohort| %>
       <%= render cohort %>
     <% end %>
   </table>
 
-  <%= link_to 'New Cohort', new_cohort_path(@course), class: 'button' %>
-  <%= link_to 'Update Course', edit_course_path(@course), class: 'small button' %>
+  <%= link_to 'New Cohort', new_cohort_path(@course), class: 'button' if policy(Course).create? %>
+  <%= link_to 'Update Course', edit_course_path(@course), class: 'small button' if policy(@course).update? %>
 </div>

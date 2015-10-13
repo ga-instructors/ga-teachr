@@ -3,25 +3,31 @@
 <%= render current_user.cohort %>
 
 <div class="large container">
-	<%= image_tag gravatar_url(current_user.email, 384), style: 'border: solid #EEEEEE 1px; float: right;' %>
+	<div style="float:left">
+		<%= image_tag gravatar_url(current_user.email, 256), style: 'border: solid #EEEEEE 1px;' %>
+	</div>
 
-	<div style="text-align:center;">
+	<div style="text-align: center; float: left; width: calc(90% - 256px);">
 		<br />
 		<% if current_user.cohort.surveys.ready.any? %>
-			<h3>HERE YOU GO!</h3>
-			<% current_user.cohort.surveys.ready.each do |survey| %>
-				<%= link_to survey.title, survey, class: 'button' %>
-			<% end %>
+			<h3><%= silly_pun_generator %></h3>
+			<ul style="list-style-type: none; padding: 0">
+				<% current_user.cohort.surveys.ready.each_with_index do |survey, i| %>
+					<% if i == 0 %>
+						<li><%= link_to survey.title, survey, class: 'button big primary' %></li>
+					<% else %>
+						<li>.then&nbsp;->&nbsp;<%= link_to survey.title, survey, class: '' %></li>
+					<% end %>
+				<% end %>
+			</ul>
 		<% else %>
 			<h2>Great Job!</h2>
 			<p>It appears that you are caught up.</p>
 		<% end %>
-		<br />
-		<svg viewbox="0 0 100 100" style="width: calc(100% - 500px); height: 300px; margin: 0 auto;">
-			<% percent = 0.5 %>
-			<circle cx=50 cy=50 r=40 fill="none" stroke-width=10 stroke="#CC0000" stroke-dasharray="<%= percent * 251 %>,999"></circle>
-			<text x=55 y=55 text-anchor="middle"><%= (percent * 100).ceil %>%</text>
-		</svg>
+	</div>
+
+	<div class="progress" style="width: 256px;">
+		<%= react_component 'RadialProgress', progress: 1  %>
 	</div>
 
 </div>

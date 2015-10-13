@@ -1,6 +1,10 @@
 class Survey::QuestionPolicy < ApplicationPolicy
 
-  def create?
+  def update?
+    user && user.employee
+  end
+
+  def create
     user && user.employee
   end
 

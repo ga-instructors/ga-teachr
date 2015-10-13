@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 <div class="medium container">
-  <h1>Survey Questions</h1>
+  <br />
+  <h2><%= @questionnaire.ordinal %>. <%= @questionnaire.title %></h2>
+  <hr />
 
   <% @survey_questions.each do |survey_question| %>
       <h4>Q<%= survey_question.ordinal %>.</h4>
@@ -18,13 +20,13 @@
         <textarea disabled></textarea>
       <% end %>
       <div style="text-align: right;">
-        <%= link_to 'Remove', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: #CCCCCC; text-decoration: none;' %>
-        <%= link_to 'Update Prompt', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
-        <%= link_to 'Responses', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'small button' %>
+        <%= link_to 'Remove Question', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: #CCCCCC; text-decoration: none;' %>
+        &nbsp;&nbsp;<%= link_to 'Update Prompt', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'button' %>
+        <%= link_to 'Responses', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'secondary button' %>
       </div>
       <hr />
   <% end %>
 
   <%= link_to 'New Question', new_survey_questionnaire_question_path, class: 'button' %>
-  <%= link_to 'Cancel', survey_questionnaires_path %>
+  <%= link_to 'Cancel', @questionnaire.cohort %>
 </div>

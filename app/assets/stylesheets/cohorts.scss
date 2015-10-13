@@ -10,6 +10,9 @@
   .student {
     text-decoration: none !important;
     padding-left: 3pt;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .student.selected {
     background-color: #EEEEEE;

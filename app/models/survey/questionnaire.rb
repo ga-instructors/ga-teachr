@@ -3,11 +3,15 @@ class Survey::Questionnaire < ActiveRecord::Base
   before_save :update_ordinals
 
   default_scope { order :ordinal }
-  scope :ready, -> { where 'begins_at > ? AND ends_at < ?', Time.now.utc, Time.now.utc }
+  scope :ready, -> { joins(:cohort).where(<<-SQL, *[Time.now.utc]*4) }
+        ((survey_questionnaires.begins_at IS NULL AND cohorts.begins_at < ?) OR cohorts.begins_at < ?)
+    AND ((survey_questionnaires.ends_at   IS NULL AND cohorts.ends_at   > ?) OR cohorts.ends_at   > ?)
+  SQL
 
   belongs_to :cohort
-  has_many :questions, foreign_key: 'survey_questionnaire_id'
-  has_many :responses, foreign_key: 'survey_questionnaire_id'
+  has_many :questions, foreign_key: :survey_questionnaire_id
+  has_many :responses, foreign_key: :survey_questionnaire_id
+  has_many :evaluations, foreign_key: :survey_questionnaire_id
 
   def initialize_ordinal
     self.ordinal ||= cohort ? (cohort.surveys.maximum(:ordinal) || 0) + 1 : nil

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Survey response:</strong>
+  <%= @survey_evaluation.survey_response %>
+</p>
+
+<p>
+  <strong>Survey question:</strong>
+  <%= @survey_evaluation.survey_question %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @survey_evaluation.student %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @survey_evaluation.employee %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @survey_evaluation.value %>
+</p>
+
+<p>
+  <strong>Manifest:</strong>
+  <%= @survey_evaluation.manifest %>
+</p>
+
+<%= link_to 'Edit', edit_survey_evaluation_path(@survey_evaluation) %> |
+<%= link_to 'Back', survey_evaluations_path %>

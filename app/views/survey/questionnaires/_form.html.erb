@@ -24,3 +24,11 @@
   <%= form.text_area :introduction, class: 'markdown' %>
   <iframe class="markdown-preview" src="http://about:blank" height="1"></iframe>
 </div>
+<div class="field">
+  <%= form.label :begins_at %>
+  <%= form.datetime_select :begins_at %>
+</div>
+<div class="field">
+  <%= form.label :ends_at %>
+  <%= form.datetime_select :ends_at %>
+</div>
