@@ -17,7 +17,8 @@ class Survey::Question < ActiveRecord::Base
   belongs_to :questionnaire, foreign_key: :survey_questionnaire_id
   has_many :options, foreign_key: :survey_question_id
   has_many :topics, foreign_key: :survey_question_id
-  accepts_nested_attributes_for :topics, :options
+  accepts_nested_attributes_for :topics
+  accepts_nested_attributes_for :options, reject_if: proc { |attrs| attrs["label"].blank? }, allow_destroy: true
 
   has_many :answers, foreign_key: :survey_question_id
 

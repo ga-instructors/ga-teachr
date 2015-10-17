@@ -6,6 +6,9 @@
 <% @answers.each do |answer| %>
 
 ### ![Gravatar of <%= answer.response.student.name %>](<%= gravatar_url(answer.response.student.email, 48) %>) <%= answer.response.student.name %>
+
+<% if answer.question_option %>
+- <%= answer.question_option.try(:label) %><% end %>
 <%= answer.answer %>
 
 <% end %>

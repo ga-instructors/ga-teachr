@@ -5,7 +5,7 @@ module Survey
     belongs_to :student
     belongs_to :question_option, class_name: Question::Option, foreign_key: :survey_question_option_id
 
-    has_many :evaluations, foreign_key: :survey_answer_id
+    has_many :evaluations, foreign_key: :survey_answer_id, dependent: :destroy
 
     def answer_html
       return nil if self[:answer].blank?

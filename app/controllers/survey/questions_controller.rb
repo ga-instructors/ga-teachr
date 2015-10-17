@@ -13,14 +13,12 @@ class Survey::QuestionsController < ApplicationController
   def show
     @next_question = @questionnaire.questions.where('ordinal > ?', @survey_question.ordinal).first
     @previous_question = @questionnaire.questions.where('ordinal < ?', @survey_question.ordinal).last
-    @answers = @survey_question.answers.select("survey_answers.*, survey_evaluations.value").joins(:evaluations).order('survey_evaluations.value DESC')
+    @answers = @survey_question.answers.select("survey_answers.*, survey_evaluations.value").joins(:evaluations).order('survey_evaluations.value ASC')
   end
 
   # GET /survey/questions/new
   def new
     @survey_question = Survey::Question.new
-    @survey_question.options.build
-    @survey_question.options.build
     @survey_question.options.build
     authorize @survey_question
   end
@@ -52,7 +50,7 @@ class Survey::QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @survey_question.update(survey_question_params)
-        format.html { redirect_to @survey_question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to survey_questionnaire_questions_path(@survey_question.questionnaire), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_question }
       else
         format.html { render :edit }
@@ -89,6 +87,6 @@ class Survey::QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_question_params
-      params.require(:survey_question).permit(:survey_questionnaire_id, :ordinal, :topics, :prompt, :open_ended, :format, :evaluation)
+      params.require(:survey_question).permit(:survey_questionnaire_id, :ordinal, :topics, :prompt, :open_ended, :format, :evaluation, options_attributes: [:id, :label, :value, :_destroy])
     end
 end

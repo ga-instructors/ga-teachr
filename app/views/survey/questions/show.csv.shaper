@@ -1,7 +1,8 @@
-csv.headers :id, :student, :value, :answer
+csv.headers :id, :student, :value, :answer, :comment
 csv.rows @answers do |csv, answer|
   csv.cell :id, answer.id
   csv.cell :student, answer.response.student.name
   csv.cell :value, answer.evaluations.last.value
-  csv.cell :answer, answer.answer || answer.question_option.label
+  csv.cell :answer, answer.question_option ? answer.question_option.label : answer.answer
+  csv.cell :comment, answer.evaluations.last.comment
 end

@@ -45,10 +45,11 @@
 </div>
 <div class="tab-content">
   <div class="options field">
-    <ul style="margin-top: 0; margin-bottom: 0; list-style-type: circle;">
-      <%= form.fields_for :options do |f| %>
-        <li>
-          <%= f.text_field :label, style: 'width: 66%' %>
+    <ul class="question__options" style="margin-top: 0; margin-bottom: 0; list-style-type: circle;">
+			<%= form.fields_for :options do |f| %>
+				<li class="question__option">
+					<%= f.hidden_field :_destroy, class: 'question__option__destroy' %>
+          <%= f.text_field :label, style: 'width: 66%', class: 'question__option_label' %>
           <%= f.range_field :value, min: 0, max: 1, step: 0.25, style: 'width: 32%; vertical-align: -70%;' %>
           <output for="<%= f.object_name %>[value]">&mdash;</output>
         </li>

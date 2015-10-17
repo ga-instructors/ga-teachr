@@ -4,7 +4,7 @@ class Survey::QuestionPolicy < ApplicationPolicy
     user && user.employee
   end
 
-  def create
+  def create?
     user && user.employee
   end
 

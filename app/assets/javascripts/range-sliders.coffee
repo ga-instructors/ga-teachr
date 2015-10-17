@@ -8,6 +8,8 @@ jQuery ->
     if max == 1 && min == 0 && value > 0
       f = new Fraction(parseFloat(el.val()), 1);
       label = if value == 1 then "&nbsp;&nbsp;✔" else "#{f.numerator}/#{f.denominator}"
+    else if value == 0
+      label = "&nbsp;&nbsp;✗"
     else
       label = el.val()
 

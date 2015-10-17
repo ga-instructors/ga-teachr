@@ -23,23 +23,25 @@
 	<h5>Responses:</h5>
 	<hr>
 
-	<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>
-		<h5>&#9675;&nbsp;<%= option.label %></h5>
-		<div style="margin-left: 2rem; columns: 3; -webkit-columns: 3;">
-			<% if option.answers.any? %>
-				<% option.answers.each do |answer| %>
-					<%= render 'students/student', student: answer.response.student %>
+	<div style="overflow: hidden;">
+		<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>
+			<div style="float: left; width: 50%;">
+				<h4><%= option.label %></h4>
+				<% if option.answers.any? %>
+					<% option.answers.each do |answer| %>
+						<%= render 'students/student', student: answer.response.student %>
+					<% end %>
+				<% else %>
+					<em>No Answers</em>
 				<% end %>
-			<% else %>
-				<em>No Answers</em>
-			<% end %>
-		</div>
-	<% end %>
+			</div>
+		<% end %>
+	</div>
 
 	<% @answers.where("survey_question_option_id IS NULL").each do |answer| %>
 		<%= content_tag_for :div, answer, style: 'overflow: hidden' do %>
-			<div style="width: 40%; float: right;">
-				<%= content_tag_for :div, answer.evaluations.last, style: 'position: relative; min-height: 110px' do |evaluation| %>
+			<div style="width: 40%; float: right; margin-bottom: 1rem;">
+				<%= content_tag_for :div, answer.evaluations.last, style: 'position: relative; min-height: 110px;' do |evaluation| %>
 					<div style="width: 100px; right: 20px; top: 0; position: absolute;">
 						<%= react_component 'RadialProgress', progress: evaluation.value.try(:*, 100) %>
 					</div>
@@ -54,7 +56,7 @@
 			</div>
 			<div style="margin-right: 42%;">
 				<br />
-				<strong><%= render 'students/student', container: "span", student: answer.response.student %></strong>
+				<strong><%= render 'students/student', container: "span", size: 32, student: answer.response.student %></strong>
 				<% if answer.question_option %>
 					<ul style="list-style-type: circle; margin-top: 0;">
 						<li><strong><%= answer.question_option.label %></strong></li>
