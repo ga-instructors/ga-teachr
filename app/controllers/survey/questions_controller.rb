@@ -13,6 +13,7 @@ class Survey::QuestionsController < ApplicationController
   def show
     @next_question = @questionnaire.questions.where('ordinal > ?', @survey_question.ordinal).first
     @previous_question = @questionnaire.questions.where('ordinal < ?', @survey_question.ordinal).last
+    @answers = @survey_question.answers.select("survey_answers.*, survey_evaluations.value").joins(:evaluations).order('survey_evaluations.value DESC')
   end
 
   # GET /survey/questions/new
@@ -73,11 +74,16 @@ class Survey::QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
-      @questionnaire = Survey::Questionnaire.find(params[:questionnaire_id])
+      @questionnaire = Survey::Questionnaire.find(params[:questionnaire_id]) if params[:questionnaire_id]
     end
 
     def set_survey_question
-      @survey_question = @questionnaire.questions.find(params[:id])
+      if @questionnaire
+        @survey_question = @questionnaire.questions.find(params[:id])
+      else
+        @survey_question = Survey::Question.find(params[:id])
+        @questionnaire = @survey_question.questionnaire
+      end
       authorize @survey_question
     end
 

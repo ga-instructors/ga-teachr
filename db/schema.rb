@@ -175,11 +175,12 @@ ActiveRecord::Schema.define(version: 20151012053014) do
   create_table "survey_evaluations", force: :cascade do |t|
     t.integer  "survey_answer_id"
     t.integer  "employee_id"
+    t.text     "comment"
     t.float    "value"
     t.boolean  "autograded"
-    t.text     "manifest"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.text     "autograde_manifest"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "survey_evaluations", ["employee_id"], name: "index_survey_evaluations_on_employee_id", using: :btree

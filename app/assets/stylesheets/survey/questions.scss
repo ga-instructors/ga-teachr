@@ -1,3 +1,14 @@
-label[for=survey_question_valuation] {
-  
+@import 'style_guide/colors';
+
+.survey_answer .survey_evaluation {
+  overflow: hidden;
+  .markdown {
+    margin: 0.5rem;
+    min-height: 3em;;
+    background-color: lighten($color5, 10%);
+    padding: 2%;
+    border-radius: 1%;
+    border: solid darken($color5, 10%) 1px;
+  }
 }
+

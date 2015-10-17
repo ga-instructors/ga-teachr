@@ -1,0 +1,7 @@
+csv.headers :id, :student, :value, :answer
+csv.rows @answers do |csv, answer|
+  csv.cell :id, answer.id
+  csv.cell :student, answer.response.student.name
+  csv.cell :value, answer.evaluations.last.value
+  csv.cell :answer, answer.answer || answer.question_option.label
+end

@@ -1,0 +1,11 @@
+# Q<%= @survey_question.ordinal %>.
+
+<%= @survey_question.prompt %>
+
+---
+<% @answers.each do |answer| %>
+
+### ![Gravatar of <%= answer.response.student.name %>](<%= gravatar_url(answer.response.student.email, 48) %>) <%= answer.response.student.name %>
+<%= answer.answer %>
+
+<% end %>

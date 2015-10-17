@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       redirect_to new_authentication_path, notice: 'You must login to do that'
     else
-      redirect_to authentication_path(current_auth), notice: 'You do not have permission to do that'
+      redirect_to authentication_path(current_auth), notice: 'You do not have permission to do that.'
     end
   end
 

@@ -1,3 +1,5 @@
+@import 'style_guide/colors';
+
 .style-guide__example {
   details {
     margin: 0 1rem 1rem 1rem;
@@ -9,5 +11,21 @@
   }
   .style-guide__example_render {
     &> * { margin-left: 0.5rem; margin-right: 0.5rem; }
+  }
+  .color-swatch {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem 0 1rem 1rem;
+    line-height: 3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    border: solid rgba(128,128,128,0.5) 1px;
+    &.color1 { background-color: $color1; color: invert($color1); }
+    &.color2 { background-color: $color2; color: invert($color2); }
+    &.color3 { background-color: $color3; color: invert($color3); }
+    &.color4 { background-color: $color4; color: invert($color4); }
+    &.color5 { background-color: $color5; color: invert($color5); }
+    &.color6 { background-color: $color6; color: invert($color6); }
   }
 }

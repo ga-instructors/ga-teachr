@@ -90,6 +90,7 @@ Cohort.all.each do |cohort|
       survey_question = survey.questions.create!({
         ordinal: question["ordinal"],
         prompt: question["question"],
+        format: question["format"],
         open_ended: question["open_ended"]
       })
       legacy_map[survey_question] = question["id"]
@@ -111,7 +112,8 @@ Cohort.all.each do |cohort|
             question_option: survey_question.options.detect { |option| legacy_map[option] == answer["question_option_id"] }
           })
           survey_answer.evaluations.create!({
-            value: answer["grade"]
+            value: answer["grade"],
+            comment: answer["reviewer_comment"]
           })
         else
           warn "Unable to import assessment, assessment not found for #{student.name}"

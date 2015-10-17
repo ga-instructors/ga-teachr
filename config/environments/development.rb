@@ -49,4 +49,6 @@ Rails.application.configure do
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   ENV['HTTP_PROXY'] = Billy.proxy.url
 
+  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
 end

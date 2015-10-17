@@ -14,6 +14,8 @@
  *= require_self
 */
 
+@import 'style_guide/colors';
+
 * { box-sizing: border-box; }
 
 html, body { height: 100%; margin: 0; padding: 0; }
@@ -31,7 +33,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; color: #000000; }
 h1, h2, h3 {
   font-family: 'PF DIN Compressed Pro';
   text-transform: uppercase;
-  line-height: 3rem;
+  line-height: 4rem;
   a { text-decoration: none; }
   a.white { color: white; }
 }
@@ -164,9 +166,10 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
     }
   }
   &.primary {
-    background-color: #FA4542;
+    border-radius: 0;
+    background-color: $color1;
     color: #FFFFFF; font-weight: 600;
-    border-color: #BE0201;
+    border-color: darken($color1, 15%);
   }
   &.secondary {
     background-color: #EEEEEE;
@@ -195,10 +198,14 @@ a:link.button, a:visited.button, .button, button, input[type=submit], input[type
 }
 
 #notice {
-  background-color: #EEEEEE;
+  background-color: #333333;
+  border-bottom: #DDDDDD;
   line-height: 2rem;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
   margin: 0;
+  text-align: center;
+  color: $color7;
+  font-weight: 100;
 }
 #notice:empty { display: none; }
 
@@ -260,4 +267,14 @@ svg {
     cursor: default;
   }
   * { transition: all 0.25s; }
+}
+
+header {
+  background-color: #1A1A1A;
+  border-bottom: solid #111111 5px;
+  height: 50px;
+  line-height: 3rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  &, a { color: #FFFFFF; text-decoration: none; }
 }

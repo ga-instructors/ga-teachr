@@ -37,6 +37,7 @@ gem 'pundit'
 gem 'omniauth-github'
 gem "octokit", "~> 4.0"
 gem 'redcarpet'
+gem 'csv_shaper'
 gem 'pygments.rb'
 gem 'deep_cloneable'
 gem 'database_cleaner'
@@ -50,8 +51,8 @@ source 'https://rails-assets.org' do
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
