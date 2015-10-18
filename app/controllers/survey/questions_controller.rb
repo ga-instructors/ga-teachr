@@ -13,7 +13,7 @@ class Survey::QuestionsController < ApplicationController
   def show
     @next_question = @questionnaire.questions.where('ordinal > ?', @survey_question.ordinal).first
     @previous_question = @questionnaire.questions.where('ordinal < ?', @survey_question.ordinal).last
-    @answers = @survey_question.answers.select("survey_answers.*, survey_evaluations.value").joins(:evaluations).order('survey_evaluations.value ASC')
+    @answers = @survey_question.answers.select("survey_answers.*, survey_evaluations.value").joins(:evaluations).order('survey_evaluations.value ASC').where('survey_evaluations.value IS NOT NULL')
   end
 
   # GET /survey/questions/new

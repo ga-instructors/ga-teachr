@@ -10,7 +10,7 @@
 <body id="<%= controller_name %>_<%= action_name %>" class="<%= controller_name %>">
 
 	<header>
-		<%= link_to authentication_path(current_auth) do %>
+		<%= link_to current_auth ? authentication_path(current_auth) : root_path do %>
 			<%= image_tag 'ga-brand.png' %>
 			<h3 style="display: inline-block; color: #FFFFFF; line-height: 1em;">&nbsp;GENERAL ASSEMBLY</h3>
 		<% end %>

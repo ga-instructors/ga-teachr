@@ -7,11 +7,12 @@
     <div style="float: right;"><%= link_to 'Edit Survey', edit_survey_questionnaire_path(@survey_questionnaire), class: 'button' %></div>
   <% end %>
   <h2><%= @survey_questionnaire.ordinal %>. <%= @survey_questionnaire.title %></h2>
-
   <hr />
-  <div style="padding: 2%;" class="markdown">
+  <div style="padding: 2%; min-height: 10em;" class="markdown">
     <%= @survey_questionnaire.introduction_html %>
   </div>
+</div>
+<div class="medium container">
   <hr />
 
   <div style="text-align: center;">

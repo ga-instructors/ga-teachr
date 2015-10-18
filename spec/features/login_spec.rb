@@ -1,6 +1,4 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
+require 'support/features'
 
 RSpec.describe 'Login Feature', type: :feature do
 

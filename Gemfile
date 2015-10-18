@@ -56,6 +56,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'poltergeist'
   gem 'ffaker'
   gem 'better_errors'

@@ -34,7 +34,7 @@ class AuthenticationsController < ApplicationController
       if @authentication.save
         session[:tk] = @authentication.token
         session[:tz] = @authentication.timezone.name
-        format.html { redirect_to authentication_url(@authentication), notice: 'Authentication was successfully created.' }
+        format.html { redirect_to authentication_url(@authentication), notice: 'Welcome Back!' }
         format.json { render :show, status: :created, location: @authentication }
       else
         format.html { render :new }
