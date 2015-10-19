@@ -82,4 +82,4 @@ production:
   <<: *default
   database: ga-teachr_production
   username: ga-teachr
-  password: <%= ENV['GA-TEACHR_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>

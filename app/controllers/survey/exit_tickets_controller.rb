@@ -32,7 +32,7 @@ class Survey::ExitTicketsController < Survey::QuestionnairesController
 
     respond_to do |format|
       if @survey_exit_ticket.save
-        format.html { redirect_to @survey_exit_ticket, notice: 'ExitTicket was successfully created.' }
+        format.html { redirect_to [:new, @survey_exit_ticket, :question], notice: 'Exit Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @survey_exit_ticket }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class Survey::ExitTicketsController < Survey::QuestionnairesController
   def update
     respond_to do |format|
       if @survey_exit_ticket.update(survey_exit_ticket_params)
-        format.html { redirect_to @survey_exit_ticket, notice: 'ExitTicket was successfully updated.' }
+        format.html { redirect_to @survey_exit_ticket, notice: 'Exit Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_exit_ticket }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class Survey::ExitTicketsController < Survey::QuestionnairesController
   def destroy
     @survey_exit_ticket.destroy
     respond_to do |format|
-      format.html { redirect_to survey_exit_tickets_url, notice: 'ExitTicket was successfully destroyed.' }
+      format.html { redirect_to survey_exit_tickets_url, notice: 'Exit Ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,7 +72,7 @@ class Survey::ExitTicketsController < Survey::QuestionnairesController
         @cohort = Cohort.find(params[:cohort_id])
       end
     end
-  
+
     def set_survey_exit_ticket
       @survey_exit_ticket = @survey_questionnaire = Survey::ExitTicket.find(params[:id])
       authorize @survey_exit_ticket

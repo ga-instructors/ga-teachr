@@ -9,11 +9,15 @@
 	<h2>Exit Tickets</h2>
 	<hr />
 
-	<ol style="list-style-type: upper-roman;">
-		<% @survey_exit_tickets.each do |quiz| %>
-			<li><%= link_to quiz.title, quiz %></li>
+	<table>
+		<% @survey_exit_tickets.each do |exit_ticket| %>
+			<tr>
+				<td><%= link_to exit_ticket.title, exit_ticket %></td>
+				<td><%= exit_ticket.created_at.to_date.to_s(:long) %></td>
+				<td><%= exit_ticket.responses.joins(:answers => :evaluations).average('survey_evaluations.value') %></td>
+			</tr>
 		<% end %>
-	</ol>
+	</table>
 
   <%= link_to 'New Exit Ticket', new_cohort_exit_ticket_path, class: 'button' %>
   <%= link_to 'Finished', current_user.cohort %>

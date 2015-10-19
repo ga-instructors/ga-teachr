@@ -1,8 +1,11 @@
-require 'rails_helper'
-require 'capybara/rails'
-require 'capybara/rspec'
+require 'support/features'
 
-RSpec.describe 'Login Feature', type: :feature do
+RSpec.describe 'Style Guide', type: :feature, js: true do
+  include FeatureSpec::Screenshots
 
+  it 'should not change unexpectedly' do
+    visit '/style-guide'
+    expect(page).to take_screenshot_of('style-guide')
+  end
 
 end

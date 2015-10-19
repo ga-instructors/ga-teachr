@@ -1,7 +1,6 @@
 module FeatureSpec::Screenshots
-  extend ActiveSupport::Concern
   extend RSpec::Matchers::DSL
-  
+
   def tracked_screenshots
     @@tracked_screenshots ||= begin
                             Hash[`git ls-files -s spec/features/screenshots`.split("\n").map do |line|
@@ -27,7 +26,7 @@ module FeatureSpec::Screenshots
 
         page.save_screenshot path
         print ANSI.up(19) + ANSI.right(accum) if accum > 0
-        system("bin/imgcat #{path}")
+        puts("\x1b]1337;File=inline=1;height=18:#{`base64 #{path}`}\a")
         print ANSI.right(accum) if accum > 0
         puts ANSI.bold { name.center(term_width) }
 

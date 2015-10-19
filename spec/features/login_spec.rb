@@ -6,9 +6,10 @@ RSpec.describe 'Login Feature', type: :feature do
   let(:invalid_password) { 'badpassword' }
 
   let(:user) do
-    student = Student.create!(first_name: 'Jaden', email: 'student@gmail.com', user_attributes: { password: valid_password })
-    user = student.user
     campus = Campus.create(name: 'New York', timezone: 'Eastern Time (US & Canada)')
+    cohort = Cohort.create(campus: campus)
+    student = Student.create!(first_name: 'Jaden', email: 'student@gmail.com', cohort: cohort, user_attributes: { password: valid_password })
+    user = student.user
     employee = Employee.create!(user: user, campus: campus, first_name: 'Jaden', title: 'Instructor', email: 'employee@generalassemb.ly')
     user
   end
