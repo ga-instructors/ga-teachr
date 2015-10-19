@@ -1,3 +1,18 @@
-// Place all the styles related to the survey/questionnaires controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'style_guide/colors';
+
+.survey_quizzes {
+  list-style-type: upper-roman;
+  padding: 0;
+}
+.survey_quiz {
+  display: block;
+  border: solid $color2 1px;
+  display: inline-block;
+  width: 32%;
+  height: 200px;
+  text-align: center;
+  svg {
+    width: 100%;
+    height: 120px;
+  }
+}

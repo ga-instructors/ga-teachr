@@ -1,0 +1,20 @@
+<%= render @cohort %>
+<p id="notice"><%= notice %></p>
+
+<div class="medium container">
+  <svg width="72" height="72" viewbox="-4 -4 16 16" style="float: right; margin: 0.5rem;">
+    <circle cx=4 cy=4 r=8 fill=black />
+		<path d="M0 0v7h8v-1h-7v-6h-1zm5 0v5h2v-5h-2zm-3 2v3h2v-3h-2z" fill="#FFFFFF" />
+  </svg>
+	<h2>Exit Tickets</h2>
+	<hr />
+
+	<ol style="list-style-type: upper-roman;">
+		<% @survey_exit_tickets.each do |quiz| %>
+			<li><%= link_to quiz.title, quiz %></li>
+		<% end %>
+	</ol>
+
+  <%= link_to 'New Exit Ticket', new_cohort_exit_ticket_path, class: 'button' %>
+  <%= link_to 'Finished', current_user.cohort %>
+</div>

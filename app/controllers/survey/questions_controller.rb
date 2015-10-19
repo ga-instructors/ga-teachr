@@ -18,14 +18,14 @@ class Survey::QuestionsController < ApplicationController
 
   # GET /survey/questions/new
   def new
-    @survey_question = Survey::Question.new
-    @survey_question.options.build
+    @survey_question = @questionnaire.questions.new
+    @survey_question.build_initial_options
     authorize @survey_question
   end
 
   # GET /survey/questions/1/edit
   def edit
-    @survey_question.options.build
+    @survey_question.build_initial_options
   end
 
   # POST /survey/questions
@@ -36,7 +36,7 @@ class Survey::QuestionsController < ApplicationController
 
     respond_to do |format|
       if @survey_question.save
-        format.html { redirect_to @survey_question, notice: 'Question was successfully created.' }
+        format.html { redirect_to [:new, @survey_question.questionnaire, :question], notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @survey_question }
       else
         format.html { render :new }
@@ -73,6 +73,8 @@ class Survey::QuestionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
       @questionnaire = Survey::Questionnaire.find(params[:questionnaire_id]) if params[:questionnaire_id]
+      @questionnaire ||= Survey::Quiz.find(params[:quiz_id]) if params[:quiz_id]
+      @questionnaire ||= Survey::ExitTicket.find(params[:exit_ticket_id]) if params[:exit_ticket_id]
     end
 
     def set_survey_question

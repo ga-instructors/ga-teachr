@@ -1,0 +1,11 @@
+<div class="large container">
+	<h2>Editting Quiz for <%= @survey_questionnaire.cohort.name %></h2>
+
+  <%= form_for(@survey_questionnaire) do |form| %>
+    <%= render form %>
+    <div class="actions">
+      <%= form.submit 'Save & Continue'%>
+      <%= link_to 'Cancel', cohort_quizzes_path(@survey_questionnaire.cohort) %>
+    </div>
+  <% end %>
+</div>

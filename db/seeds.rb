@@ -15,7 +15,7 @@ nycampus = Campus.create!({
 })
 
 wdi = Course.create!(name: 'Web Development Immersive', abbrev: 'WDI')
-pmi = Course.create!(name: 'Project Management Immersive', abbrev: 'PMI')
+pmi = Course.create!(name: 'Product Management Immersive', abbrev: 'PMI')
 uxdi = Course.create!(name: 'User Experience Design Immersive', abbrev: 'UXDI')
 
 legacy_map = {}
@@ -38,8 +38,8 @@ db.exec_params("SELECT * FROM groups").each do |group|
   })] = group["id"]
 end
 
+# Populates the Cohort's team members (functions)
 Cohort.all.each do |cohort|
-
   members = db.exec_params("SELECT * FROM group_members LEFT JOIN users ON users.id = group_members.user_id WHERE group_id = $1", [legacy_map[cohort]])
   members.each do |member|
 
@@ -73,13 +73,14 @@ Cohort.all.each do |cohort|
     end
 
   end
-
 end
+
+# Populates the Cohort's Quizzes
 
 Cohort.all.each do |cohort|
   quizzes = db.exec_params("SELECT * FROM quizzes_quizzes WHERE group_id = $1", [legacy_map[cohort]])
   quizzes.each do |quiz|
-    survey = cohort.surveys.create!({
+    survey = cohort.quizzes.create!({
       title: quiz["name"],
       introduction: quiz["introduction"],
       ordinal: quiz["ordinal"]

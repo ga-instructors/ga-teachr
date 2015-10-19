@@ -6,7 +6,7 @@
     <%= render form %>
     <div class="actions">
       <%= form.submit %>
-      <%= link_to 'Cancel', survey_questionnaire_questions_path %>
+      <%= link_to 'Cancel', [@questionnaire, :questions] %>
     </div>
 
   <% end %>

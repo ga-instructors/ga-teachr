@@ -1,0 +1,33 @@
+<%= render @cohort %>
+<p id="notice"><%= notice %></p>
+
+<div class="large container">
+  <svg width="72" height="72" viewbox="-4 -4 16 16" style="float: right; margin: 0.5rem;">
+    <circle cx=4 cy=4 r=8 fill=black />
+		<path d="M0 0v7h8v-1h-7v-6h-1zm5 0v5h2v-5h-2zm-3 2v3h2v-3h-2z" fill="#FFFFFF" />
+  </svg>
+	<h2>Quizzes</h2>
+	<hr/>
+
+	<ol class="survey_quizzes">
+		<% @survey_quizzes.each do |quiz| %>
+			<li class="survey_quiz">
+				<%= link_to quiz do %>
+					<svg>
+						<% 20.times do |i| %>
+							<rect x="<%= i * 21 + 5 %>" y="<%= i + 15 %>" width="20" height="<%= 100 - i %>" fill="#FF0000" />
+						<% end %>
+					</svg>
+					<h4 style="padding: 0 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= quiz.title %></h4>
+				<% end %>
+			</li>
+		<% end %>
+	</ol>
+
+	<div style="text-align: center;">
+		<hr />
+		<%= link_to 'New Quiz', new_cohort_quiz_path(@cohort), class: 'primary button' %>
+		<%= link_to 'Finished', current_user.cohort %>
+		<br /><br />
+	</div>
+</div>

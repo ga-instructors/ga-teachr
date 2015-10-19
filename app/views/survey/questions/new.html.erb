@@ -1,11 +1,13 @@
+<p id="notice"><%= notice %></p>
+
 <div class="large container">
-  <h1>New Survey Question</h1>
+  <h2>New Question</h2>
 
   <%= form_for(@survey_question) do |form| %>
     <%= render form %>
     <div class="actions" style="text-align: center;">
       <%= form.submit class: 'large primary' %>
-      <%= link_to 'Cancel', survey_questionnaire_questions_path %>
+      <%= link_to 'Finished', url_for(action: :index) %>
     </div>
     <br />
   <% end %>

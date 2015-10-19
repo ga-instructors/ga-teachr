@@ -1,0 +1,30 @@
+
+<p id="notice"><%= notice %></p>
+
+<%= render 'cohorts/cohort', cohort: @survey_exit_ticket.cohort %>
+
+<div class="large container" style="margin-top:1rem;">
+  <% if policy(@survey_exit_ticket).update? %>
+    <div style="float: right;"><%= link_to 'Edit Survey', edit_cohort_exit_ticket_path(@survey_exit_ticket.cohort_id, @survey_exit_ticket), class: 'button' %></div>
+  <% end %>
+  <h2><%= @survey_exit_ticket.ordinal %>. <%= @survey_exit_ticket.title %></h2>
+  <hr />
+  <div style="padding: 2%; min-height: 10em;" class="markdown">
+    <%= @survey_exit_ticket.introduction_html %>
+  </div>
+</div>
+<div class="medium container">
+  <hr />
+
+  <div style="text-align: center;">
+    <% if policy(@survey_response).create? %>
+      <%= form_for @survey_response do |f| %>
+        <%= f.hidden_field :survey_questionnaire_id %>
+				<%= f.submit 'Start', class: 'big primary button', onclick: 'this.requestFullscreen()' %>
+      <% end %>
+    <% elsif policy(@survey_exit_ticket).update? %>
+      <%= link_to "Start", survey_exit_ticket_questions_path(@survey_exit_ticket), class: 'big primary button' %>
+    <% end %>
+    <br /><br />
+  </div>
+</div>

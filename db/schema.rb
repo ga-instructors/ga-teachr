@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20151012053014) do
   add_index "survey_question_options", ["survey_question_id"], name: "index_survey_question_options_on_survey_question_id", using: :btree
 
   create_table "survey_questionnaires", force: :cascade do |t|
+    t.string   "type"
     t.integer  "cohort_id"
     t.integer  "ordinal"
     t.string   "title"

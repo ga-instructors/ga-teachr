@@ -1,0 +1,2 @@
+module Survey::QuizzesHelper
+end

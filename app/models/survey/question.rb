@@ -19,11 +19,10 @@ class Survey::Question < ActiveRecord::Base
   has_many :topics, foreign_key: :survey_question_id
   accepts_nested_attributes_for :topics
   accepts_nested_attributes_for :options, reject_if: proc { |attrs| attrs["label"].blank? }, allow_destroy: true
-
   has_many :answers, foreign_key: :survey_question_id
 
   after_initialize :initialize_ordinal
-  # before_save :update_ordinals
+  before_save :update_ordinals
 
   def prompt_html
     return nil if self[:prompt].blank?
@@ -33,6 +32,25 @@ class Survey::Question < ActiveRecord::Base
       no_intra_emphasis: true
     }).render(self[:prompt]).html_safe
   end
+
+  def multiple_choice
+    new_record? || options.any?
+  end
+
+  def multple_choice=(multiple_choice)
+    options.each(&:mark_for_destruction) if multiple_choice == "0"
+  end
+
+  def build_initial_options
+    if new_record? && questionnaire.is_a?(Survey::ExitTicket)
+      (1..10).each do |value|
+        options.build(label: value, value: value)
+      end
+    end
+    options.build
+  end
+
+  private
 
   def initialize_ordinal
     self.ordinal ||= questionnaire ? (questionnaire.questions.maximum(:ordinal) || 0) + 1 : nil

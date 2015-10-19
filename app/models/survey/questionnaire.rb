@@ -13,11 +13,14 @@ class Survey::Questionnaire < ActiveRecord::Base
   has_many :responses, foreign_key: :survey_questionnaire_id
   has_many :evaluations, foreign_key: :survey_questionnaire_id
 
+  validates :ordinal, :title, presence: true
+
   def initialize_ordinal
-    self.ordinal ||= cohort ? (cohort.surveys.maximum(:ordinal) || 0) + 1 : nil
+    self.ordinal ||= cohort ? (self.class.where(cohort: cohort).maximum(:ordinal) || 0) + 1 : nil
   end
 
   def introduction_html
+    return if self[:introduction].nil?
     Redcarpet::Markdown.new(MarkdownPygments, {
       fenced_code_blocks: true,
       tables: true,
@@ -26,7 +29,7 @@ class Survey::Questionnaire < ActiveRecord::Base
   end
 
   def update_ordinals
-    cohort.surveys.where('ordinal >= ? AND id != ?', ordinal, id).order(:ordinal).each_with_index do |survey, i|
+    self.class.where(cohort: cohort).where('ordinal >= ? AND id != ?', ordinal, id).order(:ordinal).each_with_index do |survey, i|
       next_ordinal = i + ordinal + 1
       break if survey.ordinal > next_ordinal
       survey.update_column('ordinal', next_ordinal)

@@ -35,8 +35,8 @@
 <% end %>
 <div class="field">
   <label class="button">
-    <%= check_box_tag :multiple_choice, "1", form.object.new_record? || form.object.options.any? %>
-    <%= label_tag :multiple_choice, 'Multiple Choice' %>
+    <%= form.check_box :multiple_choice %>
+    <%= form.label :multiple_choice, 'Multiple Choice' %>
   </label>
   <label class="button">
     <%= form.check_box :open_ended %>
@@ -45,12 +45,13 @@
 </div>
 <div class="tab-content">
   <div class="options field">
-    <ul class="question__options" style="margin-top: 0; margin-bottom: 0; list-style-type: circle;">
+		<ul class="question__options" style="margin-top: 0; margin-bottom: 0; list-style-type: circle;">
+			<% max = form.object.options.map(&:value).max.round(-1) %>
 			<%= form.fields_for :options do |f| %>
 				<li class="question__option">
 					<%= f.hidden_field :_destroy, class: 'question__option__destroy' %>
-          <%= f.text_field :label, style: 'width: 66%', class: 'question__option_label' %>
-          <%= f.range_field :value, min: 0, max: 1, step: 0.25, style: 'width: 32%; vertical-align: -70%;' %>
+          <%= f.text_field :label, style: 'width: 66%', class: 'question__option_label', placeholder: 'New Option' %>
+					<%= f.range_field :value, min: 0, max: max || 1, step: max > 1 ? 1 : 0.25, style: 'width: 32%; vertical-align: -70%;' %>
           <output for="<%= f.object_name %>[value]">&mdash;</output>
         </li>
       <% end %>

@@ -1,11 +1,11 @@
 <div class="large container">
-  <h1>Survey <%= @survey_questionnaire.cohort.name %></h1>
+  <h2>Exit Ticket for <%= @survey_questionnaire.cohort.name %></h2>
 
   <%= form_for(@survey_questionnaire) do |form| %>
     <%= render form %>
     <div class="actions">
       <%= form.submit 'Continue' %>
-      <%= link_to 'Cancel', survey_questionnaires_path %>
+      <%= link_to 'Cancel', cohort_exit_tickets_path(@cohort) %>
     </div>
   <% end %>
 

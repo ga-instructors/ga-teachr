@@ -20,13 +20,13 @@
         <textarea disabled></textarea>
       <% end %>
       <div style="text-align: right;">
-        <%= link_to 'Remove Question', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: #CCCCCC; text-decoration: none;' %>
-        &nbsp;&nbsp;<%= link_to 'Update Prompt', edit_survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'button' %>
-        <%= link_to 'Responses', survey_questionnaire_question_path(params[:questionnaire_id], survey_question), class: 'secondary button' %>
+        <%= link_to 'Remove Question', [@questionnaire, :question, id: survey_question], method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: #CCCCCC; text-decoration: none;' %>
+        &nbsp;&nbsp;<%= link_to 'Update Prompt', [:edit, @questionnaire, :question, id: survey_question], class: 'button' %>
+        <%= link_to 'Responses', [@questionnaire, :question, id: survey_question], class: 'secondary button' %>
       </div>
       <hr />
   <% end %>
 
-  <%= link_to 'New Question', new_survey_questionnaire_question_path, class: 'button' %>
+  <%= link_to 'New Question', url_for(action: :new), class: 'button' %>
   <%= link_to 'Cancel', @questionnaire.cohort %>
 </div>

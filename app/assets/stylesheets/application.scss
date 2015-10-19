@@ -101,6 +101,11 @@ progress { width: 100%; }
     margin-top: 1rem;
 }
 
+#error_explanation {
+  border: solid $color1 2px;
+  a[href] { color: $color1; text-decoration: none; }
+}
+
 .field {
   margin-top: 1rem;
   overflow: hidden;
@@ -123,8 +128,8 @@ progress { width: 100%; }
     padding: 0pt 4pt;
   }
   .field_with_errors {
-    background-color: yellow;
-    display: inline-block;
+    color: $color1;
+    display: inline;
   }
   .field_with_errors:first-child {
     margin-left: -4pt;

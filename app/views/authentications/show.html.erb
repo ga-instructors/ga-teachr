@@ -12,12 +12,12 @@
 		<br />
 		<% if current_user.cohort.surveys.ready.any? %>
 			<h3><%= silly_pun_generator %></h3>
-			<ul style="list-style-type: none; padding: 0">
+			<ul style="list-style-type: none; padding: 0; display: inline-block; text-align: left;">
 				<% current_user.cohort.surveys.ready.each_with_index do |survey, i| %>
 					<% if i == 0 %>
 						<li><%= link_to survey.title, survey, class: 'button big primary' %></li>
 					<% else %>
-						<li>.then&nbsp;->&nbsp;<%= link_to survey.title, survey, class: '' %></li>
+						<li>.then&nbsp;=&gt;&nbsp;<%= link_to survey.title, survey, class: '' %></li>
 					<% end %>
 				<% end %>
 			</ul>

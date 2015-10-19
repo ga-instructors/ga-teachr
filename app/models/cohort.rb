@@ -18,6 +18,8 @@ class Cohort < ActiveRecord::Base
   has_many :groupings, class_name: Groups::Grouping
 
   has_many :surveys, class_name: Survey::Questionnaire
+  has_many :quizzes, class_name: Survey::Quiz
+  has_many :exit_tickets, class_name: Survey::ExitTicket
 
   attr_accessor :banner
   after_save if: -> { @banner } do
