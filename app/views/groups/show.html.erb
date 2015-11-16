@@ -2,7 +2,7 @@
 <%= render @cohort %>
 <div class="large container">
 
-	<h1><%= @groups_grouping.name %></h1>
+	<h2><%= @groups_grouping.name %></h2>
 
 	<% @groups_grouping.groups.each do |group| %>
 
@@ -13,9 +13,8 @@
 			<div class="group" style="width: 20%; float: left;">
 				<h3><%= group.name || "Group #{i+1}" %></h3>
 				<ul style="list-style-type: none; padding: 0;">
-					<% group.students do |assign| %>
+					<% group.students.each do |student| %>
 						<li>
-							<%= student %>
 							<%= render student %>
 						</li>
 					<% end %>
@@ -23,7 +22,6 @@
 			</div>
 		<% end %>
 	</div>
-
 
 	<%= link_to 'Edit', edit_cohort_group_path(@cohort, @groups_grouping) %>
 	<%= link_to 'Finished', cohort_groups_path %>

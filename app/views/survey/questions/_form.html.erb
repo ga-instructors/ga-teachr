@@ -47,6 +47,7 @@
   <div class="options field">
 		<ul class="question__options" style="margin-top: 0; margin-bottom: 0; list-style-type: circle;">
 			<% max = form.object.options.map(&:value).max.round(-1) %>
+			<% max = 1 if max < 1 %>
 			<%= form.fields_for :options do |f| %>
 				<li class="question__option">
 					<%= f.hidden_field :_destroy, class: 'question__option__destroy' %>

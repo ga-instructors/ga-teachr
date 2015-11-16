@@ -78,6 +78,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def groups_grouping_params
-      params.require(:groups_grouping).permit(:name, :groups_attributes => {:id => "", :name => "", assignments_attributes: [:id, :groups_group_id, :student_id, :_destroy]})
+      params.require(:groups_grouping).permit(:name, :groups_attributes => [:id, :name, assignments_attributes: [:id, :groups_group_id, :student_id, :_destroy]])
     end
 end
