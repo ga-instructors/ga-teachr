@@ -9,7 +9,7 @@ class Authentication < ActiveRecord::Base
   scope :github, -> { where(type: 'Authentication::Github') }
 
   def self.new(attributes={})
-    if self ==  Authentication && attributes[:provider] == 'github'
+    if self == Authentication && attributes[:provider] == 'github'
       Authentication::Github.new(attributes)
     else super(attributes)
     end

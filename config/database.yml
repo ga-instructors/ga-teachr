@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
+  host: localhost
   database: ga-teachr_production
-  username: ga-teachr
-  password: <%= ENV['GA-TEACHR_DATABASE_PASSWORD'] %>
+  username: ga_teachr
+  password: <%= ENV['GA_TEACHR_DATABASE_PASSWORD'] %>
+  pool: 5

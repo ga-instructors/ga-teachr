@@ -1,6 +1,6 @@
 require 'pg'
 
-db = PG.connect(dbname: 'ga-quiz_development')
+db = PG.connect(host: 'localhost', dbname: 'ga-quiz_development', user: 'ga_teachr', password: ENV['GA_TEACHR_DATABASE_PASSWORD'])
 
 nycampus = Campus.create!({
   name: 'New York City',
