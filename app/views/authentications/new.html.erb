@@ -4,11 +4,17 @@
 
 	<div style="text-align:center; margin: 2rem;"><%= link_to 'Login with Github', '/auth/github', class: 'big primary button' %></div>
 
-	<%= form_for(@authentication) do |form| %>
-		<%= render form %>
-		<div class="actions" style="text-align:center">
-			<%= form.submit 'Login with Email and Password', class: 'button secondary' %>
-		</div>
+	<% if @authentication.provider == "github" %>
+		<p id="notice"><%= @authentication.errors.full_messages.to_sentence %></p>
+	<% else %>
+
+		<%= form_for(@authentication) do |form| %>
+			<%= render form %>
+			<div class="actions" style="text-align:center">
+				<%= form.submit 'Login with Email and Password', class: 'button secondary' %>
+			</div>
+		<% end %>
+
 	<% end %>
 
 </div>
