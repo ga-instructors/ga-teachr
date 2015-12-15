@@ -1,18 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <div class="large container">
+	<nav style="float:right; width:250pt;">
+		<ul>
+			<li>
+				<%= link_to survey_questionnaire_questions_path(@survey_question.questionnaire) do %>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
+					  <path d="M.5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6z"
+					  />
+					</svg>
+					<div>View All</div>
+				<% end %>
+			</li>
+			<% if @previous_question %>
+				<li>
+					<%= link_to survey_questionnaire_question_path(@questionnaire, @previous_question), class: 'prev-page' do %>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
+						  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1v2h3v2h-3v2l-3-3 3-3z" />
+						</svg>
+						<div>Previous</div>
+					<% end %>
+				</li>
+			<% end %>
+			<% if @next_question %>
+				<li>
+					<%= link_to survey_questionnaire_question_path(@questionnaire, @next_question), class: 'next-page' do %>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
+						  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1l3 3-3 3v-2h-3v-2h3v-2z" />
+						</svg>
+						<div>Next</div>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</nav>
 	<h2><%= @questionnaire.ordinal %>. <%= @questionnaire.title %></h2>
-	<div style="float:right;">
-		<%= link_to 'View All', survey_questionnaire_questions_path(@survey_question.questionnaire) %>
-		<% if @previous_question %>
-			&nbsp;|&nbsp;
-			<%= link_to "Previous", survey_questionnaire_question_path(@questionnaire, @previous_question) %>
-		<% end %>
-		<% if @next_question %>
-			&nbsp;|&nbsp;
-			<%= link_to "Next", survey_questionnaire_question_path(@questionnaire, @next_question) %>
-		<% end %>
-	</div>
 
 	<h4>Q<%= @survey_question.ordinal %>. <%= @survey_question.topics.map(&:name).to_sentence %></h4>
 

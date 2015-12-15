@@ -1,4 +1,10 @@
 jQuery ->
+  $(document).on 'keyup', (keyup) ->
+    if keyup.which == 37 && prev_link = $('a[href].prev-page').first()
+      Turbolinks.visit(prev_link.focus().attr('href'))
+    else if keyup.which == 39 && next_link = $('a[href].next-page').first()
+      Turbolinks.visit(next_link.focus().attr('href'))
+
   updateForm = (slide) ->
     if $('#survey_question_open_ended:checked').length
       $('.open_end').slideDown(slide);

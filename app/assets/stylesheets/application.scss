@@ -55,7 +55,17 @@ h6 { color: #999999; }
    ------------------ */
 
 p { margin-top: 0; }
-a { color: #4078c0; }
+a {
+  color: #4078c0;
+  &:focus {
+    color: red;
+    outline: none;
+    svg * {
+      fill: red;
+    }
+  }
+}
+
 
 pre, code {
   background-color: #FAFAFA;
@@ -238,7 +248,7 @@ table {
 nav {
   display: table;
   margin: 2rem 0;
-  a { line-height: 0.9rem; text-decoration: none; color: #000000; }
+  a { text-decoration: none; color: #000000; }
   a:hover {
     color: red;
     text-decoration: underline;
