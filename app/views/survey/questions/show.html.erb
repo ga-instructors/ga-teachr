@@ -1,128 +1,130 @@
 <p id="notice"><%= notice %></p>
 
-<div class="large container">
-	<nav style="float:right; width:250pt;">
-		<ul>
-			<li>
-				<%= link_to survey_questionnaire_questions_path(@survey_question.questionnaire) do %>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
-					  <path d="M.5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6z"
-					  />
-					</svg>
-					<div>View All</div>
-				<% end %>
-			</li>
-			<% if @previous_question %>
+<%= cache [@questionnaire, @survey_question, :show] do %>
+	<div class="large container">
+		<nav style="float:right; width:250pt;">
+			<ul>
 				<li>
-					<%= link_to survey_questionnaire_question_path(@questionnaire, @previous_question), class: 'prev-page' do %>
+					<%= link_to survey_questionnaire_questions_path(@survey_question.questionnaire) do %>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
-						  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1v2h3v2h-3v2l-3-3 3-3z" />
+						  <path d="M.5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6zm-1.5 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm1.5 0v1h6v-1h-6z"
+						  />
 						</svg>
-						<div>Previous</div>
+						<div>View All</div>
 					<% end %>
 				</li>
-			<% end %>
-			<% if @next_question %>
-				<li>
-					<%= link_to survey_questionnaire_question_path(@questionnaire, @next_question), class: 'next-page' do %>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
-						  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1l3 3-3 3v-2h-3v-2h3v-2z" />
-						</svg>
-						<div>Next</div>
-					<% end %>
-				</li>
-			<% end %>
-		</ul>
-	</nav>
-	<h2><%= @questionnaire.ordinal %>. <%= @questionnaire.title %></h2>
-
-	<h4>Q<%= @survey_question.ordinal %>. <%= @survey_question.topics.map(&:name).to_sentence %></h4>
-
-	<hr style="clear: both;">
-
-	<%= @survey_question.prompt_html %>
-
-	<h5>Responses:</h5>
-	<hr>
-
-	<div style="overflow: hidden;">
-		<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>
-			<div style="float: left; width: 50%;">
-				<h4><%= option.label %></h4>
-				<% if option.answers.any? %>
-					<% option.answers.each do |answer| %>
-						<%= render 'students/student', student: answer.response.student %>
-					<% end %>
-				<% else %>
-					<em>No Answers</em>
+				<% if @previous_question %>
+					<li>
+						<%= link_to survey_questionnaire_question_path(@questionnaire, @previous_question), class: 'prev-page' do %>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
+							  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1v2h3v2h-3v2l-3-3 3-3z" />
+							</svg>
+							<div>Previous</div>
+						<% end %>
+					</li>
 				<% end %>
-			</div>
+				<% if @next_question %>
+					<li>
+						<%= link_to survey_questionnaire_question_path(@questionnaire, @next_question), class: 'next-page' do %>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
+							  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1l3 3-3 3v-2h-3v-2h3v-2z" />
+							</svg>
+							<div>Next</div>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+		</nav>
+		<h2><%= @questionnaire.ordinal %>. <%= @questionnaire.title %></h2>
+
+		<h4>Q<%= @survey_question.ordinal %>. <%= @survey_question.topics.map(&:name).to_sentence %></h4>
+
+		<hr style="clear: both;">
+
+		<%= @survey_question.prompt_html %>
+
+		<h5>Responses:</h5>
+		<hr>
+
+		<div style="overflow: hidden;">
+			<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>
+				<div style="float: left; width: 50%;">
+					<h4><%= option.label %></h4>
+					<% if option.answers.any? %>
+						<% option.answers.each do |answer| %>
+							<%= render 'students/student', student: answer.response.student %>
+						<% end %>
+					<% else %>
+						<em>No Answers</em>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+
+		<% @answers.where("survey_question_option_id IS NULL").each do |answer| %>
+			<%= content_tag_for :div, answer, style: 'overflow: hidden' do %>
+				<div style="width: 40%; float: right; margin-bottom: 1rem;">
+					<%= content_tag_for :div, answer.evaluations.last, style: 'position: relative; min-height: 110px;' do |evaluation| %>
+						<div style="width: 100px; right: 20px; top: 0; position: absolute;">
+							<%= react_component 'RadialProgress', progress: evaluation.value.try(:*, 100) %>
+						</div>
+						<div style="float: right; margin-top: 50px; width: 120px; height: 3em;">&nbsp;</div>
+						<br /><br />
+						<% if evaluation.comment? %>
+							<div class="markdown">
+								<%= evaluation.comment_html %>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+				<div style="margin-right: 42%;">
+					<br />
+					<strong><%= render 'students/student', container: "span", size: 32, student: answer.response.student %></strong>
+					<% if answer.question_option %>
+						<ul style="list-style-type: circle; margin-top: 0;">
+							<li><strong><%= answer.question_option.label %></strong></li>
+						</ul>
+					<% end %>
+					<div class="markdown" style="border-left: solid #EEEEEE 0.25rem; padding-left: 0.75rem;"><%= answer.answer_html %></div>
+				</div>
+			<% end %>
 		<% end %>
+
+		<hr />
+
 	</div>
 
-	<% @answers.where("survey_question_option_id IS NULL").each do |answer| %>
-		<%= content_tag_for :div, answer, style: 'overflow: hidden' do %>
-			<div style="width: 40%; float: right; margin-bottom: 1rem;">
-				<%= content_tag_for :div, answer.evaluations.last, style: 'position: relative; min-height: 110px;' do |evaluation| %>
-					<div style="width: 100px; right: 20px; top: 0; position: absolute;">
-						<%= react_component 'RadialProgress', progress: evaluation.value.try(:*, 100) %>
-					</div>
-					<div style="float: right; margin-top: 50px; width: 120px; height: 3em;">&nbsp;</div>
-					<br /><br />
-					<% if evaluation.comment? %>
-						<div class="markdown">
-							<%= evaluation.comment_html %>
-						</div>
+	<div class="medium container">
+		<h6 style="text-align: center">EXPORT</h6>
+		<nav id="export_panel" style="width: 100%">
+			<ul>
+				<li>
+					<%= link_to survey_questionnaire_question_path(@questionnaire, @survey_question, format: 'csv') do %>
+						<svg width="72" height="72" viewbox="-4 -4 16 16">
+							<circle cx=4 cy=4 r=8 fill=black />
+							<path d="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h6.5c.41 0 .75-.34.75-.75v-5.5c0-.41-.34-.75-.75-.75h-6.5zm.25 1h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1z" fill="#FFFFFF" />
+						</svg>
+						<div>Excel or CSV</div>
 					<% end %>
-				<% end %>
-			</div>
-			<div style="margin-right: 42%;">
-				<br />
-				<strong><%= render 'students/student', container: "span", size: 32, student: answer.response.student %></strong>
-				<% if answer.question_option %>
-					<ul style="list-style-type: circle; margin-top: 0;">
-						<li><strong><%= answer.question_option.label %></strong></li>
-					</ul>
-				<% end %>
-				<div class="markdown" style="border-left: solid #EEEEEE 0.25rem; padding-left: 0.75rem;"><%= answer.answer_html %></div>
-			</div>
-		<% end %>
-	<% end %>
-
-	<hr />
-
-</div>
-
-<div class="medium container">
-	<h6 style="text-align: center">EXPORT</h6>
-	<nav id="export_panel" style="width: 100%">
-		<ul>
-			<li>
-				<%= link_to survey_questionnaire_question_path(@questionnaire, @survey_question, format: 'csv') do %>
+				</li>
+				<li>
 					<svg width="72" height="72" viewbox="-4 -4 16 16">
 						<circle cx=4 cy=4 r=8 fill=black />
-						<path d="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h6.5c.41 0 .75-.34.75-.75v-5.5c0-.41-.34-.75-.75-.75h-6.5zm.25 1h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1zm-2 2h1v1h-1v-1zm2 0h4v1h-4v-1z" fill="#FFFFFF" />
+						<path d="M0 0v1h8v-1h-8zm4 2l-3 3h2v3h2v-3h2l-3-3z" fill="#FFFFFF" />
 					</svg>
-					<div>Excel or CSV</div>
-				<% end %>
-			</li>
-			<li>
-				<svg width="72" height="72" viewbox="-4 -4 16 16">
-					<circle cx=4 cy=4 r=8 fill=black />
-					<path d="M0 0v1h8v-1h-8zm4 2l-3 3h2v3h2v-3h2l-3-3z" fill="#FFFFFF" />
-				</svg>
-				<div>Google Sheets</div>
-			</li>
-			<li>
-				<%= link_to survey_questionnaire_question_path(@questionnaire, @survey_question, format: 'md') do %>
-					<svg width="72" height="72" viewbox="-4 -4 16 16">
-						<circle cx=4 cy=4 r=8 fill=black />
-						<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3zm-3 2h1v1h-1v-1zm0 2h1v1h-1v-1zm0 2h4v1h-4v-1z" fill="#FFFFFF" />
-					</svg>
-					<div>Markdown</div>
-				<% end %>
-			</li>
-		</ul>
-	</nav>
-	<br>
-</div>
+					<div>Google Sheets</div>
+				</li>
+				<li>
+					<%= link_to survey_questionnaire_question_path(@questionnaire, @survey_question, format: 'md') do %>
+						<svg width="72" height="72" viewbox="-4 -4 16 16">
+							<circle cx=4 cy=4 r=8 fill=black />
+							<path d="M0 0v8h7v-4h-4v-4h-3zm4 0v3h3l-3-3zm-3 2h1v1h-1v-1zm0 2h1v1h-1v-1zm0 2h4v1h-4v-1z" fill="#FFFFFF" />
+						</svg>
+						<div>Markdown</div>
+					<% end %>
+				</li>
+			</ul>
+		</nav>
+		<br>
+	</div>
+<% end %>

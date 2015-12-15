@@ -14,7 +14,7 @@ class Survey::Question < ActiveRecord::Base
 
   default_scope -> { order(:ordinal) }
 
-  belongs_to :questionnaire, foreign_key: :survey_questionnaire_id
+  belongs_to :questionnaire, foreign_key: :survey_questionnaire_id, touch: true
   has_many :options, foreign_key: :survey_question_id
   has_many :topics, foreign_key: :survey_question_id
   accepts_nested_attributes_for :topics
