@@ -46,6 +46,7 @@ gem 'figaro'
 gem 'react-rails'
 gem 'ansi' # for installfest-scripting
 gem 'mini_magick'
+gem 'redis-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-velocity'
