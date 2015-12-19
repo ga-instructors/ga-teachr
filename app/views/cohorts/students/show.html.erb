@@ -19,6 +19,27 @@
     </svg>
   </div>
 
+  <br />
+
+  <div class="assessments">
+    <% @student.survey_responses.joins(:questionnaire).order('survey_questionnaires.ordinal').each do |response| %>
+      <div style="overflow: hidden; float: left; width: 45%; margin-right: 5%;">
+        <div style="float: left; width: 75pt;">
+          <%= react_component 'RadialProgress', {
+              progress: (response.answers.joins(:evaluations).average(:value) || 0) * 100
+            }, :prerender => true %>
+        </div>
+        <h3 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 75pt; margin-left: 80pt;">
+          <%= response.questionnaire.ordinal %>.
+          <%= response.questionnaire.title %>
+        </h3>
+      </div>
+    <% end %>
+  </div>
+
+  <br style="clear: both;">
+  <hr>
+
   <% case @registration.status %>
   <% when 'dropped' %>
     <h3 style="color: white; text-align: center; background-color: #FA4542">Dropped</h3>
@@ -27,4 +48,7 @@
       <%= button_to "Drop Student", cohort_student_path(@cohort, @student), method: 'delete', class: 'button', data: { confirm: 'Are you sure you want to drop this student?' } %>
     </div>
   <% end %>
+
+  <br>
+
 </div>

@@ -15,8 +15,8 @@ class GroupsController < ApplicationController
 
   # GET /groups/groupings/new
   def new
-    @groups_grouping = @cohort.groupings.new(params[:group])
-    @groups_grouping.populate!
+    @groups_grouping = @cohort.groupings.new(params[:groups_grouping] ? groups_grouping_params : {})
+    @groups_grouping.populate! { by_quiz_performance.includes(:user) }
     authorize @groups_grouping
   end
 
@@ -78,6 +78,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def groups_grouping_params
-      params.require(:groups_grouping).permit(:name, :groups_attributes => [:id, :name, assignments_attributes: [:id, :groups_group_id, :student_id, :_destroy]])
+      params.require(:groups_grouping).permit(:name, :target_group_count, :target_group_size, :groups_attributes => [:id, :name, assignments_attributes: [:id, :groups_group_id, :student_id, :_destroy]])
     end
 end

@@ -8,9 +8,12 @@
       <h4>Q<%= survey_question.ordinal %>.</h4>
       <%= survey_question.prompt_html %>
       <% if survey_question.options.any? %>
-        <ul style="list-style-type: circle">
+        <ul style="list-style-type: none">
           <% survey_question.options.each do |option| %>
-            <li><%= option.label %></li>
+            <li>
+              <%= radio_button_tag :nothing, nil, nil, disabled: true %>
+              <%= label_tag :nothing, option.label_html %>
+            </li>
           <% end %>
           <% if survey_question.open_ended? %>
             <li>Other (Specify)</li>

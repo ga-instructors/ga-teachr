@@ -89,7 +89,11 @@ hr {
          FORMS
    ------------------ */
 
-input[type=text], input[type=password], input[type=email], input[type=number], textarea {
+select {
+  -webkit-appearance:none;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], textarea, select {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem;
@@ -105,7 +109,7 @@ input[type=text], input[type=password], input[type=email], input[type=number], t
 }
 
 textarea { min-height: 100pt; font-weight: 300; font-family: 'Roboto Mono', monospace; }
-select { font-family: inherit; font-size: 1rem; }
+
 progress { width: 100%; }
 
 .field:first-child {
@@ -125,7 +129,7 @@ progress { width: 100%; }
     display: inline-block;
     min-width: 120pt;
   }
-  label ~ input {
+  label ~ input, label ~ select {
     width: calc(100% - 130pt);
   }
   input[type=radio], input[type=checkbox] {

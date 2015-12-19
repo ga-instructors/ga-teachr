@@ -16,9 +16,12 @@
 </div>
 
 <div class="field">
-	<%= form.label :target_group_size %>
-	<%= form.number_field :target_group_size, style: 'width: 50%;' %>
-	<%= form.select :target_group_strategy, [["Distributed", "distributed"], ["Random", "random"], ["Similarity", "similar"],["Difference","different"]] %>
+	<%= form.label :target_group_count, 'Groups' %>
+	<%= form.number_field :target_group_count, style: 'width: 15%; margin-right: 5%' %>
+	<%= form.label :target_group_size, 'Group Size' %>
+	<%= form.number_field :target_group_size, style: 'width: 15%; margin-right: 15%' %>
+	<%= form.label :target_group_strategy, 'Strategy' %>
+	<%= form.select :target_group_strategy, [["Distributed", "distributed"], ["Random", "random"], ["Similarity", "similar"],["Difference","different"]], {}, style: 'width: 15%;' %>
 </div>
 <hr />
 

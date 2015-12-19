@@ -25,9 +25,10 @@ jQuery ->
     $(this).siblings().removeClass('hover active')
     $(this).prevAll().addClass('hover')
     $(this).addClass('active')
-  $(document).on 'drop', '#cohort_students', (event) ->
-    alert('hello')
-    console.log(event)
+    false
+  $(document).on 'drop', '#groups_ui li', (event) ->
+    groupCount = $(this).prevAll('li').length+1
+    Turbolinks.visit(document.location+'/groups/new?groups_grouping[target_group_count]='+groupCount)
 
   ###computes control points given knots K, this is the brain of the operation###
   computeControlPoints = (K) ->

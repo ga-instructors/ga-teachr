@@ -10,6 +10,11 @@ class Student < ActiveRecord::Base
   belongs_to :cohort
 
   has_many :survey_responses, class_name: 'Survey::Response'
+  scope :by_quiz_performance, -> {
+    eager_load(:survey_responses => [{:answers => :evaluations}, :questionnaire])
+    .where("survey_questionnaires.type = 'Survey::Quiz'")
+    .order('survey_evaluations.value')
+  }
 
   validates :cohort, presence: true
 

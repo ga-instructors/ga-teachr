@@ -1,8 +1,8 @@
 jQuery ->
   $(document).on 'keyup', (keyup) ->
-    if keyup.which == 37 && prev_link = $('a[href].prev-page').first()
+    if keyup.which == 37 && (prev_link = $('a[rel=prev]')).length
       Turbolinks.visit(prev_link.focus().attr('href'))
-    else if keyup.which == 39 && next_link = $('a[href].next-page').first()
+    else if keyup.which == 39 && (next_link = $('a[rel=next]')).length
       Turbolinks.visit(next_link.focus().attr('href'))
 
   updateForm = (slide) ->

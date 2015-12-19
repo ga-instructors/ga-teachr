@@ -3,4 +3,5 @@ $(function() {
   $('.student').removeClass('selected');
   $('#<%= dom_id(@student) %>').addClass('selected');
   $('#notice').slideUp();
+  history.replaceState({student: <%= @student.id %>}, "<%= @student.name %>", "#<%= @student.id %>")
 })
