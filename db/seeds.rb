@@ -1,7 +1,7 @@
 require 'pg'
 
 if Rails.env.production?
-  db = PG.connect(host: 'localhost', dbname: 'ga-quiz_development', user: 'ga_teachr', password: ENV['GA_TEACHR_DATABASE_PASSWORD'])
+  db = PG.connect(host: 'localhost', dbname: 'ga-quiz_production', user: 'ga_teachr', password: ENV['GA_TEACHR_DATABASE_PASSWORD'])
 else  
   db = PG.connect(dbname: 'ga-quiz_development')
 end
