@@ -1,28 +1,31 @@
 <p id="notice"><%= notice %></p>
-<%= render @cohort %>
-<div class="large container">
+<div id="group_fullscreen">
+	<%= render @cohort %>
 
-	<h2><%= @groups_grouping.name %></h2>
+		<h2 style="text-align: center; line-height: 8rem;"><%= @groups_grouping.name %></h2>
 
-	<% @groups_grouping.groups.each do |group| %>
+		<% @groups_grouping.groups.each do |group| %>
 
-	<% end %>
-
-	<div class="groups" style="overflow: auto;">
-		<% @groups_grouping.groups.each_with_index do |group, i| %>
-			<div class="group" style="width: 20%; float: left;">
-				<h3><%= group.name || "Group #{i+1}" %></h3>
-				<ul style="list-style-type: none; padding: 0;">
-					<% group.students.each do |student| %>
-						<li>
-							<%= render student %>
-						</li>
-					<% end %>
-				</ul>
-			</div>
 		<% end %>
-	</div>
 
-	<%= link_to 'Edit', edit_cohort_group_path(@cohort, @groups_grouping) %>
+		<div class="groups" style="overflow: auto;">
+			<% @groups_grouping.groups.each_with_index do |group, i| %>
+				<div class="group" style="width: 20%; float: left;">
+					<h3><%= group.name || "Group #{i+1}" %></h3>
+					<ul style="list-style-type: none; padding: 0;">
+						<% group.students.each do |student| %>
+							<li>
+								<%= render student %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="large container">
+	<%= link_to 'Full Screen', "#", onclick: "$('#group_fullscreen').fullScreen(true);", class: 'button' %>
+	<%= link_to 'Edit Group', edit_cohort_group_path(@cohort, @groups_grouping), class: 'button' %>
 	<%= link_to 'Finished', cohort_groups_path %>
 </div>

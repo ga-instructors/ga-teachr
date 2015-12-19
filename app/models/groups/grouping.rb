@@ -9,7 +9,7 @@ module Groups
     attr_accessor :target_group_strategy
 
     def name
-      self[:name] ||= "Groups for #{(created_at || DateTime.now).to_date}"
+      self[:name] ||= "Groups for #{(created_at || DateTime.now).to_date.to_s(:long_ordinal)}"
     end
 
     def target_group_size
