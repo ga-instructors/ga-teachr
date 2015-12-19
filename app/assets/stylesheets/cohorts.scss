@@ -33,7 +33,9 @@
   margin-bottom: -1px;
   &.hover {
     background-color: #EEEEEE;
-    label { color: #EEEEEE; }
+    label {
+      color: #EEEEEE;
+    }
   }
   &.active {
     background-color: #CCCCCC;
@@ -46,9 +48,10 @@
     font-size: 80px;
     text-align: center;
     > div {
-      line-height: 25px;
+      line-height: 26px;
       font-size: 20px;
-      background-color: rgba(255,255,255,0.33);
+      background-color: #EEEEEE;
+      color: #666666;
     }
   }
 }

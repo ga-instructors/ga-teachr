@@ -34,11 +34,16 @@
       <path d="
         <% points.each_with_index do |point, i| %>
           <% if i == 0 %>M<% else %>L<% end %>
-          <%= i * (233/(points.count-1)) + 5 %> <%= (1-point) * 100 %>
+          <%= i * (233/(points.count-1)) + 5 %> <%= ((1-point) * 100) + 5 %>
         <% end %>
-      " stroke-width="1" stroke="#CCCCCC" fill="none" />
+        L 239 <%= ((1-points.last) * 100) + 5 %>
+        L 239 104
+        L 1 104
+        L 1 <%= ((1-points[0]) * 100) + 5 %>
+        L 5 <%= ((1-points[0]) * 100) + 5 %>
+      " stroke-width="1" stroke="#CCCCCC" fill="#EEEEEE" />
       <% points.each_with_index do |point, i| %>
-        <circle cx=<%= i * (233/(points.count-1)) + 5 %> cy=<%= (1-point) * 100 %> r=2 fill="red" />
+        <circle cx=<%= i * (233/(points.count-1)) + 5 %> cy=<%= ((1-point) * 100) + 5 %> r=2 fill="red" />
       <% end %>
     </svg>
   </div>

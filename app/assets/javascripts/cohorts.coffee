@@ -31,7 +31,7 @@ jQuery ->
     false
   $(document).on 'drop', '#groups_ui li', (event) ->
     groupCount = $(this).prevAll('li').length+1
-    Turbolinks.visit(document.location.href.match(/(^[^#]*)/)+'/groups/new?groups_grouping[target_group_count]='+groupCount)
+    Turbolinks.visit(document.location.pathname+'/groups/new?groups_grouping[target_group_count]='+groupCount)
 
   ###computes control points given knots K, this is the brain of the operation###
   computeControlPoints = (K) ->
