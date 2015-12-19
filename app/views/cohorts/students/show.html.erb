@@ -1,15 +1,39 @@
 <div class="large container">
-  <%= image_tag gravatar_url(@student.email, 384), style: 'border: solid #EEEEEE 1px; float: right;', draggable: false %>
+  <style>
+    #student__cohort_avatar {
+      position: relative;
+      float: right;
+    }
+    #student__cohort_actions {
+      position: absolute;
+      left: 0; right: 0; bottom: 0.25rem;
+    }
+    #student__cohort_avatar #student__cohort_actions .button_to { display: none; }
+    #student__cohort_avatar:hover #student__cohort_actions .button_to { display: block; }
+  </style>
+  <div id="student__cohort_avatar">
+    <%= image_tag gravatar_url(@student.email, 384), style: 'border: solid #EEEEEE 1px;', draggable: false %>
+    <div id="student__cohort_actions">
+      <% case @registration.status %>
+      <% when 'dropped' %>
+        <h3 style="color: white; text-align: center; background-color: rgba(250, 69, 66, 0.9)">Dropped</h3>
+      <% else %>
+        <div style="text-align: right;">
+          <%= button_to "Drop Student", cohort_student_path(@cohort, @student), method: 'delete', class: 'button', data: { confirm: 'Are you sure you want to drop this student?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <h1 style="white-space: nowrap; text-shadow: -1px 0 8px rgba(255,255,255,0.5), 1px 0 8px rgba(255,255,255,0.5);"><%= @student.name %></h1>
 
   <div  style="width: calc(100% - 420px); overflow: auto;">
     <svg id="students_progress-graph" viewBox="0 0 240 105" preserveAspectRatio="xMinYMin" style="height: 290px;">
       <rect x=1 y=1 width=238 height=103 stroke="#EEEEEE" fill="none" />
-      <% points = [0.1, 0.1, 0.15, 0.2, 0.4, 0.32, 0.4, 0.1, 0.05, 0.3, 0.4, 0.9, 0.4] %>
+      <% points = @student.survey_responses.joins(:questionnaire).order('survey_questionnaires.ordinal').map { |response| response.answers.joins(:evaluations).average(:value) } %>
       <path d="
         <% points.each_with_index do |point, i| %>
-          <% if i == 0 %>M<% else %>S<% end %>
-          <%= i * (233/(points.count-1)) + 5 %> <%= (1-points[i-1]) * 100 %>
+          <% if i == 0 %>M<% else %>L<% end %>
           <%= i * (233/(points.count-1)) + 5 %> <%= (1-point) * 100 %>
         <% end %>
       " stroke-width="1" stroke="#CCCCCC" fill="none" />
@@ -36,18 +60,6 @@
       </div>
     <% end %>
   </div>
-
-  <br style="clear: both;">
-  <hr>
-
-  <% case @registration.status %>
-  <% when 'dropped' %>
-    <h3 style="color: white; text-align: center; background-color: #FA4542">Dropped</h3>
-  <% else %>
-    <div id="student__cohort_actions" style="text-align: right;">
-      <%= button_to "Drop Student", cohort_student_path(@cohort, @student), method: 'delete', class: 'button', data: { confirm: 'Are you sure you want to drop this student?' } %>
-    </div>
-  <% end %>
 
   <br>
 

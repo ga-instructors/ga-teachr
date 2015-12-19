@@ -14,6 +14,9 @@ jQuery ->
     banner = $('.cohort__banner')
     fileUploadPreview(event.target, banner)
 
+  if $('body#cohorts_show').length && !!location.hash
+    $(location.hash.replace('#','#student_')).trigger('click')
+
   $(document).on 'dragstart', '#cohort_students', (event) ->
     $('#students_content').hide()
     $('#groups_ui').show()
@@ -28,7 +31,7 @@ jQuery ->
     false
   $(document).on 'drop', '#groups_ui li', (event) ->
     groupCount = $(this).prevAll('li').length+1
-    Turbolinks.visit(document.location+'/groups/new?groups_grouping[target_group_count]='+groupCount)
+    Turbolinks.visit(document.location.href.match(/(^[^#]*)/)+'/groups/new?groups_grouping[target_group_count]='+groupCount)
 
   ###computes control points given knots K, this is the brain of the operation###
   computeControlPoints = (K) ->

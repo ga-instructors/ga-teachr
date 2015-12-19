@@ -1,6 +1,10 @@
 require 'pg'
 
-db = PG.connect(host: 'localhost', dbname: 'ga-quiz_development', user: 'ga_teachr', password: ENV['GA_TEACHR_DATABASE_PASSWORD'])
+if Rails.env.production?
+  db = PG.connect(host: 'localhost', dbname: 'ga-quiz_development', user: 'ga_teachr', password: ENV['GA_TEACHR_DATABASE_PASSWORD'])
+else  
+  db = PG.connect(dbname: 'ga-quiz_development')
+end
 
 nycampus = Campus.create!({
   name: 'New York City',
@@ -117,7 +121,7 @@ Cohort.all.each do |cohort|
             comment: answer["reviewer_comment"]
           })
         else
-          warn "Unable to import assessment, assessment not found for #{student.name}"
+          warn "Failed import, `#{quiz["name"]}` assessment was not found for #{student.name}"
         end
       end
     end
