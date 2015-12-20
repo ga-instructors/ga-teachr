@@ -8,14 +8,14 @@ module Survey
     has_many :evaluations, foreign_key: :survey_answer_id, dependent: :destroy
 
     def answer_html
-      return nil if self[:answer].blank?
-      markdown = if question.format.nil? then self[:answer]
-      else ["```#{question.format}", answer, "```"].join("\n")
+      if self[:answer].blank? then return nil
+      elsif question.format.nil? then markdown = self[:answer]
+      else markdown = ["```#{question.format}", answer, "```"].join("\n")
       end
-      Redcarpet::Markdown.new(MarkdownPygments, {
-        fenced_code_blocks: true,
-        tables: true,
-        no_intra_emphasis: true
+      Redcarpet::Markdown.new(MarkdownPygments.new({
+        escape_html: true
+      }), {
+        fenced_code_blocks: true
       }).render(markdown).html_safe
     end
 

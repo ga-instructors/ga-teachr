@@ -5,10 +5,10 @@ class Survey::Evaluation < ActiveRecord::Base
 
   def comment_html
     return nil if self[:comment].blank?
-    Redcarpet::Markdown.new(MarkdownPygments, {
-      fenced_code_blocks: true,
-      tables: true,
-      no_intra_emphasis: true
+    Redcarpet::Markdown.new(MarkdownPygments.new({
+      escape_html: true
+    }), {
+      fenced_code_blocks: true
     }).render(self[:comment]).html_safe
   end
 

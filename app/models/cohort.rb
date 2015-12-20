@@ -21,6 +21,10 @@ class Cohort < ActiveRecord::Base
   has_many :quizzes, class_name: Survey::Quiz
   has_many :exit_tickets, class_name: Survey::ExitTicket
 
+  scope :active, -> {
+    where('begins_at < ? AND ends_at > ?', Time.now, Time.now)
+  }
+
   attr_accessor :banner
   after_save if: -> { @banner } do
     default_filename = id.to_s + File.extname(@banner.path)

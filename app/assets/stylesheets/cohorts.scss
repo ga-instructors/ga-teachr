@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#student__cohort_avatar {
+  position: relative;
+  float: right;
+}
+#student__cohort_actions {
+  position: absolute;
+  left: 1pt; right: 1pt; bottom: 5pt;
+}
+#student__cohort_avatar #student__cohort_actions .button_to {
+  display: none;
+}
+#student__cohort_avatar:hover #student__cohort_actions .button_to {   
+  display: block;
+}
+
 #cohort_students {
   padding-bottom: 2rem;
   float: left;

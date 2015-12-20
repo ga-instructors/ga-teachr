@@ -91,9 +91,20 @@ hr {
 
 select {
   -webkit-appearance:none;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: solid #999999 1px;
+  border-radius: 0;
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+  &[disabled] {
+    color: rgb(150, 150, 150);
+    border-color: rgb(240, 240, 240);
+  }
 }
 
-input[type=text], input[type=password], input[type=email], input[type=number], textarea, select {
+input[type=text], input[type=password], input[type=email], input[type=number], textarea {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem;
@@ -129,7 +140,7 @@ progress { width: 100%; }
     display: inline-block;
     min-width: 120pt;
   }
-  label ~ input, label ~ select {
+  label ~ input {
     width: calc(100% - 130pt);
   }
   input[type=radio], input[type=checkbox] {

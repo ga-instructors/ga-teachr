@@ -26,15 +26,15 @@ class Survey::Question < ActiveRecord::Base
 
   def prompt_html
     return nil if self[:prompt].blank?
-    Redcarpet::Markdown.new(MarkdownPygments, {
-      fenced_code_blocks: true,
-      tables: true,
-      no_intra_emphasis: true
+    Redcarpet::Markdown.new(MarkdownPygments.new({
+      escape_html: true
+    }), {
+      fenced_code_blocks: true
     }).render(self[:prompt]).html_safe
   end
 
   def multiple_choice
-    new_record? || options.any?
+    new_record? || options.find(&:persisted?)
   end
 
   def multple_choice=(multiple_choice)

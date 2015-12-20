@@ -95,7 +95,7 @@ Cohort.all.each do |cohort|
       survey_question = survey.questions.create!({
         ordinal: question["ordinal"],
         prompt: question["question"],
-        format: question["format"],
+        format: question["answer_format"],
         open_ended: question["open_ended"]
       })
       legacy_map[survey_question] = question["id"]
@@ -106,11 +106,14 @@ Cohort.all.each do |cohort|
           value: option["grade"]
         })] = option["id"]
       end
-      cohort.students.each do |student|
-        assessment = db.exec_params("SELECT * FROM quizzes_assessments WHERE quiz_id = $1 AND user_id = $2", [quiz["id"], legacy_map[student]]).first
-        if assessment
-          response = survey.responses.find_or_create_by!(student: student)
-          answer = db.exec_params("SELECT * FROM quizzes_answers WHERE assessment_id = $1 AND question_id = $2", [assessment["id"], question["id"]]).first
+    end
+    cohort.students.each do |student|
+      assessment = db.exec_params("SELECT * FROM quizzes_assessments WHERE quiz_id = $1 AND user_id = $2", [quiz["id"], legacy_map[student]]).first
+      if assessment
+        response = survey.responses.find_or_create_by!(student: student)
+        answers = db.exec_params("SELECT * FROM quizzes_answers WHERE assessment_id = $1", [assessment["id"]])
+        survey.questions.each do |survey_question|
+          answer = answers.find { |a| a["question_id"] == legacy_map[survey_question] }
           survey_answer = response.answers.create!({
             question: survey_question,
             answer: answer["answer"],
@@ -120,9 +123,9 @@ Cohort.all.each do |cohort|
             value: answer["grade"],
             comment: answer["reviewer_comment"]
           })
-        else
-          warn "Failed import, `#{quiz["name"]}` assessment was not found for #{student.name}"
         end
+      else
+        warn "Failed import, `#{quiz["name"]}` assessment was not found for #{student.name}"
       end
     end
   end

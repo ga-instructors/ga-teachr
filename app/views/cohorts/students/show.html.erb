@@ -1,16 +1,4 @@
 <div class="large container">
-  <style>
-    #student__cohort_avatar {
-      position: relative;
-      float: right;
-    }
-    #student__cohort_actions {
-      position: absolute;
-      left: 0; right: 0; bottom: 0.25rem;
-    }
-    #student__cohort_avatar #student__cohort_actions .button_to { display: none; }
-    #student__cohort_avatar:hover #student__cohort_actions .button_to { display: block; }
-  </style>
   <div id="student__cohort_avatar">
     <%= image_tag gravatar_url(@student.email, 384), style: 'border: solid #EEEEEE 1px;', draggable: false %>
     <div id="student__cohort_actions">
@@ -34,16 +22,16 @@
       <path d="
         <% points.each_with_index do |point, i| %>
           <% if i == 0 %>M<% else %>L<% end %>
-          <%= i * (233/(points.count-1)) + 5 %> <%= ((1-point) * 100) + 5 %>
+          <%= i * (233/(points.count-1)) + 5 %> <%= ((1-(point||0)) * 100) + 5 %>
         <% end %>
-        L 239 <%= ((1-points.last) * 100) + 5 %>
+        L 239 <%= ((1-(points.last||0)) * 100) + 5 %>
         L 239 104
         L 1 104
         L 1 <%= ((1-points[0]) * 100) + 5 %>
         L 5 <%= ((1-points[0]) * 100) + 5 %>
       " stroke-width="1" stroke="#CCCCCC" fill="#EEEEEE" />
       <% points.each_with_index do |point, i| %>
-        <circle cx=<%= i * (233/(points.count-1)) + 5 %> cy=<%= ((1-point) * 100) + 5 %> r=2 fill="red" />
+        <circle cx=<%= i * (233/(points.count-1)) + 5 %> cy=<%= ((1-(point||0)) * 100) + 5 %> r=2 fill="red" />
       <% end %>
     </svg>
   </div>

@@ -5,9 +5,17 @@
 	<div style="float:left">
 		<br />
 		<%= image_tag gravatar_url(current_user.email, 256), style: 'border: solid #EEEEEE 1px;' %>
+		<% if current_user.cohorts.active.length > 1 %>
+			<ul>
+				<h5 style="margin-left: -2em;">Active Cohorts</h5>
+				<% current_user.cohorts.active.each do |active_cohort| %>
+					<li><%= link_to active_cohort.name, active_cohort %></a>
+				<% end %>
+			</ul>
+		<% end %>
 	</div>
 
-	<div style="text-align: center; float: left; width: calc(90% - 256px);">
+	<div style="text-align: center; float: left; width: calc(97% - 256px);">
 
 		<br />
 		<% if current_user.cohort.surveys.ready.any? %>
@@ -21,15 +29,16 @@
 					<% end %>
 				<% end %>
 			</ul>
-		<% else %>
+		<% elsif current_user.student %>
+			<div style="width: 150pt; margin: 0 auto; float: right;">
+				<%= react_component 'RadialProgress', progress: 1  %>
+			</div>
 			<h2>Great Job!</h2>
 			<p>It appears that you are caught up.</p>
+			<br />
+			<p>You have completed <%= current_user.student.survey_responses.where(cohort: current_user.cohort).count %> of <%= current_user.cohort.quizzes.count %> quizzes</p>
 		<% end %>
 
-	</div>
-
-	<div class="progress" style="width: 256px;">
-		<%= react_component 'RadialProgress', progress: 1  %>
 	</div>
 
 </div>
