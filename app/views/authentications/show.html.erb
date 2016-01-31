@@ -15,7 +15,7 @@
 		<% end %>
 	</div>
 
-	<div style="text-align: center; float: left; width: calc(97% - 256px);">
+	<div style="text-align: center;">
 
 		<br />
 		<% if current_user.cohort.surveys.ready.any? %>
@@ -25,7 +25,7 @@
 					<% if i == 0 %>
 						<li><%= link_to survey.title, survey, class: 'button big primary' %></li>
 					<% else %>
-						<li>.then&nbsp;=&gt;&nbsp;<%= link_to survey.title, survey, class: '' %></li>
+						<li><%= link_to survey.title, survey, class: 'button' %></li>
 					<% end %>
 				<% end %>
 			</ul>
@@ -37,6 +37,8 @@
 			<p>It appears that you are caught up.</p>
 			<br />
 			<p>You have completed <%= current_user.student.survey_responses.where(cohort: current_user.cohort).count %> of <%= current_user.cohort.quizzes.count %> quizzes</p>
+		<% elsif current_user.employee %>
+
 		<% end %>
 
 	</div>

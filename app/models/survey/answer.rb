@@ -9,7 +9,7 @@ module Survey
 
     def answer_html
       if self[:answer].blank? then return nil
-      elsif question.format.nil? then markdown = self[:answer]
+      elsif question.format == "" then markdown = self[:answer]
       else markdown = ["```#{question.format}", answer, "```"].join("\n")
       end
       Redcarpet::Markdown.new(MarkdownPygments.new({
