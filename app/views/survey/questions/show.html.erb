@@ -14,15 +14,15 @@
 					<% end %>
 				</li>
 				<% end %>
-				<li style="width:60pt;">
-					<% if @next_question %>
+				<% if @next_question %>
+					<li style="width:60pt;">
 						<%= link_to survey_questionnaire_question_path(@questionnaire, @next_question), rel: 'next' do %>
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 8 8">
 							  <path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1l3 3-3 3v-2h-3v-2h3v-2z" />
 							</svg>
 							<div>Next</div>
-						</li>
-					<% end %>
+						<% end %>
+					</li>
 				<% end %>
 				<li style="width:60pt;">
 					<%= link_to survey_questionnaire_questions_path(@survey_question.questionnaire) do %>
@@ -41,10 +41,10 @@
 
 		<hr style="clear: both;">
 
-		<%= @survey_question.prompt_html %>
+		<div><%= @survey_question.prompt_html %></div>
 
 		<h5>Responses:</h5>
-		<hr>
+		<hr />
 
 		<div style="overflow: hidden;">
 			<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>
@@ -90,10 +90,9 @@
 			<% end %>
 		<% end %>
 
-		<hr />
-
 	</div>
 
+	<br /><hr />
 	<div class="medium container">
 		<h6 style="text-align: center">EXPORT</h6>
 		<nav id="export_panel" style="width: 100%">
