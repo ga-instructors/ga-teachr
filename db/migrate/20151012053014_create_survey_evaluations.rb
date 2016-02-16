@@ -6,7 +6,7 @@ class CreateSurveyEvaluations < ActiveRecord::Migration
       t.text :comment
 
       t.float :value
-      t.boolean :autograded
+      t.boolean :autograded, default: false
       t.text :autograde_manifest
 
       t.timestamps null: false

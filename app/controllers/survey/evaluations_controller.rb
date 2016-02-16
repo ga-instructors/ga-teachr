@@ -27,11 +27,12 @@ class Survey::EvaluationsController < ApplicationController
   # POST /survey/evaluations.json
   def create
     @survey_evaluation = Survey::Evaluation.new(survey_evaluation_params)
+    @survey_evaluation.employee = current_user.employee
     authorize @survey_evaluation
 
     respond_to do |format|
       if @survey_evaluation.save
-        format.html { redirect_to @survey_evaluation, notice: 'Evaluation was successfully created.' }
+        format.html { redirect_to survey_questionnaire_question_path(@survey_evaluation.survey_answer.question.questionnaire, @survey_evaluation.survey_answer.question), notice: 'Evaluation was successfully created.' }
         format.json { render :show, status: :created, location: @survey_evaluation }
       else
         format.html { render :new }
@@ -67,7 +68,7 @@ class Survey::EvaluationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survey_questionnaire
-      @survey_questionnaire = Survey::Questionnaire.find(params[:questionnaire_id])
+      @survey_questionnaire = Survey::Questionnaire.find(params[:questionnaire_id] || params[:quiz_id] || params[:exit_ticket_id])
     end
 
     def set_survey_evaluation
@@ -77,6 +78,6 @@ class Survey::EvaluationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_evaluation_params
-      params.require(:survey_evaluation).permit(:survey_response_id, :survey_question_id, :student_id, :employee_id, :value, :manifest)
+      params.require(:survey_evaluation).permit(:survey_answer_id, :comment, :value)
     end
 end

@@ -43,10 +43,12 @@
 
 		<div><%= @survey_question.prompt_html %></div>
 
+		<hr />
+		<h5>Responses:</h5>
+
 		<% if function = current_user.employee.cohort_functions.find_by(cohort_id: @survey_question.questionnaire.cohort_id) %>
 			<% if answer =  @survey_question.answers.joins('LEFT JOIN survey_evaluations ON survey_answers.id = survey_evaluations.survey_answer_id').group('survey_answers.id').where("survey_evaluations.id IS NULL").first %>
-				<hr />
-				<%= form_for answer.evaluations.new, url: [@survey_question.questionnaire, :evaluations], html: { style: "clear: both; overflow: auto;" } do |f| %>
+				<%= form_for answer.evaluations.new, url: [@survey_question.questionnaire, :evaluations], html: { style: "clear: both; overflow: auto; background-color: #F8F8F8; padding: 1rem;" } do |f| %>
 					<div style="float: right; width: 39%; clear: both;">
 						<%= f.text_area :comment %>
 						<div>
@@ -56,14 +58,14 @@
 					</div>
 					<div style="float: left; width: 59%; overflow: scroll;">
 						<%= f.hidden_field :survey_answer_id %>
+						<%= render answer.response.student %>
+						<hr />
 						<%= answer.answer_html %>
 					</div>
 				<% end %>
 			<% end %>
+			<br />
 		<% end %>
-
-		<h5>Responses:</h5>
-		<hr />
 
 		<div style="overflow: hidden;">
 			<% @survey_question.options.eager_load(:answers).sort_by{ |o| -o.answers.count }.each do |option| %>

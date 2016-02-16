@@ -1,30 +1,32 @@
 jQuery ->
   $(document).on 'keyup', (keyup) ->
-    if keyup.which == 37 && (prev_link = $('a[rel=prev]')).length
-      Turbolinks.visit(prev_link.focus().attr('href'))
-    else if keyup.which == 39 && (next_link = $('a[rel=next]')).length
-      Turbolinks.visit(next_link.focus().attr('href'))
+    focusTag = document.activeElement.tagName.toLowerCase()
+    if focusTag != 'textarea' && focusTag != 'input'
+      if keyup.which == 37 && (prev_link = $('a[rel=prev]')).length
+        Turbolinks.visit(prev_link.focus().attr('href'))
+      else if keyup.which == 39 && (next_link = $('a[rel=next]')).length
+        Turbolinks.visit(next_link.focus().attr('href'))
 
   updateForm = (slide) ->
     if $('#survey_question_open_ended:checked').length
-      $('.open_end').slideDown(slide);
+      $('.open_end').slideDown(slide)
     else
-      $('.open_end').slideUp(slide);
+      $('.open_end').slideUp(slide)
 
     if $('#survey_question_multiple_choice:checked').length
       $('form > .field.open_end').animate({'margin-left': '40px'})
-      $('.field.options').slideDown(slide);
+      $('.field.options').slideDown(slide)
     else
       $('form > .field.open_end').animate({'margin-left': ''})
-      $('.field.options').slideUp(slide);
+      $('.field.options').slideUp(slide)
 
   $(document).on 'change', '#survey_question_open_ended', ->
     if $('#survey_question_multiple_choice:checked').length + $('#survey_question_open_ended:checked').length == 0
-      $('#survey_question_multiple_choice').prop('checked', true);
+      $('#survey_question_multiple_choice').prop('checked', true)
     updateForm()
   $(document).on 'change', '#survey_question_multiple_choice', ->
     if $('#survey_question_multiple_choice:checked').length + $('#survey_question_open_ended:checked').length == 0
-      $('#survey_question_open_ended').prop('checked', true);
+      $('#survey_question_open_ended').prop('checked', true)
     updateForm()
   $(document).on 'page:load', -> updateForm(0)
   updateForm(0)
