@@ -158,7 +158,6 @@ ActiveRecord::Schema.define(version: 20151012053014) do
   add_index "students", ["email"], name: "index_students_on_email", using: :btree
 
   create_table "survey_answers", force: :cascade do |t|
-    t.integer  "student_id"
     t.integer  "survey_question_id"
     t.integer  "survey_response_id"
     t.text     "answer"
@@ -167,7 +166,6 @@ ActiveRecord::Schema.define(version: 20151012053014) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "survey_answers", ["student_id"], name: "index_survey_answers_on_student_id", using: :btree
   add_index "survey_answers", ["survey_question_id"], name: "index_survey_answers_on_survey_question_id", using: :btree
   add_index "survey_answers", ["survey_question_option_id"], name: "index_survey_answers_on_survey_question_option_id", using: :btree
   add_index "survey_answers", ["survey_response_id"], name: "index_survey_answers_on_survey_response_id", using: :btree
@@ -268,7 +266,6 @@ ActiveRecord::Schema.define(version: 20151012053014) do
   add_foreign_key "student_registrations", "cohorts"
   add_foreign_key "student_registrations", "students"
   add_foreign_key "students", "cohorts"
-  add_foreign_key "survey_answers", "students"
   add_foreign_key "survey_answers", "survey_question_options"
   add_foreign_key "survey_answers", "survey_questions"
   add_foreign_key "survey_answers", "survey_responses"

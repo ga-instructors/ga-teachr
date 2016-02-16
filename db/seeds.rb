@@ -119,10 +119,12 @@ Cohort.all.each do |cohort|
             answer: answer["answer"],
             question_option: survey_question.options.detect { |option| legacy_map[option] == answer["question_option_id"] }
           })
-          survey_answer.evaluations.create!({
-            value: answer["grade"],
-            comment: answer["reviewer_comment"]
-          })
+          if answer["grade"].present?
+            survey_answer.evaluations.create!({
+              value: answer["grade"],
+              comment: answer["reviewer_comment"]
+            })
+          end
         end
       else
         warn "Failed import, `#{quiz["name"]}` assessment was not found for #{student.name}"

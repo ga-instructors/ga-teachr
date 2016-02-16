@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= cache [@questionnaire, @survey_question, :show] do %>
-	<div class="large container">
+<div class="large container">
+	<%= cache [@questionnaire, @survey_question, :show] do %>
 		<nav style="float:right;">
 			<ul>
 				<li style="width:60pt;">
@@ -43,6 +43,25 @@
 
 		<div><%= @survey_question.prompt_html %></div>
 
+		<% if function = current_user.employee.cohort_functions.find_by(cohort_id: @survey_question.questionnaire.cohort_id) %>
+			<% if answer =  @survey_question.answers.joins('LEFT JOIN survey_evaluations ON survey_answers.id = survey_evaluations.survey_answer_id').group('survey_answers.id').where("survey_evaluations.id IS NULL").first %>
+				<hr />
+				<%= form_for answer.evaluations.new, url: [@survey_question.questionnaire, :evaluations], html: { style: "clear: both; overflow: auto;" } do |f| %>
+					<div style="float: right; width: 39%; clear: both;">
+						<%= f.text_area :comment %>
+						<div>
+							<%= f.range_field :value, min: 0, max: 1, step: 0.25, style: "width: 60%" %>
+							<%= f.submit "Submit Grade", class: "small", style: "width: 34%" %>
+						</div>
+					</div>
+					<div style="float: left; width: 59%; overflow: scroll;">
+						<%= f.hidden_field :survey_answer_id %>
+						<%= answer.answer_html %>
+					</div>
+				<% end %>
+			<% end %>
+		<% end %>
+
 		<h5>Responses:</h5>
 		<hr />
 
@@ -79,7 +98,7 @@
 				</div>
 				<div style="margin-right: 42%;">
 					<br />
-					<strong><%= render 'students/student', container: "span", size: 32, student: answer.response.student %></strong>
+					<strong><%= render 'students/student', container: "span", size: 64, student: answer.response.student %></strong>
 					<% if answer.question_option %>
 						<ul style="list-style-type: circle; margin-top: 0;">
 							<li><strong><%= answer.question_option.label %></strong></li>
@@ -125,5 +144,5 @@
 			</ul>
 		</nav>
 		<br>
-	</div>
-<% end %>
+	<% end %>
+</div>

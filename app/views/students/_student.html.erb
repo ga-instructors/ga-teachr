@@ -1,4 +1,4 @@
 <% container = defined?(container) && container ? container.split('.') : [:div] %>
 <%= content_tag_for container.shift, student, style: 'line-height: 32px', draggable: true, class: container do %>
-	<%= image_tag gravatar_url(student.email, defined?(size) ? size : 24), style: 'vertical-align: -6px;', draggable: false %>&nbsp;<%= student.name %>
+	<%= image_tag gravatar_url(student.email, defined?(size) ? size : 24), style: 'vertical-align: -6px;' + (defined?(size) && size > 42 ? 'float:left; margin-right: 0.5rem;' : ''), draggable: false %>&nbsp;<%= student.name %>
 <% end %>
